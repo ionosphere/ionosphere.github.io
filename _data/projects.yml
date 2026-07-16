@@ -1,0 +1,70 @@
+# Le book — PROJ-1, PROJ-5.
+#
+# PROJ-3 : ajouter un projet SANS page détail = ajouter un bloc ici. Rien d'autre.
+# PROJ-4 : ajouter une étude de cas = créer _projects/<id>.md avec `ref: <id>`.
+#          Le lien apparaît tout seul. Aucun gabarit à toucher.
+#
+# `statut` : actif | maintenu | archivé
+# `stack` et `licence` sont des jetons LANG-4 → rendus en mono, jamais traduits.
+
+- id: ekylibre
+  nom: Ekylibre
+  tagline: ERP agricole open source — gestion, traçabilité, comptabilité.
+  role: Co-fondateur & CEO
+  stack: [Ruby, PostgreSQL, PostGIS]
+  licence: AGPL-3.0
+  repo: https://github.com/ekylibre/ekylibre
+  site: https://ekylibre.org
+  statut: actif
+  debut: "2015"
+  fin:
+  featured: true
+  # PROJ-11 — la seule preuve de traction vérifiable du dossier. Elle s'affiche
+  # sur la carte, pas seulement dans l'étude de cas.
+  etoiles: 486
+  forks: 170
+
+- id: lexicon
+  nom: Lexicon
+  tagline: Open data agricole normalisé — explorer, filtrer, exporter.
+  role: Créateur
+  stack: [Ruby, TypeScript]
+  licence: MIT
+  repo: https://github.com/osfarm/lexicon
+  site: https://lexicon.osfarm.org
+  statut: actif
+  debut: "2024"
+  fin:
+  featured: true
+
+- id: gaia
+  nom: GAIA
+  tagline: Démocratiser l'intelligence artificielle dans le monde agricole.
+  # ⚠️ §7.2 point 10 — « créateur » est confirmé par l'utilisateur, mais
+  #    gaia-ia.org attribue le projet à La Ferme Digitale + OSFarm et ne cite
+  #    David Joulin que comme intervenant. La formulation ci-dessous est celle
+  #    qui reste VÉRIFIABLE. Ne pas écrire « créateur » tout court tant que la
+  #    source publique ne le porte pas (NFR-1).
+  role: Créateur — via La Ferme Digitale et OSFarm
+  licence: MIT
+  repo: https://github.com/osfarm/GAIA-AGRI-IA-QUALIFICATION
+  site: https://www.gaia-ia.org/
+  statut: maintenu
+  debut: "2024"
+  fin: "2026"
+  featured: true
+
+- id: piloterra
+  nom: Piloterra
+  tagline: Portail IA agricole open source — souverain, frugal, mutualisé.
+  role: CTO
+  stack: [Mistral AI, Supabase, n8n]
+  # ⚠️ Pas de `repo:` — les « agents open source » sont revendiqués par le
+  #    projet, mais aucun dépôt public n'a été trouvé. Le gabarit n'affiche pas
+  #    de lien repo quand le champ est absent : ne pas en inventer un.
+  site: https://piloterra.fr
+  statut: actif
+  debut: "2024"
+  fin:
+  featured: true
+

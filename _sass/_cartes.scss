@@ -1,0 +1,244 @@
+// Cartes projets, publications, CV.
+
+// ── Hero ─────────────────────────────────────────────────────────────────
+// Le hero est une thèse : le one-liner puis l'assolement. Pas de gros chiffre
+// avec petit label, pas de dégradé — c'est la réponse template.
+.hero {
+  padding-block: clamp(1rem, calc(0.5rem + 2vw), 2.5rem) 0;
+
+  &__nom {
+    font-size: var(--t-hero);
+    margin-bottom: 0.5rem;
+  }
+
+  &__one-liner {
+    font-family: var(--f-display);
+    font-variation-settings: "wonk" 0;
+    font-weight: 400;
+    font-size: var(--t-l);
+    line-height: 1.25;
+    max-width: 34ch;
+    margin-bottom: var(--rythme);
+    text-wrap: balance;
+  }
+
+  &__pitch {
+    max-width: 52ch;
+    color: var(--encre-pale);
+  }
+}
+
+// ── Grille de cartes ─────────────────────────────────────────────────────
+// PROJ-10 — conçue pour QUATRE cartes réelles, pas pour un book vide ni pour
+// vingt. À quatre, un 2×2 large tient mieux qu'un 4×1 étriqué.
+.cartes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1px;
+  background: var(--trait);
+  border: 1px solid var(--trait);
+}
+
+@media (min-width: 40rem) {
+  .cartes { grid-template-columns: repeat(2, 1fr); }
+}
+
+.carte {
+  background: var(--sol);
+  padding: 1.5rem;
+
+  &__nom {
+    margin-bottom: 0.35rem;
+
+    a { color: inherit; text-decoration: none; }
+    a:hover { color: var(--releve); text-decoration: underline; }
+  }
+
+  &__tagline {
+    color: var(--encre-pale);
+    font-size: var(--t-s);
+    margin-bottom: 1rem;
+  }
+
+  &__faits {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.3rem 0.85rem;
+    margin: 0 0 1rem;
+    font-size: var(--t-s);
+
+    dt {
+      font-family: var(--f-jeton);
+      font-size: var(--t-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--encre-pale);
+      padding-top: 0.15rem;
+    }
+
+    dd { margin: 0; display: flex; flex-wrap: wrap; gap: 0.3rem; align-items: baseline; }
+  }
+
+  &__liens {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 0;
+    font-family: var(--f-jeton);
+    font-size: var(--t-s);
+  }
+
+  &__etude { font-weight: 600; }
+}
+
+.statut {
+  font-family: var(--f-jeton);
+  font-size: var(--t-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-radius: 2px;
+  padding: 0.05em 0.4em;
+  border: 1px solid currentColor;
+
+  // NFR-3 — le statut est un mot, pas seulement une couleur.
+  &--actif { color: #3f6b2c; }
+  &--maintenu { color: #8a6d1f; }
+  &--archivé { color: var(--encre-pale); }
+}
+
+// ── Publications — ACT-8 ─────────────────────────────────────────────────
+.publications {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.75rem;
+}
+
+.publication {
+  padding-left: 1rem;
+  border-left: 3px solid var(--trait);
+
+  &__titre {
+    margin-bottom: 0.3rem;
+
+    a { color: inherit; text-decoration: none; }
+    a:hover { color: var(--releve); text-decoration: underline; }
+  }
+
+  &__auteurs {
+    margin-bottom: 0.4rem;
+    font-size: var(--t-s);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    align-items: baseline;
+  }
+
+  &__editeur { color: var(--encre-pale); }
+
+  // ⚠️ ACT-8a — LA mention qui empêche la faute d'attribution.
+  // « Éditeur : David Joulin » ne doit JAMAIS pouvoir se lire comme une
+  // signature. D'où un traitement visuellement distinct des auteurs :
+  // encadré, mono, décalé. Un lecteur pressé voit deux objets différents.
+  &__role {
+    font-family: var(--f-jeton);
+    font-size: var(--t-xs);
+    color: var(--encre-pale);
+    margin-bottom: 0.5rem;
+  }
+
+  &__role-label { font-weight: 600; color: var(--encre); }
+
+  &__role--tiers {
+    display: inline-block;
+    background: var(--sol-creuse);
+    border: 1px solid var(--trait);
+    border-radius: 2px;
+    padding: 0.25rem 0.5rem;
+  }
+
+  &__note {
+    font-size: var(--t-s);
+    color: var(--encre-pale);
+    max-width: 56ch;
+    margin-bottom: 0.4rem;
+  }
+
+  &__poids { margin: 0; }
+}
+
+// ── CV ───────────────────────────────────────────────────────────────────
+.poste {
+  padding-block: 1.5rem;
+  border-top: 1px solid var(--sol-creuse);
+  break-inside: avoid; // CV-4
+
+  &__entete {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.25rem 1rem;
+    align-items: baseline;
+  }
+
+  &__dates {
+    font-family: var(--f-jeton);
+    font-size: var(--t-s);
+    color: var(--encre-pale);
+    white-space: nowrap;
+  }
+
+  &__role {
+    color: var(--releve);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  &__faits {
+    margin: 0;
+    padding-left: 1.1rem;
+    font-size: var(--t-s);
+
+    li { margin-bottom: 0.2rem; }
+  }
+}
+
+.grille-deux {
+  display: grid;
+  gap: 1.5rem 2.5rem;
+}
+
+@media (min-width: 40rem) {
+  .grille-deux { grid-template-columns: repeat(2, 1fr); }
+}
+
+.bloc {
+  &__titre {
+    font-size: var(--t-base);
+    margin-bottom: 0.3rem;
+  }
+
+  &__prose { font-size: var(--t-s); color: var(--encre-pale); margin-bottom: 0; }
+
+  &__jetons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin: 0;
+  }
+}
+
+// CV-5 — dire quoi faire, pas mimer un téléchargement qui n'existe pas.
+.impression {
+  margin-block: 1.5rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--trait);
+  border-radius: 3px;
+  background: var(--sol-creuse);
+  font-size: var(--t-s);
+
+  p { margin: 0; }
+}

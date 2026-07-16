@@ -1,0 +1,34 @@
+# Compétences. Les `jetons` sont du LANG-4 : ils ne se traduisent pas et sont
+# rendus en mono. La `prose` est en français, rendue en sans.
+
+domaines:
+  - titre: Pilotage & gouvernance SI
+    prose: Schéma directeur, portefeuille projets, budget, indicateurs, qualité de service.
+  - titre: Architecture & urbanisation
+    prose: Standards, interopérabilité, cloud et SaaS, modernisation et simplification.
+  - titre: Sécurité & conformité
+    prose: Politique de sécurité, RGPD, gestion des risques, continuité, supervision et incidents.
+  - titre: Management & partenaires
+    prose: Équipes pluridisciplinaires, pilotage des éditeurs et des prestataires.
+  - titre: Conduite du changement
+    prose: Quinze ans de formation et d'accompagnement des métiers, en coopératives agricoles et agroalimentaires.
+  - titre: Données & IA
+    prose: Gouvernance et valorisation de la donnée, IA frugale et souveraine.
+
+techniques:
+  - titre: Langages
+    jetons: [PHP, Python, Ruby, SQL]
+  - titre: Plateforme & déploiement
+    jetons: [GitHub, GitLab, CI/CD, Docker, Linux]
+  - titre: Bases de données & ETL
+    jetons: [PostgreSQL, PostGIS, BigQuery, Talend, Elastic, n8n]
+  - titre: IA
+    jetons: [Mistral, OpenAI, Anthropic, HuggingFace, Gradio, OpenWebUI, Ollama]
+  - titre: Outils métiers
+    jetons: [MesParcelles, Smag Farmer, Geofolia, QGIS]
+
+langues:
+  - langue: Français
+    niveau: langue maternelle
+  - langue: Anglais
+    niveau: courant — TOEIC 755

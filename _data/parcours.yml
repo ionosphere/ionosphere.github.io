@@ -1,0 +1,112 @@
+# Parcours — porte CV-7 (expériences PARALLÈLES).
+#
+# ⚠️ RÈGLE : `fin:` vide = poste en cours. Plusieurs entrées peuvent l'être
+#    simultanément — c'est le cas ici (Ekylibre + bziiit). Aucun gabarit ne doit
+#    supposer qu'il n'y a qu'un seul poste courant.
+#
+# ⚠️ RÈGLE : les chevauchements ne sont PAS des erreurs. Le gabarit dessine ce
+#    qu'on lui donne. Aucun code ne « corrige » un chevauchement — c'est
+#    exactement la faute que le CV DSI a commise en lissant le parcours.
+#
+# `nature` : clé fermée → couleur + code RPG.
+#            entreprise | salariat | independant | agricole
+
+- id: bziiit
+  organisation: bziiit
+  role: Directeur technique (CTO)
+  debut: "2026-01"
+  fin:
+  nature: salariat
+  lieu: Bordeaux
+  faits:
+    - Direction technique : gestion des projets et des environnements de production numériques.
+    - Veille technologique IA & Data ; audit, expertise et formation des organisations.
+
+- id: ekylibre
+  organisation: Ekylibre
+  # ✅ rév. 7 — « CEO », d'après sa propre bio GitHub. Le CV DSI recadrait le
+  #    mandat en « directeur technique » pour viser un poste de DSI.
+  role: Co-fondateur & CEO
+  debut: "2014-11"
+  fin:
+  nature: entreprise
+  lieu: Bègles / Saint-Porchaire
+  faits:
+    - Définition du schéma directeur produit & technique, des standards d'architecture, d'urbanisation et d'interopérabilité.
+    - Management d'une équipe pluridisciplinaire (développement, support, infrastructure) et pilotage des éditeurs & prestataires.
+    - Gouvernance SI : méthodes, procédures et indicateurs de qualité de service.
+    - Sécurité du SI : environnements, sauvegardes, centralisation des logs, supervision, incidents, conformité RGPD.
+    - Pilotage du portefeuille : roadmap produit, sprints, arbitrages budgétaires et mises en production.
+    - Direction d'entreprise : gestion financière, commerciale et RH ; support clients et documentation.
+
+# ⚠️ CV-6 OUVERT — cette entrée est coupée du CV DSI. Réintégrée ici parce que
+#    c'est l'une des trois expériences PARALLÈLES que le CV de recrutement avait
+#    effacées (CV-7), et parce qu'elle porte le nom du handle GitHub et du site
+#    (ID-4). Pour la retirer : supprimer ce bloc. Rien d'autre.
+- id: ionosphere-consulting
+  organisation: Ionosphere Consulting
+  role: Consultant AgroTIC — freelance
+  debut: "2008-01"
+  fin: "2014-12"
+  nature: independant
+  lieu: Bordeaux
+  faits:
+    - Réorganisation informatique et migration vers des systèmes de gestion à base de briques libres, pour PMI-PME.
+    - Consultant AgroTIC « on-demand » ; gestion de projets transversaux.
+
+- id: ergolis
+  organisation: Ergolis
+  role: Chef de projet MOA
+  # ✅ rév. 7 — 2012, confirmé par l'utilisateur. Le CV DoYouBuzz avait raison.
+  #    Chevauche donc Bordeaux Sciences Agro : le chevauchement est RÉEL.
+  debut: "2012-06"
+  fin: "2014-10"
+  nature: salariat
+  lieu: Bordeaux
+  faits:
+    - Recueil et formalisation des besoins métiers, rédaction des spécifications fonctionnelles et du cahier des charges.
+    - Définition de la méthodologie, du planning, des ressources et des livrables ; modélisation et tests fonctionnels.
+    - Expertise métiers : comptabilité, gestion, productions agricoles.
+
+- id: bordeaux-sciences-agro
+  organisation: Bordeaux Sciences Agro
+  role: Ingénieur applicatifs / Enseignant
+  debut: "2008-10"
+  fin: "2013-06"
+  nature: salariat
+  lieu: Gradignan
+  faits:
+    - Chef de projet sur le progiciel ANAIS (gestion prévisionnelle agricole) ; expertise et maintenance sur ISTEA (comptabilité agricole).
+    - Mise en place du suivi d'incidents, des tests unitaires & fonctionnels et d'un extranet client ; ingénieur système & réseau.
+    - Enseignant en cursus ingénieur et Mastère Viticulture.
+    - Clients : 85 chambres d'agriculture & ADASEA, 15 centres de gestion.
+
+- id: cobas
+  organisation: COBAS
+  role: Ingénieur NTIC
+  debut: "2006-09"
+  fin: "2008-09"
+  nature: salariat
+  lieu: Arcachon
+  faits:
+    - Gestion du parc, des appels d'offres et du support pour 150 collaborateurs ; documentation technique & applicatifs.
+    - Pilotage et suivi de projets, animation de réunions, suivi budgétaire et reporting d'activité.
+
+# ⚠️ CV-6 OUVERT — coupée du CV DSI. Réintégrée : c'est la plus longue des bandes
+#    parallèles (dix-huit ans), et le lieu du tiers-lieu de La Vauzelle (ACT-7).
+#    Elle fait remonter l'origine de l'assolement à 2002.
+- id: gaec-joulin
+  organisation: GAEC Joulin
+  role: Agriculteur à temps partiel
+  debut: "2002-01"
+  fin: "2020-12"
+  nature: agricole
+  lieu: Saint-Porchaire
+  faits:
+    - Élevage : alimentation, soin, traite.
+    - Production végétale : travaux du sol, récolte, traitement.
+    - Conducteur d'engins : presse, moissonneuse-batteuse.
+
+# ⚠️ CV-6 — Charentes Alliance (chargé de mission QSE, stage, 2004–2005) est
+#    volontairement ABSENTE : un stage d'il y a vingt ans n'apporte rien au récit
+#    POS-1 et allonge l'assolement sans rien y démontrer. À rouvrir si besoin.

@@ -1,0 +1,34 @@
+---
+layout: base
+---
+{%- comment -%}
+  PROJ-2 — étude de cas. Le front matter ne porte que `ref` : toutes les
+  métadonnées viennent de projects.yml, qui reste la source unique (NFR-6).
+  Écrire une étude de cas = écrire de la prose, pas re-déclarer un projet.
+{%- endcomment -%}
+{%- assign p = site.data.projects | where: "id", page.ref | first -%}
+
+<article class="page etude">
+  <header class="page__entete">
+    <p class="etude__retour"><a href="{{ '/projets/' | relative_url }}">← Tous les travaux</a></p>
+    <h1 class="page__titre">{{ p.nom }}</h1>
+    <p class="page__chapeau">{{ p.tagline }}</p>
+
+    <dl class="etude__faits">
+      {%- if p.role -%}<dt>Rôle</dt><dd>{{ p.role }}</dd>{%- endif -%}
+      <dt>Période</dt>
+      <dd><time datetime="{{ p.debut }}">{{ p.debut }}{% if p.fin %}–{{ p.fin }}{% else %} — en cours{% endif %}</time></dd>
+      {%- if p.stack -%}
+        <dt>Stack</dt>
+        <dd>{% for j in p.stack %}{% include jeton.html valeur=j %}{% endfor %}</dd>
+      {%- endif -%}
+      {%- if p.licence -%}<dt>Licence</dt><dd>{% include jeton.html valeur=p.licence %}</dd>{%- endif -%}
+      {%- if p.repo -%}<dt>Dépôt</dt><dd><a href="{{ p.repo }}">{{ p.repo | remove: "https://" }}</a></dd>{%- endif -%}
+      {%- if p.site -%}<dt>Site</dt><dd><a href="{{ p.site }}">{{ p.site | remove: "https://" }}</a></dd>{%- endif -%}
+    </dl>
+  </header>
+
+  <div class="etude__prose">
+    {{ content }}
+  </div>
+</article>

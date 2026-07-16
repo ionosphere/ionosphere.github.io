@@ -1,0 +1,40 @@
+# Publications — ACT-2, et surtout ACT-8b.
+#
+# ⚠️⚠️ CE SCHÉMA EST CE QUI EMPÊCHE UNE FAUTE D'ATTRIBUTION.
+#
+#   `auteurs` — les auteurs RÉELS de l'ouvrage. David Joulin n'y figure QUE s'il
+#               l'a écrit.
+#   `role`    — le rôle de David Joulin, DISTINCT des auteurs.
+#
+# Les deux champs sont obligatoires et s'affichent toujours (ACT-8a). Une liste
+# où « co-auteur » et « éditeur » se présenteraient à l'identique s'attribuerait
+# le travail d'un tiers PAR SIMPLE PLACEMENT, sans qu'une phrase soit fausse.
+
+- id: ia-des-champs
+  titre: L'IA des Champs — une autre culture de l'IA
+  auteurs: [Hervé Pillaud, Karine Cailleaux-Breton, David Joulin]
+  role: co-auteur
+  editeur: Éditions France Agricole
+  annee: "2026"
+  url: https://ia-des-champs.lovable.app/
+  note: >-
+    Plateforme associée : 251 termes illustrés en vidéo, glossaire et assistant.
+    Présenté au Salon international de l'agriculture, stand La Ferme Digitale.
+
+- id: la-vauzelle
+  titre: La Vauzelle — Deux siècles de son histoire
+  # ⚠️ DAVID JOULIN N'EST PAS L'AUTEUR DE CE LIVRE. Francis Joulin l'est.
+  #    Page de titre : « Un témoignage de Francis Joulin ». Préface signée.
+  #    Ne jamais ajouter « David Joulin » à cette liste.
+  auteurs: [Francis Joulin]
+  role: éditeur
+  role_detail: Mise en page, numérisation, travail documentaire et mise en ligne.
+  annee: "2026"
+  pages: 209
+  # NFR-4 — un lien qui déclenche 24 Mo se signale. Le fichier est hébergé par
+  # sci-chenes-verts.github.io, pas par ce site.
+  poids: 24 Mo
+  url: https://sci-chenes-verts.github.io/assets/livre/la-vauzelle-deux-siecles.pdf
+  note: >-
+    Témoignage d'un agriculteur éleveur né en 1933 à La Vauzelle, sur deux
+    siècles d'une ferme de Saintonge devenue tiers-lieu.

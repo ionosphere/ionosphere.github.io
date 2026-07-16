@@ -1,0 +1,27 @@
+diplomes:
+  - titre: Ingénieur des travaux agricoles
+    detail: Option qualité et gestion agroalimentaire
+    etablissement: VetAgro Sup (ex-ENITA de Clermont-Ferrand)
+    debut: "2004"
+    fin: "2006"
+  - titre: Ingénieur-Maître en génie des procédés
+    etablissement: IUP GEPI — Université de La Rochelle
+    debut: "2002"
+    fin: "2004"
+  - titre: DUT Génie biologique
+    etablissement: IUT de La Rochelle
+    debut: "2000"
+    fin: "2002"
+
+# Formations complémentaires. Le Bac S (1996–1999) est volontairement absent :
+# sans intérêt à vingt-sept ans de distance pour un profil de direction.
+complements:
+  - titre: Nouveau modèle économique (NME)
+    etablissement: CJD
+    debut: "2021"
+    fin: "2022"
+  - titre: Ruby on Rails
+    etablissement: Ekylibre
+    detail: Niveau avancé
+    debut: "2012"
+    fin:

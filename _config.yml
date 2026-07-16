@@ -1,0 +1,47 @@
+# Site personnel — David Joulin
+# Voir docs/SPEC.md (le quoi) et docs/DESIGN.md (le comment).
+
+title: David Joulin
+tagline: Directeur technique, systèmes d'information agricoles libres
+description: >-
+  Directeur technique — vingt ans de systèmes d'information pour l'agriculture,
+  en logiciel libre.
+
+# §5 — pas de domaine personnalisé. `ionosphere` est un compte UTILISATEUR (ID-4),
+# donc le site est servi à la racine : baseurl DOIT rester vide.
+url: https://ionosphere.github.io
+baseurl: ""
+
+lang: fr # LANG-1
+
+author:
+  name: David Joulin
+
+# NFR-7 — les deux seuls plugins whitelistés GitHub Pages dont le site a besoin.
+# ⚠️ safe: true — un plugin non whitelisté est ignoré SANS ERREUR (§5).
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# PROJ-2 — collection native, aucun plugin requis.
+collections:
+  projects:
+    output: true
+    permalink: /projets/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: projet
+
+sass:
+  style: compressed
+
+exclude:
+  - docs/
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor/

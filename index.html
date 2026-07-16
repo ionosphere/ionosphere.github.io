@@ -1,0 +1,79 @@
+---
+layout: base
+---
+{%- assign moi = site.data.identite -%}
+
+<section class="hero">
+  {%- comment -%} HOME-1 — identité immédiate. {%- endcomment -%}
+  <h1 class="hero__nom">{{ moi.nom }}</h1>
+  <p class="hero__one-liner">{{ moi.one_liner }}</p>
+  <p class="hero__pitch">{{ moi.pitch }}</p>
+</section>
+
+{%- comment -%}
+  LE GESTE — l'assolement. DESIGN.md §2.2.
+
+  HOME-2 exige un accès de RANG ÉGAL au parcours et aux travaux. Deux sections
+  côte à côte créent toujours une hiérarchie de lecture ; un seul assolement
+  portant les deux familles n'en crée aucune. Et c'est vrai : Ekylibre est à la
+  fois un poste et un projet, et les projets, les emplois et les associations
+  sont le même écosystème (PROJ-12).
+
+  HOME-2 est donc satisfaite par la STRUCTURE, pas par un arbitrage de mise en page.
+
+  Les engagements ne sont pas ici : eux aussi sont parallèles, mais quinze bandes
+  en accueil noient le signal. Ils ont leur plan sur /activite (DESIGN.md §1.2).
+{%- endcomment -%}
+<section class="section">
+  <h2 class="section__titre">Vingt ans, plusieurs choses à la fois</h2>
+  {% include assolement.html postes=true travaux=true featured_only=true %}
+  <p class="accueil-liens">
+    <a href="{{ '/cv/' | relative_url }}">Le parcours en détail</a> ·
+    <a href="{{ '/projets/' | relative_url }}">Les travaux en détail</a>
+  </p>
+</section>
+
+{%- comment -%}
+  HOME-3 — piloté par `featured: true`, jamais par une liste écrite à la main.
+
+  ⚠️ DESIGN.md §4.1 — les quatre projets du lancement sont TOUS featured, donc
+  cette grille et /projets affichent la même chose. Doublon assumé tant que le
+  book est court : à quatre projets, en cacher deux en accueil appauvrirait
+  l'accueil sans enrichir le book.
+{%- endcomment -%}
+<section class="section">
+  <h2 class="section__titre">Travaux</h2>
+  <ul class="cartes">
+    {%- for p in site.data.projects -%}
+      {%- if p.featured -%}
+        {% include projet-carte.html projet=p %}
+      {%- endif -%}
+    {%- endfor -%}
+  </ul>
+</section>
+
+{%- comment -%} HOME-5 — activité + contact. {%- endcomment -%}
+<section class="section">
+  <h2 class="section__titre">Activité</h2>
+  <div class="grille-deux">
+    <div class="bloc">
+      <h3 class="bloc__titre">Engagements</h3>
+      <p class="bloc__prose">
+        {%- for e in site.data.engagements -%}
+          {{ e.nom }}{% unless forloop.last %} · {% endunless %}
+        {%- endfor -%}
+      </p>
+    </div>
+    <div class="bloc">
+      <h3 class="bloc__titre">Publications</h3>
+      <p class="bloc__prose">
+        {%- for p in site.data.publications -%}
+          {{ p.titre }}{% unless forloop.last %} · {% endunless %}
+        {%- endfor -%}
+      </p>
+    </div>
+  </div>
+  <p class="accueil-liens" style="margin-top:1.25rem">
+    <a href="{{ '/activite/' | relative_url }}">Contributions, publications et engagements</a>
+  </p>
+</section>

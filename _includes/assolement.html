@@ -1,0 +1,127 @@
+{%- comment -%}
+  L'ASSOLEMENT — le composant signature. Voir DESIGN.md §2.
+
+  Rend des expériences PARALLÈLES (CV-7) sous la forme d'un plan d'assolement :
+  parcelles en lignes, campagnes en colonnes. Les chevauchements se voient.
+
+  Paramètres :
+    postes      — bool, rendre le groupe « Parcours »
+    travaux     — bool, rendre le groupe « Travaux »
+    engagements — bool, rendre le groupe « Engagements »
+    compact     — bool, sans les libellés de rôle (home)
+
+  L'origine est CALCULÉE sur les entrées effectivement rendues. Retirer le GAEC
+  de parcours.yml fait remonter l'origine toute seule : rien à toucher ici (NFR-6).
+
+  ⚠️ Aucune logique ici ne « corrige » un chevauchement. Le plan dessine ce que
+     les données disent. C'est le point de CV-7.
+{%- endcomment -%}
+
+{%- assign maintenant = site.time | date: "%Y" | plus: 0 -%}
+{%- assign debuts = "" | split: "" -%}
+
+{%- if include.postes -%}
+  {%- for p in site.data.parcours -%}
+    {%- assign a = p.debut | split: "-" | first -%}
+    {%- assign debuts = debuts | push: a -%}
+  {%- endfor -%}
+{%- endif -%}
+{%- comment -%}
+  Les travaux rendus. `featured_only` aligne l'assolement de la home sur les
+  cartes qui le suivent (HOME-3) : sans ça, un projet `featured: false`
+  apparaîtrait dans le plan mais pas dans la grille en dessous — le lecteur
+  chercherait une carte qui n'existe pas.
+{%- endcomment -%}
+{%- if include.featured_only -%}
+  {%- assign travaux_liste = site.data.projects | where: "featured", true -%}
+{%- else -%}
+  {%- assign travaux_liste = site.data.projects -%}
+{%- endif -%}
+
+{%- if include.travaux -%}
+  {%- for p in travaux_liste -%}
+    {%- assign a = p.debut | split: "-" | first -%}
+    {%- assign debuts = debuts | push: a -%}
+  {%- endfor -%}
+{%- endif -%}
+{%- if include.engagements -%}
+  {%- for e in site.data.engagements -%}
+    {%- assign a = e.debut | split: "-" | first -%}
+    {%- assign debuts = debuts | push: a -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- assign origine = debuts | sort | first | plus: 0 -%}
+{%- assign campagnes = maintenant | minus: origine | plus: 1 -%}
+
+{%- comment -%}
+  Les titres de groupe ne servent qu'à DISTINGUER des groupes : avec un seul, ils
+  doublonnent avec le titre de section de la page. On ne les rend qu'à partir de deux.
+{%- endcomment -%}
+{%- assign nb_groupes = 0 -%}
+{%- if include.postes %}{% assign nb_groupes = nb_groupes | plus: 1 %}{% endif -%}
+{%- if include.travaux %}{% assign nb_groupes = nb_groupes | plus: 1 %}{% endif -%}
+{%- if include.engagements %}{% assign nb_groupes = nb_groupes | plus: 1 %}{% endif -%}
+
+<div class="assolement" style="--campagnes: {{ campagnes }}">
+
+  {%- comment -%}
+    L'échelle des campagnes est décorative : chaque parcelle porte ses dates en
+    clair, donc le lecteur d'écran n'a rien à lire ici (DESIGN.md §2.4).
+  {%- endcomment -%}
+  <div class="assolement__echelle" aria-hidden="true">
+    <span class="assolement__echelle-vide"></span>
+    <span class="assolement__piste">
+      {%- for i in (1..campagnes) -%}
+        {%- assign annee = origine | plus: i | minus: 1 -%}
+        {%- assign reste = annee | modulo: 4 -%}
+        <span class="campagne {% if reste == 0 %}campagne--reperee{% endif %}" style="--c: {{ i }}">
+          {%- if reste == 0 -%}<i>{{ annee }}</i>{%- endif -%}
+        </span>
+      {%- endfor -%}
+    </span>
+  </div>
+
+  {%- if include.postes -%}
+    {%- if nb_groupes > 1 -%}<h3 class="assolement__titre" id="assolement-parcours">Parcours</h3>{%- endif -%}
+    <ol class="assolement__parcelles" aria-label="Parcours">
+      {%- assign postes = site.data.parcours | sort: "debut" | reverse -%}
+      {%- for p in postes -%}
+        {%- comment -%} Les paramètres d'include n'admettent pas de filtre : le
+        lien se calcule avant. {%- endcomment -%}
+        {%- assign lien = "/cv/#" | append: p.id -%}
+        {%- include parcelle.html nom=p.organisation detail=p.role debut=p.debut fin=p.fin nature=p.nature origine=origine campagnes=campagnes maintenant=maintenant lien=lien compact=include.compact -%}
+      {%- endfor -%}
+    </ol>
+  {%- endif -%}
+
+  {%- if include.travaux -%}
+    {%- if nb_groupes > 1 -%}<h3 class="assolement__titre" id="assolement-travaux">Travaux</h3>{%- endif -%}
+    <ol class="assolement__parcelles" aria-label="Travaux">
+      {%- assign travaux = travaux_liste | sort: "debut" | reverse -%}
+      {%- for t in travaux -%}
+        {%- assign lien = "/projets/#" | append: t.id -%}
+        {%- comment -%}
+          La bande de travail ne répète PAS le rôle : Ekylibre figure dans les
+          deux groupes (c'est un poste ET un projet — c'est le point de POS-1),
+          et deux bandes disant « Co-fondateur & CEO » se lisent comme un doublon
+          au lieu d'une superposition. Elle porte donc la licence, qui est une
+          information de projet — et un jeton LANG-4.
+        {%- endcomment -%}
+        {%- assign detail = t.licence | default: t.statut -%}
+        {%- include parcelle.html nom=t.nom detail=detail debut=t.debut fin=t.fin nature="travail" origine=origine campagnes=campagnes maintenant=maintenant lien=lien compact=include.compact -%}
+      {%- endfor -%}
+    </ol>
+  {%- endif -%}
+
+  {%- if include.engagements -%}
+    {%- if nb_groupes > 1 -%}<h3 class="assolement__titre" id="assolement-engagements">Engagements</h3>{%- endif -%}
+    <ol class="assolement__parcelles" aria-label="Engagements">
+      {%- assign engagements = site.data.engagements | sort: "debut" | reverse -%}
+      {%- for e in engagements -%}
+        {%- include parcelle.html nom=e.nom detail=e.role debut=e.debut fin=e.fin nature="engagement" origine=origine campagnes=campagnes maintenant=maintenant compact=include.compact -%}
+      {%- endfor -%}
+    </ol>
+  {%- endif -%}
+
+</div>

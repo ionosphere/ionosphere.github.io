@@ -1,0 +1,45 @@
+# Engagements associatifs — ACT-3.
+# ACT-5 : ce ne sont pas des lignes décoratives. OSFarm porte l'infrastructure
+# GitHub de la moitié du book ; NAOS est un pôle logiciel libre. Ils
+# appartiennent au récit POS-1.
+
+- id: la-ferme-digitale
+  nom: La Ferme Digitale
+  # ⚠️ §7.2 — 2015 (CV DSI) ou mars 2016 (CV DoYouBuzz) ? Non tranché.
+  #    2015 retenu : le CV DSI est le plus récent. À confirmer.
+  debut: "2015"
+  fin:
+  role: VP Data & IA
+  historique: Responsable adhésion (2020–2022), trésorier (2015–2020).
+  resume: Association fédérant les acteurs de l'AgriTech et de la FoodTech en France.
+  url: https://www.lafermedigitale.fr/
+
+- id: osfarm
+  nom: OSFarm
+  # ⚠️ §7.2 — le CV dit « depuis 2024 », le site porte « © 2023–2026 ».
+  #    2024 retenu (déclaratif utilisateur). À confirmer.
+  debut: "2024"
+  fin:
+  role: Cofondateur
+  resume: >-
+    Création de l'association et d'un fablab de 350 m² ; hackathons autour des
+    communs numériques agricoles. Porte les dépôts de Lexicon et de GAIA.
+  url: https://www.osfarm.org/
+
+- id: seconde-nature
+  nom: Seconde Nature
+  debut: "2025"
+  fin:
+  # ✅ rév. 7 — attesté par seconde-nature.net/faq :
+  #    « David — Trésorier (Finance, Achats, Informatique, IA, Matériel, Jardin) ».
+  role: Trésorier
+  resume: >-
+    Recyclerie en tiers-lieu à Saint-Porchaire — réemployer, réparer, réutiliser.
+  url: https://www.seconde-nature.net/
+
+- id: naos
+  nom: NAOS — Nouvelle-Aquitaine Open Source
+  debut: "2021"
+  fin: "2024"
+  role: Membre
+  resume: Pôle de compétences régional en logiciels et technologies libres.

@@ -1,0 +1,44 @@
+# Identité, one-liner, pitch, contacts.
+# LANG-5 : rien de tout ceci n'est écrit en dur dans un gabarit.
+
+nom: David Joulin
+
+# POS-3 — validé. Porte les quatre éléments de la synthèse :
+# le rôle (recruteur), l'ancienneté (crédibilité), le domaine (le fil qui
+# unifie), le libre (pair technique).
+one_liner: >-
+  Directeur technique — vingt ans de systèmes d'information pour l'agriculture,
+  en logiciel libre.
+
+# ID-2 — première personne.
+# POS-3c — l'IA n'est pas dans le one-liner : elle se démontre dans le book,
+# elle ne s'annonce pas dans le titre.
+pitch: >-
+  Fils d'agriculteur devenu ingénieur, je conçois depuis vingt ans les systèmes
+  d'information des exploitations et des filières agricoles. J'ai cofondé un
+  éditeur de logiciels de gestion dont le code est ouvert, et je continue de
+  construire des communs numériques pour l'agriculture — données, outils,
+  et depuis peu intelligence artificielle.
+
+# CONT-1 — email + LinkedIn + GitHub.
+# CONT-3 — PAS de numéro de téléphone. Jamais, y compris à l'impression.
+# CONT-4 — pas d'adresse postale.
+contacts:
+  - id: email
+    libelle: djoulin@gmail.com
+    url: mailto:djoulin@gmail.com
+  - id: github
+    # ID-4 — `ionosphere` est le handle personnel de David Joulin, pas une
+    # organisation. ID-5 : le mot a le droit d'apparaître ici — c'est une
+    # adresse, pas une marque.
+    libelle: github.com/ionosphere
+    url: https://github.com/ionosphere
+  - id: linkedin
+    # ⚠️ Le CV DSI imprime `linkedin.com/in/david-joulin` (vanity URL, peut-être
+    #    morte). Celle-ci est la forme fournie par l'utilisateur, donc vérifiée.
+    libelle: linkedin.com/in/david-joulin
+    url: https://www.linkedin.com/in/david-joulin-9b629790/
+
+# ⚠️ Pas d'âge (§7.2 point 12) : le CV DoYouBuzz affiche « 42 ans » alors que la
+#    naissance est datée du 2 mars 1981 — il est déjà périmé. C'est le cas d'école
+#    de ce qu'ACT-4 proscrit.

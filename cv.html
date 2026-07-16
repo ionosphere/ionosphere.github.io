@@ -1,0 +1,121 @@
+---
+layout: page
+titre: CV
+chapeau: Vingt ans de systèmes d'information pour l'agriculture. Plusieurs choses à la fois, le plus souvent.
+permalink: /cv/
+---
+
+{%- comment -%}
+  CV-5 — dire au visiteur quoi faire. Surtout PAS un faux bouton de
+  téléchargement : aucun PDF n'existe (CV-3), le PDF EST le rendu print.
+{%- endcomment -%}
+<div class="impression">
+  <p><strong>Pour emporter ce CV</strong> — imprimez cette page
+  (<span class="jeton">Ctrl</span> + <span class="jeton">P</span>) et choisissez
+  « Enregistrer au format PDF ». La mise en page d'impression est faite pour ça.</p>
+</div>
+
+{%- comment -%}
+  L'assolement complet. CV-7 : les chevauchements sont réels et se voient —
+  Ionosphere Consulting court par-dessus Bordeaux Sciences Agro et Ergolis,
+  le GAEC court sous tout le reste, Ekylibre et bziiit sont en cours ensemble.
+{%- endcomment -%}
+<section class="section">
+  <h2 class="section__titre">Assolement</h2>
+  {% include assolement.html postes=true %}
+</section>
+
+<section class="section">
+  <h2 class="section__titre">Parcours</h2>
+  {%- assign postes = site.data.parcours | sort: "debut" | reverse -%}
+  {%- for p in postes -%}
+    <article class="poste" id="{{ p.id }}">
+      <div class="poste__entete">
+        <h3>{{ p.organisation }}{% if p.lieu %} <span class="poste__lieu">· {{ p.lieu }}</span>{% endif %}</h3>
+        <time class="poste__dates" datetime="{{ p.debut }}">
+          {{- p.debut | split: "-" | first -}}
+          {% if p.fin %}–{{ p.fin | split: "-" | first }}{% else %} — en cours{% endif -%}
+        </time>
+      </div>
+      <p class="poste__role">{{ p.role }}</p>
+      {%- if p.faits -%}
+        <ul class="poste__faits">
+          {%- for f in p.faits -%}<li>{{ f }}</li>{%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </article>
+  {%- endfor -%}
+</section>
+
+<section class="section">
+  <h2 class="section__titre">Domaines d'expertise</h2>
+  <div class="grille-deux">
+    {%- for d in site.data.competences.domaines -%}
+      <div class="bloc">
+        <h3 class="bloc__titre">{{ d.titre }}</h3>
+        <p class="bloc__prose">{{ d.prose }}</p>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{%- comment -%}
+  LANG-4 rendu — les jetons ne sont jamais écrits en dur ici : ils viennent des
+  _data et passent tous par _includes/jeton.html.
+{%- endcomment -%}
+<section class="section">
+  <h2 class="section__titre">Compétences techniques</h2>
+  <div class="grille-deux">
+    {%- for t in site.data.competences.techniques -%}
+      <div class="bloc">
+        <h3 class="bloc__titre">{{ t.titre }}</h3>
+        <p class="bloc__jetons">
+          {%- for j in t.jetons -%}{% include jeton.html valeur=j %}{%- endfor -%}
+        </p>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section__titre">Formation</h2>
+  {%- for d in site.data.formation.diplomes -%}
+    <article class="poste">
+      <div class="poste__entete">
+        <h3>{{ d.titre }}</h3>
+        <time class="poste__dates" datetime="{{ d.debut }}">{{ d.debut }}–{{ d.fin }}</time>
+      </div>
+      <p class="poste__role">{{ d.etablissement }}</p>
+      {%- if d.detail -%}<p class="bloc__prose">{{ d.detail }}</p>{%- endif -%}
+    </article>
+  {%- endfor -%}
+
+  <div class="grille-deux" style="margin-top:1.5rem">
+    <div class="bloc">
+      <h3 class="bloc__titre">Formations complémentaires</h3>
+      <p class="bloc__prose">
+        {%- for c in site.data.formation.complements -%}
+          {{ c.titre }} ({{ c.etablissement }}){% unless forloop.last %} · {% endunless %}
+        {%- endfor -%}
+      </p>
+    </div>
+    <div class="bloc">
+      <h3 class="bloc__titre">Langues</h3>
+      <p class="bloc__prose">
+        {%- for l in site.data.competences.langues -%}
+          {{ l.langue }} — {{ l.niveau }}{% unless forloop.last %} · {% endunless %}
+        {%- endfor -%}
+      </p>
+    </div>
+  </div>
+</section>
+
+{%- comment -%} CONT-1. CONT-3 : jamais de téléphone. {%- endcomment -%}
+<section class="section">
+  <h2 class="section__titre">Contact</h2>
+  <ul class="pied__contacts">
+    {%- for c in site.data.identite.contacts -%}
+      <li><a href="{{ c.url }}">{{ c.libelle }}</a></li>
+    {%- endfor -%}
+  </ul>
+</section>

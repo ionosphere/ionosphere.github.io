@@ -1,0 +1,10 @@
+---
+layout: base
+---
+<article class="page">
+  <header class="page__entete">
+    <h1 class="page__titre">{{ page.titre }}</h1>
+    {%- if page.chapeau -%}<p class="page__chapeau">{{ page.chapeau }}</p>{%- endif -%}
+  </header>
+  {{ content }}
+</article>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang }}">{%- comment -%} LANG-1 {%- endcomment -%}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {%- comment -%}
+    NFR-7. ⚠️ ID-5 : pas d'og:site_name « Ionosphere ». Le handle est une
+    adresse, pas une marque — il n'apparaît que dans l'URL et les liens GitHub.
+  {%- endcomment -%}
+  {%- seo title=false -%}
+  <title>{% if page.titre %}{{ page.titre }} — {{ site.title }}{% else %}{{ site.title }} — {{ site.tagline }}{% endif %}</title>
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="icon" href="{{ '/assets/favicon.svg' | relative_url }}" type="image/svg+xml">
+</head>
+<body>
+
+<a class="evitement" href="#contenu">Aller au contenu</a>
+
+<header class="entete">
+  {%- comment -%}
+    Nav en clair, toujours visible. Pas de <details>, pas de hamburger : quatre
+    liens courts tiennent sur un écran de 320 px. Un menu déroulant pour quatre
+    liens est un réflexe, pas un besoin — et c'était le seul endroit où Bootstrap
+    aurait pu manquer. Il ne manque pas (DESIGN.md §5).
+  {%- endcomment -%}
+  <div class="nav">
+    <a class="nav__nom" href="{{ '/' | relative_url }}">{{ site.data.identite.nom }}</a>
+    <nav class="nav__liens" aria-label="Navigation principale">
+      <a href="{{ '/cv/' | relative_url }}" {% if page.url contains '/cv' %}aria-current="page"{% endif %}>CV</a>
+      <a href="{{ '/projets/' | relative_url }}" {% if page.url contains '/projets' %}aria-current="page"{% endif %}>Travaux</a>
+      <a href="{{ '/activite/' | relative_url }}" {% if page.url contains '/activite' %}aria-current="page"{% endif %}>Activité</a>
+    </nav>
+  </div>
+</header>
+
+<main id="contenu">
+  {{ content }}
+</main>
+
+<footer class="pied">
+  <ul class="pied__contacts">
+    {%- for c in site.data.identite.contacts -%}
+      <li><a href="{{ c.url }}">{{ c.libelle }}</a></li>
+    {%- endfor -%}
+  </ul>
+  {%- comment -%}
+    ACT-4 — aucune date de fraîcheur ici. Le site ne doit pas exhiber son propre
+    vieillissement. Pas de « dernière mise à jour », pas d'année de copyright.
+  {%- endcomment -%}
+</footer>
+
+</body>
+</html>

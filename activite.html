@@ -1,0 +1,94 @@
+---
+layout: page
+titre: Activité
+chapeau: Ce qui se passe autour du code — contributions, publications, engagements.
+permalink: /activite/
+---
+
+{%- comment -%} ACT-1 — contributions open source. {%- endcomment -%}
+<section class="section">
+  <h2 class="section__titre">Contributions</h2>
+  <p>
+    Mon compte est <a href="https://github.com/ionosphere"><code class="jeton">github.com/ionosphere</code></a>.
+    L'essentiel du travail vit sous les organisations
+    <a href="https://github.com/ekylibre"><code class="jeton">ekylibre</code></a> et
+    <a href="https://github.com/osfarm"><code class="jeton">osfarm</code></a>.
+  </p>
+  <div class="grille-deux">
+    <div class="bloc">
+      <h3 class="bloc__titre">Ekylibre</h3>
+      <p class="bloc__prose">
+        L'ERP agricole, en {% include jeton.html valeur="AGPL-3.0" %} — plus de
+        trois cents modèles de données, sur {% include jeton.html valeur="PostgreSQL" %}
+        et {% include jeton.html valeur="PostGIS" %}.
+      </p>
+    </div>
+    <div class="bloc">
+      <h3 class="bloc__titre">OSFarm</h3>
+      <p class="bloc__prose">
+        L'association porte les dépôts de Lexicon et de GAIA, et agrège une stack
+        agricole libre — guidage, robotique de désherbage, gestion.
+      </p>
+    </div>
+  </div>
+</section>
+
+{%- comment -%}
+  ⚠️⚠️ ACT-2 / ACT-8 — LE POINT SENSIBLE DU SITE.
+
+  Deux livres, deux rôles différents : co-auteur de l'un, ÉDITEUR de l'autre.
+  « La Vauzelle » est un témoignage de Francis Joulin — David Joulin ne l'a pas
+  écrit. Le rendu passe par _includes/publication.html, qui affiche toujours
+  `auteurs` puis `role`, et traite le rôle de tiers de façon visuellement
+  distincte. S'attribuer le travail d'un tiers par simple placement est le seul
+  type d'erreur que ce site ne peut pas se permettre.
+{%- endcomment -%}
+<section class="section">
+  <h2 class="section__titre">Publications</h2>
+  <ul class="publications">
+    {%- for p in site.data.publications -%}
+      {% include publication.html pub=p %}
+    {%- endfor -%}
+  </ul>
+</section>
+
+<section class="section">
+  <h2 class="section__titre">Interventions</h2>
+  <ul class="publications">
+    {%- for i in site.data.interventions -%}
+      <li class="publication">
+        <h3 class="publication__titre">
+          {%- if i.url -%}<a href="{{ i.url }}">{{ i.titre }}</a>{%- else -%}{{ i.titre }}{%- endif -%}
+        </h3>
+        <p class="publication__auteurs">
+          {{ i.cadre }} <span class="jeton">{{ i.annee }}</span>
+        </p>
+        {%- if i.resume -%}<p class="publication__note">{{ i.resume }}</p>{%- endif -%}
+      </li>
+    {%- endfor -%}
+  </ul>
+</section>
+
+{%- comment -%}
+  ACT-3 / ACT-5 — les engagements ne sont pas décoratifs : OSFarm porte
+  l'infrastructure de la moitié du book, NAOS est un pôle logiciel libre. Ils
+  ont leur propre assolement — eux aussi courent en parallèle.
+{%- endcomment -%}
+<section class="section">
+  <h2 class="section__titre">Engagements</h2>
+  {% include assolement.html engagements=true %}
+
+  <div class="grille-deux" style="margin-top:1.5rem">
+    {%- for e in site.data.engagements -%}
+      <div class="bloc">
+        <h3 class="bloc__titre">
+          {%- if e.url -%}<a href="{{ e.url }}">{{ e.nom }}</a>{%- else -%}{{ e.nom }}{%- endif -%}
+        </h3>
+        <p class="bloc__prose">
+          <strong>{{ e.role }}</strong>{% if e.historique %} — {{ e.historique }}{% endif %}<br>
+          {{ e.resume }}
+        </p>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>

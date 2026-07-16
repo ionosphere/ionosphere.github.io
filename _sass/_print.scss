@@ -1,0 +1,113 @@
+// PRINT — CV-4. C'EST UN LIVRABLE, PAS UNE FINITION.
+//
+// C'est l'artefact que le recruteur emporte, et il n'existe AUCUN PDF derrière
+// (CV-3 : le PDF est le rendu print, la source de vérité reste les _data).
+
+@media print {
+  @page {
+    // A4 explicite : sans ça, le navigateur retombe sur son défaut — `letter`
+    // aux États-Unis. Un CV français qui s'imprime en letter se coupe en bas.
+    size: A4;
+    margin: 14mm 12mm;
+  }
+
+  :root {
+    --sol: #fff;
+    --sol-creuse: #fff;
+    --encre: #000;
+    --encre-pale: #444;
+    --trait: #999;
+  }
+
+  body {
+    font-size: 10pt;
+    line-height: 1.4;
+  }
+
+  // Masquer ce qui n'a pas de sens sur papier.
+  .entete,
+  .pied,
+  .evitement,
+  .impression,
+  .etude__retour,
+  .accueil-liens {
+    display: none !important;
+  }
+
+  main { padding: 0; max-width: none; }
+
+  h1 { font-size: 20pt; }
+  h2 { font-size: 13pt; }
+  h3 { font-size: 11pt; }
+
+  // ── CV-4 — les URL en toutes lettres ───────────────────────────────────
+  // Un lien n'est pas cliquable sur papier.
+  a { color: #000; text-decoration: none; }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-family: var(--f-jeton);
+    font-size: 7.5pt;
+    color: #555;
+    word-break: break-all;
+  }
+
+  // Sauf là où l'URL est déjà le libellé : ne pas la doubler.
+  .pied a::after,
+  .jeton a::after { content: none; }
+
+  // ── CV-4 — pas de coupure au milieu d'une expérience ───────────────────
+  .poste,
+  .carte,
+  .publication,
+  .parcelle,
+  .bloc {
+    break-inside: avoid;
+  }
+
+  h1, h2, h3 { break-after: avoid; }
+
+  // ── CV-7 s'applique au print ───────────────────────────────────────────
+  // La feuille DOIT tenir le parallélisme. L'assolement s'imprime, compact.
+  //
+  // ⚠️ NON ACQUIS — ~25 campagnes sur A4 portrait, c'est serré. À éprouver sur
+  //    un vrai aperçu, pas à supposer (DESIGN.md §6). Si le rendu ne tient pas :
+  //    réduire l'empan (retirer le GAEC → origine 2006) ou passer le bandeau en
+  //    pleine largeur avec des repères tous les 5 ans.
+  .assolement {
+    --col-identite: 30mm;
+    --col-role: 34mm;
+    margin-block: 6mm;
+    break-inside: avoid;
+  }
+
+  .parcelle {
+    padding-block: 1.2mm;
+    border-bottom: none;
+
+    &__bande {
+      opacity: 1;
+      height: 2.6mm;
+      // L'aplat couleur ne survit pas à une impression noir et blanc : la bande
+      // porte un contour, et le code + les dates restent la source d'info.
+      border: 0.4pt solid #000;
+      background: #d8d8d8;
+    }
+
+    &__bande--en-cours {
+      -webkit-mask-image: none;
+      mask-image: none;
+      border-right-style: dashed;
+    }
+
+    &__code { color: #000; border-bottom-color: #000; }
+  }
+
+  .campagne--reperee i { font-size: 6pt; }
+
+  // ── Interdits absolus ──────────────────────────────────────────────────
+  // CONT-3 — le numéro de téléphone n'apparaît nulle part, y compris ici.
+  //          Il n'est dans aucune donnée : cette règle est une ceinture.
+  // §7.2/12 — jamais d'âge : le CV DoYouBuzz est déjà périmé.
+  [data-print="jamais"] { display: none !important; }
+}

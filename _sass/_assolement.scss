@@ -1,0 +1,176 @@
+// L'ASSOLEMENT — le geste unique. DESIGN.md §2.
+//
+// Parcelles en lignes, campagnes en colonnes. Les chevauchements SE VOIENT :
+// c'est CV-7 rendu, pas contourné. Grille CSS pure, zéro JS.
+//
+// Rien ici ne « corrige » un chevauchement — c'est le point.
+
+.assolement {
+  --col-identite: minmax(7rem, 13rem);
+  --col-role: minmax(5rem, 11rem);
+  margin-block: 1.5rem;
+
+  &__titre {
+    font-family: var(--f-jeton);
+    font-size: var(--t-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--encre-pale);
+    margin: 1.75rem 0 0.6rem;
+  }
+
+  &__parcelles {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  // ── Échelle des campagnes ──────────────────────────────────────────────
+  // Décorative : chaque parcelle porte ses dates en clair, donc aria-hidden.
+  &__echelle {
+    display: none;
+  }
+}
+
+// ── Piste : la grille des campagnes ──────────────────────────────────────
+.parcelle__piste,
+.assolement__piste {
+  display: grid;
+  grid-template-columns: repeat(var(--campagnes), 1fr);
+  align-items: center;
+  min-height: var(--piste-h);
+}
+
+.campagne {
+  grid-column: var(--c) / span 1;
+  border-left: 1px solid var(--trait);
+  height: 100%;
+  font-family: var(--f-jeton);
+  font-size: var(--t-xs);
+  color: var(--encre-pale);
+
+  &--reperee {
+    border-left-color: var(--encre-pale);
+
+    i {
+      font-style: normal;
+      display: block;
+      padding-left: 0.25rem;
+    }
+  }
+}
+
+// ── Parcelle ─────────────────────────────────────────────────────────────
+.parcelle {
+  padding-block: 0.35rem;
+  border-bottom: 1px solid var(--sol-creuse);
+
+  &__identite {
+    display: block;
+  }
+
+  &__nom {
+    font-weight: 600;
+
+    a { color: inherit; text-decoration: none; }
+    a:hover { text-decoration: underline; text-decoration-color: var(--parcelle); }
+  }
+
+  &__meta {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-family: var(--f-jeton);
+    font-size: var(--t-xs);
+    color: var(--encre-pale);
+  }
+
+  // NFR-3 — code RPG : l'information n'est jamais portée par la couleur seule.
+  // C'est aussi ainsi que fonctionne le RPG dont la palette est tirée.
+  &__code {
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--parcelle);
+    border-bottom: 2px solid var(--parcelle);
+    text-decoration: none;
+    cursor: help;
+  }
+
+  &__dates { white-space: nowrap; }
+
+  &__role {
+    font-size: var(--t-s);
+    color: var(--encre-pale);
+  }
+
+  // ── La bande ─────────────────────────────────────────────────────────
+  // La piste est TOUJOURS rendue, y compris sur mobile.
+  //
+  // DESIGN.md §2.5 prévoyait de la masquer sous 600 px et de faire porter le
+  // parallélisme par la prose. Renoncé : à 390 px, 25 campagnes font encore
+  // ~14 px chacune — la grille tient, il suffit d'empiler l'identité au-dessus.
+  // Abandonner la démonstration de CV-7 sur mobile aurait été un repli, pas une
+  // adaptation : c'est là que la majorité des visiteurs arrivent.
+  &__piste { margin-top: 0.35rem; }
+
+  &__bande {
+    grid-column: var(--c1) / var(--c2);
+    // Remplissage en teinte, arête gauche à PLEINE intensité (DESIGN.md §1.3).
+    // Pas d'`opacity` ici : elle écraserait aussi l'arête. D'où les tokens
+    // --parcelle-clair, explicites.
+    background: var(--parcelle-clair);
+    height: 0.7rem;
+    border-radius: var(--bande-r);
+    border-left: 3px solid var(--parcelle);
+    position: relative;
+  }
+
+  // Un poste en cours n'a pas de bord droit : la bande sort du cadre. Deux
+  // parcelles peuvent l'être en même temps — c'est justement le cas (CV-7).
+  &__bande--en-cours {
+    border-radius: var(--bande-r) 0 0 var(--bande-r);
+    -webkit-mask-image: linear-gradient(to right, #000 82%, transparent 100%);
+    mask-image: linear-gradient(to right, #000 82%, transparent 100%);
+  }
+}
+
+// ── < 600px : identité empilée au-dessus de sa piste ─────────────────────
+// Les bandes restent là, donc les chevauchements aussi. Seule l'échelle des
+// campagnes tombe (illisible à cette largeur) : les dates en clair de chaque
+// parcelle portent l'absolu, les bandes portent le relatif — c'est-à-dire le
+// parallélisme, qui est tout l'objet.
+
+// ── ≥ 600px : identité et piste côte à côte, échelle rétablie ────────────
+@media (min-width: 37.5rem) {
+  .assolement__echelle {
+    display: grid;
+    grid-template-columns: var(--col-identite) 1fr;
+    gap: 0 1rem;
+    margin-bottom: 0.25rem;
+    min-height: 1.4rem;
+  }
+
+  .parcelle {
+    display: grid;
+    grid-template-columns: var(--col-identite) 1fr;
+    gap: 0 1rem;
+    align-items: center;
+
+    &__piste { margin-top: 0; }
+    &__role { grid-column: 2; font-size: var(--t-xs); padding-top: 0.1rem; }
+  }
+}
+
+// ── ≥ 900px : rôle en troisième colonne ──────────────────────────────────
+@media (min-width: 56.25rem) {
+  .assolement__echelle {
+    grid-template-columns: var(--col-identite) 1fr var(--col-role);
+  }
+
+  .parcelle {
+    grid-template-columns: var(--col-identite) 1fr var(--col-role);
+
+    &__role { grid-column: 3; padding-top: 0; }
+  }
+}

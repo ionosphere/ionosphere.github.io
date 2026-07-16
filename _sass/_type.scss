@@ -1,0 +1,102 @@
+// Typographie — DESIGN.md §1.4
+//
+// LE SYSTÈME EST LA RÈGLE LANG-4 :
+//   mono  = ce qui ne se traduit pas (Ruby, PostGIS, AGPL-3.0, les handles)
+//   sans  = la voix française
+// La distinction se lit sans légende, et elle est vraie.
+//
+// Trois fontes libres, AUTO-HÉBERGÉES — Google Fonts est un tiers (§6).
+// `font-display: swap` : le texte reste lisible pendant le chargement (NFR-4).
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("../fonts/bricolage-grotesque.woff2") format("woff2");
+  font-weight: 300 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Source Sans 3";
+  src: url("../fonts/source-sans-3.woff2") format("woff2");
+  font-weight: 200 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("../fonts/ibm-plex-mono.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBM Plex Mono";
+  src: url("../fonts/ibm-plex-mono-600.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+
+// ── Display — avec retenue ───────────────────────────────────────────────
+// Bricolage Grotesque n'est ni Inter, ni Geist, ni Playfair, ni Space Grotesk :
+// aucun des défauts. ⚠️ Son axe « wonk » la rend joueuse — il est DÉSACTIVÉ, et
+// la fonte reste cantonnée aux titres (lectorat DSI).
+h1, h2, h3 {
+  font-family: var(--f-display);
+  font-variation-settings: "wonk" 0;
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  margin: 0;
+}
+
+h1 { font-size: var(--t-xl); }
+h2 { font-size: var(--t-l); }
+h3 { font-size: var(--t-m); letter-spacing: -0.01em; }
+
+p { margin: 0 0 var(--rythme); }
+
+// ── Jeton — LANG-4 ───────────────────────────────────────────────────────
+.jeton {
+  font-family: var(--f-jeton);
+  font-size: 0.85em;
+  background: var(--sol-creuse);
+  border: 1px solid var(--trait);
+  border-radius: 2px;
+  padding: 0.08em 0.4em;
+  white-space: nowrap;
+}
+
+// ── Sections ─────────────────────────────────────────────────────────────
+.section {
+  padding-block: clamp(2rem, calc(1.2rem + 3vw), 4rem);
+  border-top: 1px solid var(--trait);
+
+  &__titre {
+    font-family: var(--f-jeton);
+    font-size: var(--t-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--encre-pale);
+    margin-bottom: 1.25rem;
+  }
+}
+
+.page__titre { margin-bottom: 0.75rem; }
+
+.page__chapeau {
+  font-size: var(--t-m);
+  color: var(--encre-pale);
+  max-width: 46rem;
+}
+
+// Accessible mais invisible — NFR-3.
+.lecture-seule {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

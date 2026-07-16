@@ -1,0 +1,45 @@
+---
+layout: page
+titre: Travaux
+chapeau: Quatre projets. Tous agricoles, tous libres — c'est le même fil que le parcours, pas une annexe.
+permalink: /projets/
+---
+
+{%- comment -%}
+  PROJ-1 — la grille vient de _data/projects.yml. Une entrée = une carte.
+  PROJ-3 — ajouter un projet sans page détail = ajouter un bloc YAML. Rien d'autre.
+  PROJ-4 — le lien vers l'étude de cas se résout seul (voir projet-carte.html).
+  PROJ-7 — pas de filtre : à quatre projets, c'est un ornement qui signalerait
+           que le book est trop court pour lui. Arbitré en design.
+{%- endcomment -%}
+<ul class="cartes">
+  {%- assign projets = site.data.projects | sort: "debut" | reverse -%}
+  {%- for p in projets -%}
+    {% include projet-carte.html projet=p %}
+  {%- endfor -%}
+</ul>
+
+{%- comment -%}
+  PROJ-12 — les quatre projets forment une chaîne, pas une liste. C'est la
+  démonstration de POS-1 : le book n'illustre pas le CV, il l'est.
+{%- endcomment -%}
+<section class="section">
+  <h2 class="section__titre">Comment ils s'enchaînent</h2>
+  <div class="grille-deux">
+    <div class="bloc">
+      <h3 class="bloc__titre">Lexicon alimente Ekylibre</h3>
+      <p class="bloc__prose">
+        Ekylibre normalise ses données agricoles via les nomenclatures Onoma et
+        Lexicon — plus de vingt millions de références. Le second n'est pas à côté
+        du premier : il est dedans.
+      </p>
+    </div>
+    <div class="bloc">
+      <h3 class="bloc__titre">GAIA a engendré Piloterra</h3>
+      <p class="bloc__prose">
+        Piloterra est né du premier hackathon IA &amp; agriculture, organisé au
+        Salon de l'agriculture 2024 avec Comexposium et La Ferme Digitale.
+      </p>
+    </div>
+  </div>
+</section>

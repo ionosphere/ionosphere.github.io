@@ -1,0 +1,58 @@
+{%- comment -%}
+  ACT-8a — CONTRAT DE RENDU, NON NÉGOCIABLE.
+
+  `auteurs` s'affiche TOUJOURS, avant le rôle. Une publication ne peut pas être
+  rendue sans son auteur.
+
+  `role` s'affiche TOUJOURS, et il est visuellement DISTINCT : « éditeur » ne
+  doit jamais pouvoir se lire comme une signature.
+
+  Ce gabarit rend « L'IA des Champs » (co-auteur) et « La Vauzelle » (éditeur,
+  auteur : Francis Joulin) de façon SÉPARABLE À L'ŒIL. S'attribuer le témoignage
+  d'un tiers par simple placement est le seul type d'erreur que ce site ne peut
+  pas se permettre — l'auteur est une personne réelle et identifiable.
+{%- endcomment -%}
+
+{%- assign pub = include.pub -%}
+{%- assign moi = site.data.identite.nom -%}
+{%- assign est_auteur = false -%}
+{%- for a in pub.auteurs -%}{%- if a == moi -%}{%- assign est_auteur = true -%}{%- endif -%}{%- endfor -%}
+
+<li class="publication" id="{{ pub.id }}">
+  <h3 class="publication__titre">
+    {%- if pub.url -%}
+      <a href="{{ pub.url }}">{{ pub.titre }}</a>
+    {%- else -%}
+      {{ pub.titre }}
+    {%- endif -%}
+  </h3>
+
+  <p class="publication__auteurs">
+    {{ pub.auteurs | join: ", " }}
+    {%- if pub.editeur %} <span class="publication__editeur">· {{ pub.editeur }}</span>{% endif -%}
+    {%- if pub.annee %} <span class="jeton">{{ pub.annee }}</span>{% endif -%}
+    {%- if pub.pages %} <span class="jeton">{{ pub.pages }} p.</span>{% endif -%}
+  </p>
+
+  {%- comment -%}
+    La mention de rôle. Quand David Joulin n'est PAS auteur, elle est explicite
+    et signalée — c'est tout l'objet d'ACT-8.
+  {%- endcomment -%}
+  <p class="publication__role {% unless est_auteur %}publication__role--tiers{% endunless %}">
+    {%- if est_auteur -%}
+      <span class="publication__role-label">{{ moi }}</span> — {{ pub.role }}
+    {%- else -%}
+      <span class="publication__role-label">{{ pub.role | capitalize }} : {{ moi }}</span>
+      {%- if pub.role_detail %} — {{ pub.role_detail }}{% endif -%}
+    {%- endif -%}
+  </p>
+
+  {%- if pub.note -%}
+    <p class="publication__note">{{ pub.note }}</p>
+  {%- endif -%}
+
+  {%- comment -%} NFR-4 — un lien qui déclenche 24 Mo se signale. {%- endcomment -%}
+  {%- if pub.poids -%}
+    <p class="publication__poids"><span class="jeton">PDF · {{ pub.poids }}</span></p>
+  {%- endif -%}
+</li>

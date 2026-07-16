@@ -1,0 +1,120 @@
+// Reset minimal + structure. ~20 lignes là où Bootstrap en apportait 30 ko
+// dont on aurait utilisé 5 % (DESIGN.md §5).
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--sol);
+  color: var(--encre);
+  font-family: var(--f-prose);
+  font-size: var(--t-base);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; }
+
+a {
+  color: var(--releve);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+
+  &:hover { color: var(--releve-vif); }
+}
+
+// NFR-3 — focus visible partout, sans exception.
+:focus-visible {
+  outline: 2px solid var(--releve);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+// NFR-3 — il n'y a aucune animation décorative, mais la règle est posée.
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.evitement {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--encre);
+  color: var(--sol);
+  padding: 0.6rem 1rem;
+  z-index: 10;
+
+  &:focus { left: 0; }
+}
+
+// ── Cadre ────────────────────────────────────────────────────────────────
+.entete, main, .pied {
+  max-width: var(--largeur);
+  margin-inline: auto;
+  padding-inline: var(--gouttiere);
+}
+
+main { padding-block: clamp(2rem, calc(1rem + 4vw), 4.5rem); }
+
+// ── Navigation — quatre liens, toujours visibles, zéro JS ────────────────
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  padding-block: 1.25rem;
+  border-bottom: 1px solid var(--trait);
+
+  &__nom {
+    font-family: var(--f-display);
+    font-variation-settings: "wonk" 0; // DESIGN.md §1.4 — axe Wonky désactivé
+    font-weight: 700;
+    font-size: var(--t-m);
+    color: var(--encre);
+    text-decoration: none;
+  }
+
+  &__liens {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+
+    a {
+      font-family: var(--f-jeton);
+      font-size: var(--t-s);
+      text-decoration: none;
+      color: var(--encre-pale);
+
+      // NFR-3 — la page courante n'est pas signalée par la seule couleur :
+      // aria-current la porte, et le trait la double visuellement.
+      &[aria-current="page"] {
+        color: var(--encre);
+        font-weight: 600;
+        border-bottom: 2px solid var(--releve);
+      }
+
+      &:hover { color: var(--releve); text-decoration: underline; }
+    }
+  }
+}
+
+// ── Pied ─────────────────────────────────────────────────────────────────
+.pied {
+  border-top: 1px solid var(--trait);
+  padding-block: 2rem;
+
+  &__contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: var(--f-jeton);
+    font-size: var(--t-s);
+  }
+}

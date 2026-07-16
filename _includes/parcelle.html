@@ -1,0 +1,63 @@
+{%- comment -%}
+  Une parcelle = une bande de l'assolement.
+
+  ⚠️ `fin` vide = EN COURS. Plusieurs parcelles peuvent l'être en même temps :
+     rien ici ne suppose le contraire (CV-7).
+
+  NFR-3 — l'information n'est JAMAIS portée par la couleur seule : chaque
+  parcelle affiche son code (ENT/SAL/IND/AGR/TRA/ENG) et ses dates en clair.
+  C'est aussi ainsi que fonctionne le RPG, dont la palette est tirée.
+{%- endcomment -%}
+
+{%- assign an_debut = include.debut | split: "-" | first | plus: 0 -%}
+{%- if include.fin and include.fin != "" -%}
+  {%- assign an_fin = include.fin | split: "-" | first | plus: 0 -%}
+  {%- assign en_cours = false -%}
+{%- else -%}
+  {%- assign an_fin = include.maintenant -%}
+  {%- assign en_cours = true -%}
+{%- endif -%}
+
+{%- comment -%} Colonnes de la piste. Bornées : une parcelle antérieure à
+l'origine ne doit pas déborder de la grille. {%- endcomment -%}
+{%- assign c1 = an_debut | minus: include.origine | plus: 1 -%}
+{%- if c1 < 1 %}{% assign c1 = 1 %}{% endif -%}
+{%- assign c2 = an_fin | minus: include.origine | plus: 2 -%}
+{%- assign c2max = include.campagnes | plus: 1 -%}
+{%- if c2 > c2max %}{% assign c2 = c2max %}{% endif -%}
+
+{%- case include.nature -%}
+  {%- when "entreprise" %}{% assign code = "ENT" %}{% assign lecture = "Entreprise fondée" -%}
+  {%- when "salariat" %}{% assign code = "SAL" %}{% assign lecture = "Emploi salarié" -%}
+  {%- when "independant" %}{% assign code = "IND" %}{% assign lecture = "Indépendant" -%}
+  {%- when "agricole" %}{% assign code = "AGR" %}{% assign lecture = "Agricole" -%}
+  {%- when "travail" %}{% assign code = "TRA" %}{% assign lecture = "Travail" -%}
+  {%- else %}{% assign code = "ENG" %}{% assign lecture = "Engagement" -%}
+{%- endcase -%}
+
+<li class="parcelle" data-nature="{{ include.nature }}">
+  <span class="parcelle__identite">
+    <span class="parcelle__nom">
+      {%- if include.lien -%}
+        <a href="{{ include.lien | relative_url }}">{{ include.nom }}</a>
+      {%- else -%}
+        {{ include.nom }}
+      {%- endif -%}
+    </span>
+    <span class="parcelle__meta">
+      <abbr class="parcelle__code" title="{{ lecture }}">{{ code }}</abbr>
+      <time class="parcelle__dates" datetime="{{ include.debut }}">
+        {{- an_debut }}{% if en_cours %} — en cours{% else %} — {{ an_fin }}{% endif -%}
+      </time>
+    </span>
+  </span>
+
+  <span class="parcelle__piste">
+    <span class="parcelle__bande {% if en_cours %}parcelle__bande--en-cours{% endif %}"
+          style="--c1: {{ c1 }}; --c2: {{ c2 }}"></span>
+  </span>
+
+  {%- unless include.compact -%}
+    <span class="parcelle__role">{{ include.detail }}</span>
+  {%- endunless -%}
+</li>
