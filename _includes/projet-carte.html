@@ -10,13 +10,35 @@
 {%- assign detail = site.projects | where: "ref", p.id | first -%}
 
 <li class="carte" id="{{ p.id }}" data-statut="{{ p.statut }}">
-  <h3 class="carte__nom">
-    {%- if detail -%}
-      <a href="{{ detail.url | relative_url }}">{{ p.nom }}</a>
-    {%- else -%}
-      {{ p.nom }}
-    {%- endif -%}
-  </h3>
+  {%- comment -%}
+    PROJ-5 `visuel` — une capture du projet RÉEL, auto-hébergée (§6).
+    `loading=lazy` + dimensions explicites : pas de saut de mise en page, et
+    rien n'est chargé avant d'être vu (NFR-4).
+    NFR-3 — alt descriptif venant des données, jamais du gabarit (LANG-5).
+  {%- endcomment -%}
+  {%- if p.visuel -%}
+    <div class="carte__visuel">
+      <img src="{{ p.visuel | relative_url }}" alt="{{ p.visuel_alt }}"
+           width="640" height="360" loading="lazy" decoding="async">
+    </div>
+  {%- endif -%}
+
+  <div class="carte__corps">
+  {%- comment -%}
+    Pas de marque ici : la capture ci-dessus porte DÉJÀ le logo du projet, en
+    grand. Un second exemplaire à 38 px n'ajoutait rien — et celui de Piloterra,
+    qui est une scène dessinée, s'y réduisait à un pâté illisible.
+    Les marques servent là où il n'y a pas de visuel : le CV et les engagements.
+  {%- endcomment -%}
+  <div class="carte__entete">
+    <h3 class="carte__nom">
+      {%- if detail -%}
+        <a href="{{ detail.url | relative_url }}">{{ p.nom }}</a>
+      {%- else -%}
+        {{ p.nom }}
+      {%- endif -%}
+    </h3>
+  </div>
 
   <p class="carte__tagline">{{ p.tagline }}</p>
 
@@ -54,4 +76,5 @@
     {%- if p.site -%}<a href="{{ p.site }}">Site</a>{%- endif -%}
     {%- if detail -%}<a href="{{ detail.url | relative_url }}" class="carte__etude">Étude de cas</a>{%- endif -%}
   </p>
+  </div>
 </li>

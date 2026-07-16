@@ -4,6 +4,7 @@
 # appartiennent au récit POS-1.
 
 - id: la-ferme-digitale
+  logo: /assets/img/logos/lfd.webp
   nom: La Ferme Digitale
   # ⚠️ §7.2 — 2015 (CV DSI) ou mars 2016 (CV DoYouBuzz) ? Non tranché.
   #    2015 retenu : le CV DSI est le plus récent. À confirmer.
@@ -15,6 +16,7 @@
   url: https://www.lafermedigitale.fr/
 
 - id: osfarm
+  logo: /assets/img/logos/osfarm.webp
   nom: OSFarm
   # ⚠️ §7.2 — le CV dit « depuis 2024 », le site porte « © 2023–2026 ».
   #    2024 retenu (déclaratif utilisateur). À confirmer.

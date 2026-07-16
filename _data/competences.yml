@@ -17,15 +17,17 @@ domaines:
 
 techniques:
   - titre: Langages
-    jetons: [PHP, Python, Ruby, SQL]
+    jetons: [PHP, Python, Ruby, Go, TypeScript, SQL, HTML, CSS, Bash]
   - titre: Plateforme & déploiement
     jetons: [GitHub, GitLab, CI/CD, Docker, Linux]
   - titre: Bases de données & ETL
     jetons: [PostgreSQL, PostGIS, BigQuery, Talend, Elastic, n8n]
   - titre: IA
-    jetons: [Mistral, OpenAI, Anthropic, HuggingFace, Gradio, OpenWebUI, Ollama]
+    jetons: [Mistral, Claude Code, HuggingFace, Gradio, OpenWebUI, Ollama]
   - titre: Outils métiers
     jetons: [MesParcelles, Smag Farmer, Geofolia, QGIS]
+  - titre: Modélisation métiers
+    jetons: [Comptabilité, Gestion, Facturation, SIG, Agriculture, Agroalimentaire]
 
 langues:
   - langue: Français

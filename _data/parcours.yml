@@ -9,9 +9,25 @@
 #    exactement la faute que le CV DSI a commise en lissant le parcours.
 #
 # `nature` : clé fermée → couleur + code RPG.
-#            entreprise | salariat | independant | agricole
+#            entreprise | salariat | independant | agricole | stage
+#
+# `devenu` : nom actuel de l'organisation, si elle a changé depuis. On garde
+#            TOUJOURS le nom d'époque en principal — écrire le nom actuel sur
+#            des dates antérieures à son existence est un anachronisme (NFR-1).
+#
+# ⚠️⚠️ PIÈGE YAML — À CONNAÎTRE AVANT D'AJOUTER UN FAIT.
+#    Une puce contenant « mot : mot » est lue comme un DICTIONNAIRE, pas comme
+#    une phrase. La page affiche alors {"Élevage"=>"alimentation, soin"} en clair.
+#    Ça n'échoue pas au build : ça s'imprime sur le site.
+#
+#        ❌  - Élevage : alimentation, soin, traite.
+#        ✅  - 'Élevage : alimentation, soin, traite.'
+#
+#    Règle : tout fait contenant « deux-points entouré d'espaces » se met entre
+#    guillemets simples (et les apostrophes internes se doublent).
 
 - id: bziiit
+  logo: /assets/img/logos/bziiit.webp
   organisation: bziiit
   role: Directeur technique (CTO)
   debut: "2026-01"
@@ -19,10 +35,11 @@
   nature: salariat
   lieu: Bordeaux
   faits:
-    - Direction technique : gestion des projets et des environnements de production numériques.
+    - 'Direction technique : gestion des projets et des environnements de production numériques.'
     - Veille technologique IA & Data ; audit, expertise et formation des organisations.
 
 - id: ekylibre
+  logo: /assets/img/logos/ekylibre.svg
   organisation: Ekylibre
   # ✅ rév. 7 — « CEO », d'après sa propre bio GitHub. Le CV DSI recadrait le
   #    mandat en « directeur technique » pour viser un poste de DSI.
@@ -34,10 +51,10 @@
   faits:
     - Définition du schéma directeur produit & technique, des standards d'architecture, d'urbanisation et d'interopérabilité.
     - Management d'une équipe pluridisciplinaire (développement, support, infrastructure) et pilotage des éditeurs & prestataires.
-    - Gouvernance SI : méthodes, procédures et indicateurs de qualité de service.
-    - Sécurité du SI : environnements, sauvegardes, centralisation des logs, supervision, incidents, conformité RGPD.
-    - Pilotage du portefeuille : roadmap produit, sprints, arbitrages budgétaires et mises en production.
-    - Direction d'entreprise : gestion financière, commerciale et RH ; support clients et documentation.
+    - 'Gouvernance SI : méthodes, procédures et indicateurs de qualité de service.'
+    - 'Sécurité du SI : environnements, sauvegardes, centralisation des logs, supervision, incidents, conformité RGPD.'
+    - 'Pilotage du portefeuille : roadmap produit, sprints, arbitrages budgétaires et mises en production.'
+    - 'Direction d''entreprise : gestion financière, commerciale et RH ; support clients et documentation.'
 
 # ⚠️ CV-6 OUVERT — cette entrée est coupée du CV DSI. Réintégrée ici parce que
 #    c'est l'une des trois expériences PARALLÈLES que le CV de recrutement avait
@@ -66,7 +83,7 @@
   faits:
     - Recueil et formalisation des besoins métiers, rédaction des spécifications fonctionnelles et du cahier des charges.
     - Définition de la méthodologie, du planning, des ressources et des livrables ; modélisation et tests fonctionnels.
-    - Expertise métiers : comptabilité, gestion, productions agricoles.
+    - 'Expertise métiers : comptabilité, gestion, productions agricoles.'
 
 - id: bordeaux-sciences-agro
   organisation: Bordeaux Sciences Agro
@@ -79,7 +96,7 @@
     - Chef de projet sur le progiciel ANAIS (gestion prévisionnelle agricole) ; expertise et maintenance sur ISTEA (comptabilité agricole).
     - Mise en place du suivi d'incidents, des tests unitaires & fonctionnels et d'un extranet client ; ingénieur système & réseau.
     - Enseignant en cursus ingénieur et Mastère Viticulture.
-    - Clients : 85 chambres d'agriculture & ADASEA, 15 centres de gestion.
+    - 'Clients : 85 chambres d''agriculture & ADASEA, 15 centres de gestion.'
 
 - id: cobas
   organisation: COBAS
@@ -103,10 +120,34 @@
   nature: agricole
   lieu: Saint-Porchaire
   faits:
-    - Élevage : alimentation, soin, traite.
-    - Production végétale : travaux du sol, récolte, traitement.
-    - Conducteur d'engins : presse, moissonneuse-batteuse.
+    - 'Élevage : alimentation, soin, traite.'
+    - 'Production végétale : travaux du sol, récolte, traitement.'
+    - 'Conducteur d''engins : presse, moissonneuse-batteuse.'
 
-# ⚠️ CV-6 — Charentes Alliance (chargé de mission QSE, stage, 2004–2005) est
-#    volontairement ABSENTE : un stage d'il y a vingt ans n'apporte rien au récit
-#    POS-1 et allonge l'assolement sans rien y démontrer. À rouvrir si besoin.
+# ⚠️ CV-6 — RÉINTÉGRÉE (2026-07-16). Je l'avais écartée en écrivant qu'un stage
+#    de vingt ans n'apportait rien : arbitrage utilisateur contraire.
+#
+# ⚠️ NOM — l'expérience a eu lieu chez **Charentes Alliance**. « Ocealia » n'existe
+#    que depuis décembre 2015, née de la fusion Charentes Alliance + Coréa
+#    Poitou-Charentes. Écrire « Ocealia · 2002-2004 » serait un anachronisme : il
+#    n'a jamais travaillé chez Ocealia. D'où le nom d'époque + le successeur, qui
+#    porte la reconnaissance d'aujourd'hui (le logo fourni est celui d'Ocealia).
+#
+# ⚠️ DATES — CONFLIT NON RÉSOLU. L'utilisateur dit 2002-2004 ; le CV DoYouBuzz dit
+#    « juin 2004 à juin 2005 ». Deux ans d'écart, contenu identique (HACCP/sécurité
+#    alimentaire + audit ATEX) : c'est le même stage. 2002-2004 retenu (parole de
+#    l'intéressé, et cohérent avec l'IUP Génie des procédés 2002-2004, qu'il
+#    chevauche exactement). À confirmer.
+- id: charentes-alliance
+  logo: /assets/img/logos/ocealia.webp
+  organisation: Charentes Alliance
+  devenu: Ocealia
+  role: Stage — amélioration continue
+  debut: "2002-01"
+  fin: "2004-12"
+  nature: stage
+  lieu: Saintes
+  faits:
+    - 'Mise en place de la démarche HACCP et d''une certification « Sécurité alimentaire ».'
+    - 'Norme ATEX : audit de sites soumis à autorisation, risques d''explosion.'
+    - Démarche d'amélioration continue.

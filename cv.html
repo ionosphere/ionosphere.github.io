@@ -6,6 +6,19 @@ permalink: /cv/
 ---
 
 {%- comment -%}
+  Portrait — page CV uniquement (arbitrage 2026-07-16). Le hero de la home porte
+  la thèse, pas un visage. Ici, le recruteur l'attend : convention du CV français.
+  Il s'imprime aussi (CV-4).
+{%- endcomment -%}
+{%- if site.data.identite.portrait -%}
+  <figure class="portrait">
+    <img src="{{ site.data.identite.portrait | relative_url }}"
+         alt="Portrait de {{ site.data.identite.nom }}"
+         width="320" height="320" loading="lazy" decoding="async">
+  </figure>
+{%- endif -%}
+
+{%- comment -%}
   CV-5 — dire au visiteur quoi faire. Surtout PAS un faux bouton de
   téléchargement : aucun PDF n'existe (CV-3), le PDF EST le rendu print.
 {%- endcomment -%}
@@ -29,20 +42,27 @@ permalink: /cv/
   <h2 class="section__titre">Parcours</h2>
   {%- assign postes = site.data.parcours | sort: "debut" | reverse -%}
   {%- for p in postes -%}
-    <article class="poste" id="{{ p.id }}">
-      <div class="poste__entete">
-        <h3>{{ p.organisation }}{% if p.lieu %} <span class="poste__lieu">· {{ p.lieu }}</span>{% endif %}</h3>
-        <time class="poste__dates" datetime="{{ p.debut }}">
-          {{- p.debut | split: "-" | first -}}
-          {% if p.fin %}–{{ p.fin | split: "-" | first }}{% else %} — en cours{% endif -%}
-        </time>
+    <article class="poste" id="{{ p.id }}" data-nature="{{ p.nature }}">
+      {%- comment -%}
+        La marque : logo réel si on l'a, monogramme typographique sinon. Système
+        sans trou — trois postes sur huit ont un logo (voir _includes/marque.html).
+      {%- endcomment -%}
+      {% include marque.html nom=p.organisation logo=p.logo %}
+      <div class="poste__corps">
+        <div class="poste__entete">
+          <h3>{{ p.organisation }}{% if p.devenu %} <span class="poste__devenu">aujourd'hui {{ p.devenu }}</span>{% endif %}{% if p.lieu %} <span class="poste__lieu">· {{ p.lieu }}</span>{% endif %}</h3>
+          <time class="poste__dates" datetime="{{ p.debut }}">
+            {{- p.debut | split: "-" | first -}}
+            {% if p.fin %}–{{ p.fin | split: "-" | first }}{% else %} — en cours{% endif -%}
+          </time>
+        </div>
+        <p class="poste__role">{{ p.role }}</p>
+        {%- if p.faits -%}
+          <ul class="poste__faits">
+            {%- for f in p.faits -%}<li>{{ f }}</li>{%- endfor -%}
+          </ul>
+        {%- endif -%}
       </div>
-      <p class="poste__role">{{ p.role }}</p>
-      {%- if p.faits -%}
-        <ul class="poste__faits">
-          {%- for f in p.faits -%}<li>{{ f }}</li>{%- endfor -%}
-        </ul>
-      {%- endif -%}
     </article>
   {%- endfor -%}
 </section>

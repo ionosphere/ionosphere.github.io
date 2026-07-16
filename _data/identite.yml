@@ -3,6 +3,11 @@
 
 nom: David Joulin
 
+# Portrait — page CV uniquement (arbitrage 2026-07-16). Pas dans le hero : celui-ci
+# porte la thèse (one-liner + assolement), pas un visage. Et 320 px ne tiendraient
+# pas un grand format sans piquer — NFR-1, le site est une pièce du portfolio.
+portrait: /assets/img/david.webp
+
 # POS-3 — validé. Porte les quatre éléments de la synthèse :
 # le rôle (recruteur), l'ancienneté (crédibilité), le domaine (le fil qui
 # unifie), le libre (pair technique).

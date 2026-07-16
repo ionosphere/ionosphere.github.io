@@ -80,14 +80,17 @@ permalink: /activite/
 
   <div class="grille-deux" style="margin-top:1.5rem">
     {%- for e in site.data.engagements -%}
-      <div class="bloc">
-        <h3 class="bloc__titre">
-          {%- if e.url -%}<a href="{{ e.url }}">{{ e.nom }}</a>{%- else -%}{{ e.nom }}{%- endif -%}
-        </h3>
-        <p class="bloc__prose">
-          <strong>{{ e.role }}</strong>{% if e.historique %} — {{ e.historique }}{% endif %}<br>
-          {{ e.resume }}
-        </p>
+      <div class="bloc bloc--marque" data-nature="engagement">
+        {% include marque.html nom=e.nom logo=e.logo %}
+        <div>
+          <h3 class="bloc__titre">
+            {%- if e.url -%}<a href="{{ e.url }}">{{ e.nom }}</a>{%- else -%}{{ e.nom }}{%- endif -%}
+          </h3>
+          <p class="bloc__prose">
+            <strong>{{ e.role }}</strong>{% if e.historique %} — {{ e.historique }}{% endif %}<br>
+            {{ e.resume }}
+          </p>
+        </div>
       </div>
     {%- endfor -%}
   </div>

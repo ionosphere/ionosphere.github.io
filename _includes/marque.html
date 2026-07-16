@@ -1,0 +1,31 @@
+{%- comment -%}
+  MARQUE — le signe d'une organisation.
+
+  Système complet, sans trou : un logo réel quand il existe, un MONOGRAMME
+  typographique sinon. Trois postes sur huit ont un logo ; une colonne à moitié
+  vide ferait plus désordre que pas de colonne du tout.
+
+  Le repli n'est pas un pis-aller : ID-3 fait reposer l'identité sur la typo.
+  Un monogramme dans la fonte de titre, à la couleur RPG de sa parcelle, est un
+  signe de plein droit — et il évite le bandeau de logos disparates de LinkedIn,
+  que NFR-2 proscrit.
+
+  Paramètres : nom (requis) · logo (optionnel) · nature (optionnel, couleur)
+{%- endcomment -%}
+
+{%- if include.logo -%}
+  {%- comment -%}
+    alt="" : le nom de l'organisation est TOUJOURS écrit juste à côté. Le
+    répéter ferait lire deux fois la même chose au lecteur d'écran (NFR-3).
+  {%- endcomment -%}
+  <img class="marque marque--logo" src="{{ include.logo | relative_url }}"
+       alt="" width="96" height="96" loading="lazy" decoding="async">
+{%- else -%}
+  {%- assign mots = include.nom | split: " " -%}
+  {%- assign initiales = "" -%}
+  {%- for mot in mots limit: 3 -%}
+    {%- assign c = mot | slice: 0 -%}
+    {%- assign initiales = initiales | append: c -%}
+  {%- endfor -%}
+  <span class="marque marque--mono" aria-hidden="true">{{ initiales | upcase }}</span>
+{%- endif -%}

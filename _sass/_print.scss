@@ -105,6 +105,15 @@
 
   .campagne--reperee i { font-size: 6pt; }
 
+  // ── Images à l'impression ──────────────────────────────────────────────
+  // Le portrait s'imprime (le recruteur emporte la feuille), les marques aussi
+  // mais sans leur cadre. Les visuels de projet, eux, NON : quatre captures
+  // couleur mangeraient une page entière pour une information déjà écrite.
+  .portrait { width: 26mm; margin-bottom: 4mm; }
+  .carte__visuel { display: none !important; }
+  .marque { width: 9mm; height: 9mm; border: none; }
+  .marque--logo { background: none; padding: 0; }
+
   // ── Interdits absolus ──────────────────────────────────────────────────
   // CONT-3 — le numéro de téléphone n'apparaît nulle part, y compris ici.
   //          Il n'est dans aucune donnée : cette règle est une ceinture.

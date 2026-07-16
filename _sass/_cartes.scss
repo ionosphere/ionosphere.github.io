@@ -1,8 +1,13 @@
-// Cartes projets, publications, CV.
+// Hero, cartes, publications, CV, marques.
+//
+// ⚠️ UNE seule règle par sélecteur dans ce fichier. Des blocs `.carte` ou
+//    `.poste` dupliqués s'annuleraient entre eux selon l'ordre — piège classique
+//    et silencieux.
 
 // ── Hero ─────────────────────────────────────────────────────────────────
-// Le hero est une thèse : le one-liner puis l'assolement. Pas de gros chiffre
-// avec petit label, pas de dégradé — c'est la réponse template.
+// Le hero est une thèse : one-liner puis assolement. Pas de gros chiffre avec
+// petit label, pas de dégradé — c'est la réponse template.
+// Pas de portrait ici : le hero porte l'argument, pas un visage (voir /cv).
 .hero {
   padding-block: clamp(1rem, calc(0.5rem + 2vw), 2.5rem) 0;
 
@@ -23,8 +28,42 @@
   }
 
   &__pitch {
-    max-width: 52ch;
+    max-width: 58ch;
     color: var(--encre-pale);
+  }
+}
+
+// ── Marque — logo réel ou monogramme ─────────────────────────────────────
+// Voir _includes/marque.html. Le repli typographique n'est pas un pis-aller :
+// ID-3 fait reposer l'identité sur la typo. Surtout, il évite le bandeau de
+// logos disparates de LinkedIn que NFR-2 proscrit — la moitié des marques du
+// site sont des lettres, pas des logos.
+.marque {
+  flex: 0 0 auto;
+  width: 2.4rem;
+  height: 2.4rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--trait);
+  border-radius: 3px;
+
+  &--logo {
+    // Les logos fournis sont un arc-en-ciel (vert, cyan, bordeaux, jaune…) sans
+    // rapport avec la palette RPG. Petits, sur fond neutre, ils restent des
+    // repères — pas des taches de couleur qui se disputeraient l'assolement.
+    object-fit: contain;
+    padding: 0.2rem;
+    background: #fff;
+  }
+
+  &--mono {
+    font-family: var(--f-display);
+    font-variation-settings: "wonk" 0;
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: -0.02em;
+    color: var(--parcelle, var(--encre-pale));
+    background: var(--sol-creuse);
   }
 }
 
@@ -47,10 +86,41 @@
 
 .carte {
   background: var(--sol);
-  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+
+  // PROJ-5 `visuel` — une capture du projet réel. Du contenu encadré, pas une
+  // marque : c'est ce qui la distingue d'un logo posé là.
+  &__visuel {
+    border-bottom: 1px solid var(--trait);
+    background: var(--sol-creuse);
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      object-position: top;
+    }
+  }
+
+  &__corps {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+  }
+
+  &__entete {
+    display: flex;
+    gap: 0.7rem;
+    align-items: center;
+    margin-bottom: 0.45rem;
+  }
 
   &__nom {
-    margin-bottom: 0.35rem;
+    margin-bottom: 0;
 
     a { color: inherit; text-decoration: none; }
     a:hover { color: var(--releve); text-decoration: underline; }
@@ -85,7 +155,8 @@
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    margin: 0;
+    margin: auto 0 0;
+    padding-top: 0.5rem;
     font-family: var(--f-jeton);
     font-size: var(--t-s);
   }
@@ -141,8 +212,8 @@
 
   // ⚠️ ACT-8a — LA mention qui empêche la faute d'attribution.
   // « Éditeur : David Joulin » ne doit JAMAIS pouvoir se lire comme une
-  // signature. D'où un traitement visuellement distinct des auteurs :
-  // encadré, mono, décalé. Un lecteur pressé voit deux objets différents.
+  // signature. D'où un traitement visuellement distinct des auteurs : encadré,
+  // mono, décalé. Un lecteur pressé voit deux objets différents.
   &__role {
     font-family: var(--f-jeton);
     font-size: var(--t-xs);
@@ -170,11 +241,34 @@
   &__poids { margin: 0; }
 }
 
-// ── CV ───────────────────────────────────────────────────────────────────
+// ── Portrait — CV uniquement ─────────────────────────────────────────────
+// Arbitrage 2026-07-16 : convention du CV français, et c'est là que le
+// recruteur l'attend. Contenu à 7rem : le fichier fait 320 px et NFR-1 dit que
+// ce site est lui-même une pièce du portfolio — une image qui pique y coûterait.
+.portrait {
+  margin: 0 0 1.5rem;
+  width: 7rem;
+
+  img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 3px;
+    border: 1px solid var(--trait);
+    display: block;
+  }
+}
+
+// ── CV — un poste ────────────────────────────────────────────────────────
 .poste {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
   padding-block: 1.5rem;
   border-top: 1px solid var(--sol-creuse);
   break-inside: avoid; // CV-4
+
+  &__corps { flex: 1 1 auto; min-width: 0; }
 
   &__entete {
     display: flex;
@@ -182,6 +276,26 @@
     justify-content: space-between;
     gap: 0.25rem 1rem;
     align-items: baseline;
+  }
+
+  // Le nom d'époque reste le titre ; le nom actuel est une mention, pas un
+  // renommage rétroactif (NFR-1).
+  &__devenu {
+    font-family: var(--f-jeton);
+    font-size: var(--t-xs);
+    font-weight: 400;
+    color: var(--encre-pale);
+    background: var(--sol-creuse);
+    border: 1px solid var(--trait);
+    border-radius: 2px;
+    padding: 0.05em 0.4em;
+  }
+
+  &__lieu {
+    font-family: var(--f-jeton);
+    font-size: var(--t-xs);
+    font-weight: 400;
+    color: var(--encre-pale);
   }
 
   &__dates {
@@ -206,6 +320,7 @@
   }
 }
 
+// ── Blocs ────────────────────────────────────────────────────────────────
 .grille-deux {
   display: grid;
   gap: 1.5rem 2.5rem;
@@ -216,9 +331,18 @@
 }
 
 .bloc {
+  &--marque {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+
   &__titre {
     font-size: var(--t-base);
     margin-bottom: 0.3rem;
+
+    a { color: inherit; text-decoration: none; }
+    a:hover { color: var(--releve); text-decoration: underline; }
   }
 
   &__prose { font-size: var(--t-s); color: var(--encre-pale); margin-bottom: 0; }

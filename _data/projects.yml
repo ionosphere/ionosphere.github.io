@@ -8,6 +8,8 @@
 # `stack` et `licence` sont des jetons LANG-4 → rendus en mono, jamais traduits.
 
 - id: ekylibre
+  visuel: /assets/img/projets/ekylibre.webp
+  visuel_alt: Page d'accueil du projet Ekylibre.
   nom: Ekylibre
   tagline: ERP agricole open source — gestion, traçabilité, comptabilité.
   role: Co-fondateur & CEO
@@ -25,6 +27,8 @@
   forks: 170
 
 - id: lexicon
+  visuel: /assets/img/projets/lexicon.webp
+  visuel_alt: Interface d'exploration des jeux de données Lexicon.
   nom: Lexicon
   tagline: Open data agricole normalisé — explorer, filtrer, exporter.
   role: Créateur
@@ -38,6 +42,8 @@
   featured: true
 
 - id: gaia
+  visuel: /assets/img/projets/gaia.webp
+  visuel_alt: Page d'accueil du projet GAIA.
   nom: GAIA
   tagline: Démocratiser l'intelligence artificielle dans le monde agricole.
   # ⚠️ §7.2 point 10 — « créateur » est confirmé par l'utilisateur, mais
@@ -55,6 +61,8 @@
   featured: true
 
 - id: piloterra
+  visuel: /assets/img/projets/piloterra.webp
+  visuel_alt: Portail PiloTerra et ses quatre principes.
   nom: Piloterra
   tagline: Portail IA agricole open source — souverain, frugal, mutualisé.
   role: CTO

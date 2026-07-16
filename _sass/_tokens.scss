@@ -31,6 +31,7 @@
   --p-salariat:    #6e8f55; --p-salariat-clair:    #d3e0c7; // SAL
   --p-independant: #7a5570; --p-independant-clair: #ddccd9; // IND
   --p-agricole:    #a8785a; --p-agricole-clair:    #e7d3c6; // AGR
+  --p-stage:       #8a8f6b; --p-stage-clair:       #dcdecf; // STG
   --p-travail:     #2e5a8c; --p-travail-clair:     #c6d7e9; // TRA
   --p-engagement:  #5a6660; --p-engagement-clair:  #d5dad7; // ENG
 
@@ -72,5 +73,6 @@
 [data-nature="salariat"]    { --parcelle: var(--p-salariat);    --parcelle-clair: var(--p-salariat-clair); }
 [data-nature="independant"] { --parcelle: var(--p-independant); --parcelle-clair: var(--p-independant-clair); }
 [data-nature="agricole"]    { --parcelle: var(--p-agricole);    --parcelle-clair: var(--p-agricole-clair); }
+[data-nature="stage"]       { --parcelle: var(--p-stage);       --parcelle-clair: var(--p-stage-clair); }
 [data-nature="travail"]     { --parcelle: var(--p-travail);     --parcelle-clair: var(--p-travail-clair); }
 [data-nature="engagement"]  { --parcelle: var(--p-engagement);  --parcelle-clair: var(--p-engagement-clair); }

@@ -88,6 +88,12 @@ La couleur **encode une catégorie réelle** du parcours :
 | `--p-salariat` | `#6E8F55` | `SAL` | Emploi salarié — COBAS, Bordeaux Sciences Agro, Ergolis, bziiit |
 | `--p-independant` | `#7A5570` | `IND` | Indépendant — Ionosphere Consulting |
 | `--p-agricole` | `#A8785A` | `AGR` | Agricole — GAEC Joulin |
+| `--p-stage` | `#8A8F6B` | `STG` | Stage — Charentes Alliance *(ajouté le 2026-07-16)* |
+
+> **Pourquoi `STG` mérite sa propre catégorie** plutôt que d'être rangé en `SAL` :
+> un stage n'est pas un emploi. Le coder « salariat » **surévaluerait** l'expérience —
+> exactement le genre d'imprécision que NFR-1 fait payer. Le système l'a encaissé en
+> deux lignes : un token, un cas dans `parcelle.html`.
 
 **Accent**
 
@@ -129,6 +135,43 @@ quels — `Ruby`, `PostGIS`, `AGPL-3.0`, les handles ; seule la prose est en fra
 ### 1.5 Le geste unique
 
 > **L'assolement.** Le reste de la page est délibérément silencieux.
+
+### 1.6 Images et marques — ajouté le 2026-07-16
+
+Le site était intégralement textuel. Trois familles d'images sont entrées, chacune
+avec une règle. **Toutes sont auto-hébergées** : §6 interdit le moindre tiers.
+
+| Famille | Où | Règle |
+| --- | --- | --- |
+| **Visuels de projet** (PROJ-5 `visuel`) | cartes du book | Captures **des sites réels**, 16∶9, WebP, ~12 ko pièce. C'est du **contenu encadré**, pas une marque — d'où sa légitimité. |
+| **Marques** d'organisation | CV, engagements | **Logo réel si on l'a, monogramme typographique sinon.** Voir ci-dessous. |
+| **Portrait** | `/cv` **uniquement** | Convention du CV français. **Pas dans le hero** : celui-ci porte la thèse, pas un visage — et 320 px ne tiendraient pas un grand format (NFR-1). |
+
+#### Le système de marques — pourquoi un monogramme
+
+Les logos fournis sont un **arc-en-ciel sans rapport avec la palette RPG** : vert LFD,
+cyan GAIA, bordeaux Ocealia, jaune/bleu bziiit, scène dessinée Piloterra. **Alignés tels
+quels, ils produisent le bandeau LinkedIn — c'est-à-dire NFR-2.** Et la couverture est
+trouée : **trois postes sur huit** ont un logo.
+
+D'où la règle : **logo réel quand il existe, monogramme dans la fonte de titre sinon**,
+à la couleur RPG de sa parcelle. Ce n'est pas un pis-aller :
+
+- **ID-3 fait reposer l'identité sur la typo** — un monogramme est un signe de plein droit ;
+- il **comble le trou de couverture** : plus de colonne à moitié vide ;
+- **la moitié des marques du site sont des lettres**, ce qui casse net l'effet
+  « mur de logos » ;
+- les logos réels restent **petits, sur fond neutre** : des repères, pas des taches qui
+  se disputeraient l'assolement.
+
+#### Ce qui a été retiré
+
+- **Pas de marque sur les cartes projet** : la capture porte **déjà** le logo, en grand.
+  Un second exemplaire à 38 px n'ajoutait rien — et celui de Piloterra, une scène
+  dessinée, s'y réduisait à un pâté illisible. *(La règle de Chanel appliquée : l'accessoire
+  en trop.)*
+- **Pas de visuel de projet à l'impression** : quatre captures couleur mangeraient une
+  page pour une information déjà écrite. Le portrait et les marques, eux, s'impriment.
 
 ---
 
@@ -587,6 +630,24 @@ confrontation au rendu réel :
 | 2 | Home et `/projets` font doublon | ⚠️ **Subsiste**, assumé : les 4 projets sont tous `featured`. À quatre, en cacher deux appauvrirait l'accueil sans enrichir le book. *(Corrigé au passage : un projet `featured: false` fuitait dans l'assolement de la home — voir §5.1 ci-dessous.)* |
 | 4 | Études de cas orphelines | ⚠️ **Subsiste.** Un `ref` erroné ne casse aucun lien, il en **supprime** un : `htmlproofer` est aveugle. À couvrir par une vérification de build. |
 | 6 | Bricolage Grotesque à éprouver | ⚠️ **À valider par l'utilisateur** sur le rendu réel. L'axe *Wonky* est désactivé et la fonte est cantonnée aux titres, mais le caractère reste un choix à confirmer. |
+| 7 | **Dates du stage Charentes Alliance** | ⚠️ **Conflit non résolu.** L'utilisateur dit **2002-2004** ; le CV DoYouBuzz dit **juin 2004 – juin 2005**. Contenu identique (HACCP + ATEX) : c'est le même stage. 2002-2004 retenu — parole de l'intéressé, et cohérent avec l'IUP Génie des procédés (2002-2004) qu'il chevauche exactement. **À confirmer.** |
+
+### 8.3 `devenu` — le nom d'époque contre le nom actuel
+
+Ajouté le 2026-07-16, à l'occasion du stage Charentes Alliance.
+
+**« Ocealia » n'existe que depuis décembre 2015**, née de la fusion de *Charentes
+Alliance* et de *Coréa Poitou-Charentes*. Écrire « Ocealia · 2002-2004 » serait un
+**anachronisme** : David Joulin n'a jamais travaillé chez Ocealia — il a fait son stage
+chez Charentes Alliance, que le groupe a ensuite absorbée.
+
+**Règle** : le **nom d'époque** reste le titre ; le nom actuel est une **mention**
+(`devenu:`), traitée en jeton discret. On garde la vérité historique **et** la
+reconnaissance d'aujourd'hui — un lecteur du monde agricole charentais saurait
+qu'Ocealia n'existait pas en 2002.
+
+*(Le logo affiché est bien celui d'Ocealia : c'est la continuité de l'entité, et c'est
+le seul fourni.)*
 
 ### 8.1 Bugs trouvés au montage — et ce qu'ils apprennent
 
@@ -601,6 +662,8 @@ Sept défauts, dont plusieurs invisibles à la lecture du code :
 | **Référence ARIA orpheline** | Corollaire du précédent : `aria-labelledby` pointait vers un id devenu absent. | Une correction visuelle a cassé l'accessibilité. → `aria-label`, toujours valide. |
 | **PDF au format `letter`** | `@page` sans `size` → défaut du navigateur, américain. | Un CV **français** qui s'imprime en letter se coupe. → `size: A4`. |
 | **`featured: false` fuitait en home** | La grille filtrait sur `featured`, **l'assolement non**. | Un projet apparaissait dans le plan sans carte en dessous. **Trouvé par un test, pas par relecture.** → `featured_only`. |
+| **`{"Élevage"=>"alimentation…"}` affiché sur le CV** | Piège YAML : une puce contenant « mot **:** mot » est lue comme un **dictionnaire**, pas une phrase. **10 faits** touchés. | **Le build ne bronche pas — ça s'imprime sur le site.** Le défaut était **en ligne**. → guillemets simples, et l'avertissement est en tête de `parcours.yml`, là où on ajoute une ligne. |
+| **Bande noire sous deux visuels** | Recadrage 3∶2 demandé sur une capture 1280×800 : 1280×⅔ = **853 > 800** → PIL a rempli en noir. | Un recadrage qui déborde ne lève aucune erreur. → 16∶9 (720 ≤ 800), avec une assertion. |
 
 ### 8.2 Ce qui a été vérifié, pas supposé
 
