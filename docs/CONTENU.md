@@ -1,8 +1,12 @@
 # Matière disponible — dépouillement des CV
 
-> Annexe de `SPEC.md` (rév. 3, 2026-07-16). **Ce document n'est pas le contenu du site** :
-> c'est la matière brute extraite des deux CV de `docs/ressources/`, avant arbitrage
-> éditorial. Il alimentera les `_data/` une fois §7 de la spec fermée.
+> Annexe de `SPEC.md` (à jour au 2026-07-17). **Ce document n'est pas le contenu du
+> site** — c'est la **matière brute** et ses conflits : deux CV, neuf sources en ligne,
+> neuf images. Le contenu publié vit dans `_data/`.
+>
+> **À quoi il sert maintenant que le site est en ligne** : c'est la **trace des sources**.
+> Avant d'écrire une valeur dans `_data/`, vérifier ici d'où elle vient et si elle est
+> attestée. Plusieurs chiffres des CV **ne le sont pas** (voir GAIA, Lexicon).
 >
 > **Règle de lecture** : ⚠️ marque un **écart entre les deux sources** ou une
 > **information non attestée**. Rien de marqué ⚠️ ne doit être publié sans vérification.
@@ -55,17 +59,21 @@ la bio GitHub de l'intéressé dit **« CEO »**.
 
 - **Nom** : David JOULIN
 - **Titres portés** : « Expert AgTech » (DoYouBuzz) / « Directeur des Systèmes
-  d'Information » (CV DSI). ⚠️ **Aucun n'est le one-liner du site** — à rédiger (POS-3).
-- **Âge** : 42 ans (DoYouBuzz). Bac en 1999 → naissance vers 1983-1984.
-- **Permis de conduire** (DoYouBuzz).
+  d'Information » (CV DSI). ✅ Ni l'un ni l'autre n'est le one-liner : POS-3 a été rédigé
+  — *« Directeur technique — vingt ans de systèmes d'information pour l'agriculture, en
+  logiciel libre. »*
+- **Naissance : 2 mars 1981** — datée par le livre de Francis Joulin (*« De leur union le
+  02 mars 1981 naît un fils prénommé David »*), cohérente avec le bac 1996–1999.
+  ⚠️ **Le CV DoYouBuzz affiche « 42 ans » : il est périmé** (45 ans). **Aucun âge n'est
+  publié** — cas d'école de ce que proscrit ACT-4.
+- **Permis de conduire** (DoYouBuzz). Non publié.
 
 ### Contact
 
 | Donnée | Valeur | Décision |
 | --- | --- | --- |
 | Email | `djoulin@gmail.com` | **Retenu** (CONT-1) |
-| LinkedIn | `linkedin.com/in/david-joulin` | **Retenu** (CONT-1) |
-| Téléphone | `06 18 60 03 27` | **Écarté** (CONT-3) |
+| Téléphone | `06 18 60 03 27` | **Écarté** (CONT-3) — nulle part, impression comprise |
 | Localisation | Saint-Porchaire (17) / Bordeaux | ⚠️ Ouvert (CONT-4) |
 | GitHub — profil personnel | **`github.com/ionosphere`** ✅ | **Retenu** (CONT-6, rév. 6) |
 | GitHub — dépôts projets | `ekylibre/ekylibre` · `osfarm/lexicon` · `osfarm/GAIA-AGRI-IA-QUALIFICATION` | **Acquis** (PROJ-5) — ⚠️ Piloterra manquant |
@@ -174,16 +182,16 @@ politique de communication ; stratégie commerciale BtoB / BtoC.
 - Pilotage et suivi de projets, animation de réunions, suivi budgétaire et reporting.
 - Apports DoYouBuzz : formateur en sciences alimentaires / hygiène ; Intranet / Web (Joomla).
 
-### Entrées absentes du CV récent — ⚠️ à décider (CV-6)
+### Entrées absentes du CV récent — ✅ TOUTES RÉINTÉGRÉES (CV-6, 2026-07-16)
 
-Le CV DSI les a **coupées**. Les réintégrer est un choix éditorial, pas un rattrapage.
+Le CV DSI les avait **coupées**. Les trois sont désormais **en ligne**.
 
 > **Elles ont un point commun** : ce sont **exactement les trois expériences parallèles**
 > — un freelance mené par-dessus deux postes salariés, une activité agricole tenue
 > dix-huit ans, un stage. Un CV de recrutement les coupe pour paraître linéaire ; c'est
 > son métier. Le site, lui, doit rendre le parallélisme (CV-7) et sert aussi le pair
-> technique (§1). **La question n'est donc pas « faut-il alourdir le parcours ? » mais
-> « quelle forme a réellement ce parcours ? ».**
+> technique (§1). **La question n'était donc pas « faut-il alourdir le parcours ? » mais
+> « quelle forme a réellement ce parcours ? ».** Réponse : celle-ci.
 
 - **Ionosphere Consulting** · Freelance · Bordeaux · **janvier 2008 → décembre 2014**
   **Consultant AgroTIC**. Gestion de projet de réorganisation informatique et migration
@@ -194,9 +202,27 @@ Le CV DSI les a **coupées**. Les réintégrer est un choix éditorial, pas un r
 - **GAEC JOULIN** · Bénévolat · Saint-Porchaire · janvier 2002 → décembre 2020
   **Agriculteur à temps partiel** : élevage (alimentation, soin, traite), production
   végétale, conducteur d'engins (presse, moissonneuse-batteuse).
-- **Charentes Alliance** · Stage · Saintes · juin 2004 → juin 2005
-  **Chargé de mission QSE** : certification « Sécurité Alimentaire », optimisation d'un
-  procédé industriel de séchage du maïs pop-corn, audit ATEX de 3 sites.
+- ✅ **Charentes Alliance** — **RÉINTÉGRÉE et EN LIGNE** (2026-07-16).
+  Stage · Saintes · **2002 → 2004** *(dates utilisateur)*.
+  **Amélioration continue** : mise en place de la démarche **HACCP** et d'une
+  certification « Sécurité alimentaire » ; **norme ATEX**, audit de sites soumis à
+  autorisation ; optimisation d'un procédé industriel de séchage du maïs pop-corn.
+
+  > ⚠️ **DATES — conflit ouvert.** L'utilisateur dit **2002–2004** ; le CV DoYouBuzz dit
+  > **juin 2004 – juin 2005**. Deux ans d'écart, contenu **identique** : c'est le même
+  > stage. **2002–2004 retenu** — parole de l'intéressé, et cohérent avec l'IUP Génie des
+  > procédés (2002–2004) qu'il chevauche exactement. À confirmer.
+  >
+  > ⚠️ **NOM — « Ocealia » est un ANACHRONISME sur ces dates.** La coopérative naît en
+  > **décembre 2015**, de la fusion **Charentes Alliance + Coréa Poitou-Charentes** ; le
+  > siège de Charentes Alliance à Cognac devient celui d'Ocealia. David Joulin n'a
+  > **jamais travaillé chez Ocealia**. Le site affiche donc « **Charentes Alliance ·
+  > aujourd'hui Ocealia** » — nom d'époque en titre, successeur en mention (`devenu:`).
+  > Le logo affiché est celui d'Ocealia : c'est la continuité de l'entité, et le seul
+  > fourni.
+  >
+  > 📌 **`nature: stage`** (code RPG **`STG`**) — un stage n'est pas un emploi ; le coder
+  > `salariat` l'aurait surévalué (NFR-1).
 
 ---
 
@@ -515,6 +541,49 @@ Plein Champ · BPI France · La France Agricole · Terre Net · Réussir · Oues
 
 > ⚠️ **À distinguer** : cette presse couvre **GAIA**, pas David Joulin nommément. Ne pas
 > présenter une couverture de projet comme une couverture personnelle (NFR-1).
+
+---
+
+## Images fournies — dépouillement (2026-07-16)
+
+Neuf fichiers déposés par l'utilisateur dans `assets/img/`. **Les originaux sont dans
+`_sources/img/`, non déployés** (909 ko pour ~116 ko réellement servis, NFR-4).
+
+| Original | Servi | Emploi | Note |
+| --- | --- | --- | --- |
+| `david_photo.jpeg` 400×400 | `david.webp` 320 px | **`/cv` seulement** (ID-6) | Cadrage informel, fond gris. Pas dans le hero. |
+| `ekylibre.svg` | `logos/ekylibre.svg` | poste + | Vectoriel, copié tel quel. |
+| `bziiit_logo.png` | `logos/bziiit.webp` | poste | ⚠️ **fond blanc opaque** → détouré. |
+| `ocealia.png` | `logos/ocealia.webp` | poste *(Charentes Alliance)* | ⚠️ **fond blanc opaque** → détouré. |
+| `lfd.png` 157×50 | `logos/lfd.webp` | engagement | Déjà détouré, propre. |
+| `osfarm.png` 3600×1555 | `logos/osfarm.webp` | engagement | 360 ko → 7 ko. |
+| `gaia-square.png` 1080² | — | **inutilisé** | Les cartes projet n'ont pas de marque. |
+| `logo_piloterra.png` 2245×1587 | — | **inutilisé** | 326 ko ; scène dessinée, **illisible à 38 px**. |
+| `sci_chenes_verts.png` | — | **inutilisé** | Les publications sont textuelles (ACT-8). |
+
+**Le détourage** est un remplissage par diffusion **depuis les bords** : il n'efface que
+le fond connecté au cadre et **préserve les blancs intérieurs** au logo (le creux du « b »
+de bziiit, la vague d'Ocealia). Un blanc→transparent global les aurait troués.
+
+### ⚠️ Ce que les logos ont appris
+
+Posés côte à côte sur le fond du site, les sept logos forment un **arc-en-ciel** — vert
+LFD, cyan GAIA, bordeaux Ocealia, jaune/bleu bziiit, ferme dessinée Piloterra — sans
+aucun rapport avec la palette RPG. **C'est le bandeau LinkedIn, c'est-à-dire NFR-2.**
+Et la couverture est trouée : **trois postes sur huit**.
+
+→ D'où le système **logo réel ou monogramme** (PROJ-14). Voir `DESIGN.md` §1.6.
+
+### Visuels de projet
+
+Captures des **sites réels** (`ekylibre.org`, `lexicon.osfarm.org`, `gaia-ia.org`,
+`piloterra.fr`), 16∶9, WebP, ~12 ko pièce. **Du contenu encadré, pas une marque** — c'est
+ce qui les rend légitimes là où un logo aurait fait décoration.
+
+> ⚠️ **Trouvaille annexe** : l'`og:image` d'**`ekylibre.org` pointe vers `prometheus.io`**
+> (copier-coller resté dans leur code). Chaque partage d'`ekylibre.org` sur un réseau
+> social affiche donc le logo de Prometheus. Rien à voir avec ce site — mais David Joulin
+> en est le CEO.
 
 ---
 

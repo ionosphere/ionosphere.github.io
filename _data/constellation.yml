@@ -1,0 +1,65 @@
+# Constellation du hero (accueil) — « la tête dans les étoiles ».
+#
+# Zéro JS (§6) : la constellation est un SVG rendu par _includes/constellation.html
+# et animée UNIQUEMENT en CSS (_sass/_constellation.scss). Ce fichier est le seul
+# endroit à toucher pour la régler — positions, tailles, couleurs, vitesses.
+#
+# Repère de dessin : un cadre `largeur` × `hauteur` (unités libres). Le SVG s'adapte
+# tout seul à la colonne. x va de 0 (gauche) à `largeur` ; y de 0 (haut) à `hauteur`.
+#
+# ⚠️ La couleur d'une planète vient de sa `nature` — le MÊME codage RPG que
+#    l'assolement (entreprise/salariat/independant/agricole/stage/travail/engagement).
+#    NFR-3 : chaque planète porte son nom en clair, la couleur n'est jamais seule.
+
+reglages:
+  largeur: 100
+  hauteur: 116
+
+  # Balancement lent de toute la figure. Faible exprès : le geste du site reste
+  # l'assolement (DESIGN.md §1.2), la constellation est une respiration, pas un
+  # second spectacle. Les libellés restent lisibles sous ~3°.
+  balancement_deg: 3
+  balancement_duree: 46s
+
+  # Étoiles de fond qui scintillent (décor pur).
+  etoiles: 44
+  scintillement_duree: 5s
+
+  # Halo qui bat autour de chaque planète.
+  halo_duree: 6s
+
+  # Anneaux décoratifs et leurs lunes en orbite — sans libellé, purement célestes.
+  # C'est ici qu'est la vraie rotation ; les planètes nommées, elles, ne tournent
+  # pas (sinon la figure et les libellés se disloqueraient).
+  orbites:
+    centre_x: 54
+    centre_y: 52
+    anneaux:
+      - { rayon: 15, lunes: 1, duree: 80s }
+      - { rayon: 27, lunes: 1, duree: 130s }
+      - { rayon: 39, lunes: 2, duree: 200s }
+
+# Les planètes = engagements et expériences. POS-1 : postes, projets et
+# associations sont le même écosystème — ils cohabitent dans le même ciel.
+# `taille` est le rayon du disque (unités du cadre). `lien` est optionnel.
+planetes:
+  - { nom: Ekylibre,          nature: entreprise,  x: 55, y: 34, taille: 3.6, lien: "/projets/ekylibre/" }
+  - { nom: NAOS,              nature: engagement,  x: 35, y: 16, taille: 2.2, lien: "https://naos-cluster.com/" }
+  - { nom: Seconde Nature,    nature: engagement,  x: 82, y: 15, taille: 2.0, lien: "https://www.seconde-nature.net/" }
+  - { nom: La Ferme Digitale, nature: engagement,  x: 20, y: 44, taille: 2.6, lien: "https://www.lafermedigitale.fr/" }
+  - { nom: bziiit,            nature: salariat,    x: 84, y: 48, taille: 2.6, lien: "/cv/#bziiit" }
+  - { nom: Ionosphere,        nature: independant, x: 50, y: 60, taille: 2.8, lien: "/cv/#ionosphere-consulting" }
+  - { nom: OSFarm,            nature: engagement,  x: 72, y: 78, taille: 2.8, lien: "https://www.osfarm.org/" }
+  - { nom: GAEC Joulin,       nature: agricole,    x: 32, y: 94, taille: 3.0, lien: "/cv/#gaec-joulin" }
+
+# La figure : les segments qui relient les planètes, par nom. Édite librement —
+# un nom absent de `planetes` est simplement ignoré.
+figure:
+  - [NAOS, Ekylibre]
+  - [Ekylibre, Seconde Nature]
+  - [Ekylibre, bziiit]
+  - [Ekylibre, Ionosphere]
+  - [La Ferme Digitale, Ionosphere]
+  - [Ionosphere, OSFarm]
+  - [Ionosphere, GAEC Joulin]
+  - [bziiit, OSFarm]

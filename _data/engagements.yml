@@ -6,42 +6,37 @@
 - id: la-ferme-digitale
   logo: /assets/img/logos/lfd.webp
   nom: La Ferme Digitale
-  # ⚠️ §7.2 — 2015 (CV DSI) ou mars 2016 (CV DoYouBuzz) ? Non tranché.
-  #    2015 retenu : le CV DSI est le plus récent. À confirmer.
   debut: "2015"
-  fin:
-  role: VP Data & IA
-  historique: Responsable adhésion (2020–2022), trésorier (2015–2020).
+  fin: "2025"
+  role: Cofondateur
+  historique: Trésorier (2015–2020), Responsable adhésion (2020–2022), VP Data-IA (2022–2026)
   resume: Association fédérant les acteurs de l'AgriTech et de la FoodTech en France.
   url: https://www.lafermedigitale.fr/
 
 - id: osfarm
   logo: /assets/img/logos/osfarm.webp
   nom: OSFarm
-  # ⚠️ §7.2 — le CV dit « depuis 2024 », le site porte « © 2023–2026 ».
-  #    2024 retenu (déclaratif utilisateur). À confirmer.
   debut: "2024"
   fin:
-  role: Cofondateur
+  role: Fondateur & Président
   resume: >-
-    Création de l'association et d'un fablab de 350 m² ; hackathons autour des
-    communs numériques agricoles. Porte les dépôts de Lexicon et de GAIA.
+    Création de l'association, Projet de fablab de 350 m² ; hackathons autour des
+    communs numériques agricoles ; Projet France 2030 / Horizon Europe sur l'IA et la robotique agricole.
   url: https://www.osfarm.org/
 
 - id: seconde-nature
   nom: Seconde Nature
   debut: "2025"
   fin:
-  # ✅ rév. 7 — attesté par seconde-nature.net/faq :
-  #    « David — Trésorier (Finance, Achats, Informatique, IA, Matériel, Jardin) ».
-  role: Trésorier
+  role: Cofondateur & Trésorier
   resume: >-
     Recyclerie en tiers-lieu à Saint-Porchaire — réemployer, réparer, réutiliser.
   url: https://www.seconde-nature.net/
 
 - id: naos
   nom: NAOS — Nouvelle-Aquitaine Open Source
-  debut: "2021"
+  debut: "2016"
   fin: "2024"
-  role: Membre
+  role: Co-président
   resume: Pôle de compétences régional en logiciels et technologies libres.
+  url: https://naos-cluster.com/

@@ -8,10 +8,16 @@
 // Trois fontes libres, AUTO-HÉBERGÉES — Google Fonts est un tiers (§6).
 // `font-display: swap` : le texte reste lisible pendant le chargement (NFR-4).
 
+// Fraunces — display. Variable : opsz 9→144, wght 100→900.
+// ⚠️ Les axes SOFT et WONK sont figés à 0 DANS LE FICHIER (au sous-ensemblage),
+//    pas en CSS. §1.4 désactivait l'axe joueur de Bricolage par une déclaration
+//    que n'importe quelle règle pouvait rouvrir ; ici l'axe n'existe plus. La
+//    décision est portée par le binaire, donc elle ne peut pas se défaire.
+// 79 ko — Bricolage en pesait 132. Le titrage change ET la page s'allège (NFR-4).
 @font-face {
-  font-family: "Bricolage Grotesque";
-  src: url("../fonts/bricolage-grotesque.woff2") format("woff2");
-  font-weight: 300 800;
+  font-family: "Fraunces";
+  src: url("../fonts/fraunces.woff2") format("woff2");
+  font-weight: 100 900;
   font-display: swap;
 }
 
@@ -37,22 +43,28 @@
 }
 
 // ── Display — avec retenue ───────────────────────────────────────────────
-// Bricolage Grotesque n'est ni Inter, ni Geist, ni Playfair, ni Space Grotesk :
-// aucun des défauts. ⚠️ Son axe « wonk » la rend joueuse — il est DÉSACTIVÉ, et
-// la fonte reste cantonnée aux titres (lectorat DSI).
+// Fraunces, et pas Playfair alors que Playfair est le titrage de Cultia : la
+// fonte est DÉJÀ celle de David Joulin — c'est celle de « La Vauzelle », le
+// livre de Francis Joulin qu'il a composé. Reprendre le Playfair de Cultia
+// aurait importé la typo d'un produit ; Fraunces vient de son propre travail,
+// et §1.4 nomme justement Playfair parmi les défauts à éviter.
+//
+// `font-optical-sizing: auto` fait le travail : à 72 px le hero prend le
+// contraste d'un titre, à 18 px un h3 reprend l'épaisseur d'un texte. C'est
+// l'axe opsz qui porte la hiérarchie, pas une pile de tailles arbitraires.
 h1, h2, h3 {
   font-family: var(--f-display);
-  font-variation-settings: "wonk" 0;
-  font-weight: 700;
-  line-height: 1.08;
-  letter-spacing: -0.02em;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
   text-wrap: balance;
   margin: 0;
 }
 
-h1 { font-size: var(--t-xl); }
+h1 { font-size: var(--t-xl); font-weight: 700; letter-spacing: -0.025em; }
 h2 { font-size: var(--t-l); }
-h3 { font-size: var(--t-m); letter-spacing: -0.01em; }
+h3 { font-size: var(--t-m); letter-spacing: -0.005em; }
 
 p { margin: 0 0 var(--rythme); }
 
@@ -62,15 +74,23 @@ p { margin: 0 0 var(--rythme); }
   font-size: 0.85em;
   background: var(--sol-creuse);
   border: 1px solid var(--trait);
-  border-radius: 2px;
+  border-radius: var(--r-s);
   padding: 0.08em 0.4em;
   white-space: nowrap;
 }
 
 // ── Sections ─────────────────────────────────────────────────────────────
+// Le titre de section est un intercalaire de relevé : mono, capitales, espacé.
+// Il ne concurrence pas le display — il étiquette.
+//
+// ⚠️ La règle de Chanel, appliquée. La section portait un `border-top` pleine
+//    largeur ET son titre reçoit maintenant sa réglure : DEUX filets à 50 px
+//    l'un de l'autre, pour un seul travail. Le `border-top` est retiré — c'est
+//    la réglure du titre qui sépare, et elle le fait mieux : le libellé est
+//    DANS le trait, comme la légende d'un plan, au lieu de flotter sous une
+//    barre anonyme. Un dispositif, pas deux.
 .section {
   padding-block: clamp(2rem, calc(1.2rem + 3vw), 4rem);
-  border-top: 1px solid var(--trait);
 
   &__titre {
     font-family: var(--f-jeton);
@@ -80,6 +100,16 @@ p { margin: 0 0 var(--rythme); }
     letter-spacing: 0.14em;
     color: var(--encre-pale);
     margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+
+    &::after {
+      content: "";
+      flex: 1 1 auto;
+      height: 1px;
+      background: var(--trait);
+    }
   }
 }
 

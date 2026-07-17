@@ -2,9 +2,16 @@
 layout: base
 ---
 <article class="page">
-  <header class="page__entete">
-    <h1 class="page__titre">{{ page.titre }}</h1>
-    {%- if page.chapeau -%}<p class="page__chapeau">{{ page.chapeau }}</p>{%- endif -%}
-  </header>
+  {%- comment -%}
+    En-tête générique : titre + chapeau. `entete_custom` (front matter) laisse une
+    page composer le sien — le CV s'en sert pour mettre titre, photo et chapeau
+    sur une même ligne. /projets et /activite gardent cet en-tête générique.
+  {%- endcomment -%}
+  {%- unless page.entete_custom -%}
+    <header class="page__entete">
+      <h1 class="page__titre">{{ page.titre }}</h1>
+      {%- if page.chapeau -%}<p class="page__chapeau">{{ page.chapeau }}</p>{%- endif -%}
+    </header>
+  {%- endunless -%}
   {{ content }}
 </article>

@@ -11,6 +11,31 @@ body {
   font-size: var(--t-base);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  position: relative;
+  min-height: 100vh;
+}
+
+// ── Atmosphère ───────────────────────────────────────────────────────────
+// Deux halos très faibles : encre en haut, laiton en bas à droite. Repris de
+// Cultia, qui les pose sur son propre parchemin.
+//
+// Pourquoi une couche fixe plutôt qu'un `background` sur body : le dégradé
+// s'ancre au cadre de vue et ne s'étire pas sur la hauteur du /cv, qui fait
+// plusieurs écrans. Et il se retire d'une ligne à l'impression — un aplat de
+// couleur sur quatre pages A4 est une facture d'encre (CV-4).
+//
+// C'est le SEUL effet décoratif du site. §1.2 dit que la boldness est dépensée
+// sur l'assolement et nulle part ailleurs : ceci est de l'atmosphère, à 6 %,
+// et ça doit le rester.
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(at 50% 0%, rgba(29, 57, 44, 0.06), rgba(29, 57, 44, 0) 55%),
+    radial-gradient(at 100% 100%, rgba(177, 147, 78, 0.10), rgba(177, 147, 78, 0) 50%);
 }
 
 img { max-width: 100%; height: auto; }
@@ -30,7 +55,8 @@ a {
   border-radius: 2px;
 }
 
-// NFR-3 — il n'y a aucune animation décorative, mais la règle est posée.
+// NFR-3 — les seules transitions du site sont des survols de 120 ms ; la règle
+// reste posée, et elle couvre ce qui viendrait après.
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -69,11 +95,17 @@ main { padding-block: clamp(2rem, calc(1rem + 4vw), 4.5rem); }
   padding-block: 1.25rem;
   border-bottom: 1px solid var(--trait);
 
+  // ID-3 — l'identité repose sur la typo, et c'est tout ce qu'il y a ici :
+  // pas de logo, pas de monogramme, pas de sigle. Le nom, dans la fonte du
+  // site. Cultia écrit « CULT-IA » en bicolore parce que l'or y découpe un
+  // mot qui veut dire quelque chose ; « Joulin » ne veut rien dire de tel, et
+  // le même geste n'y serait plus qu'un effet. Il n'est pas repris.
   &__nom {
     font-family: var(--f-display);
-    font-variation-settings: "wonk" 0; // DESIGN.md §1.4 — axe Wonky désactivé
+    font-optical-sizing: auto;
     font-weight: 700;
     font-size: var(--t-m);
+    letter-spacing: -0.02em;
     color: var(--encre);
     text-decoration: none;
   }
@@ -88,17 +120,50 @@ main { padding-block: clamp(2rem, calc(1rem + 4vw), 4.5rem); }
       font-size: var(--t-s);
       text-decoration: none;
       color: var(--encre-pale);
+      padding-bottom: 0.15rem;
+      border-bottom: 2px solid transparent;
 
       // NFR-3 — la page courante n'est pas signalée par la seule couleur :
       // aria-current la porte, et le trait la double visuellement.
       &[aria-current="page"] {
         color: var(--encre);
         font-weight: 600;
-        border-bottom: 2px solid var(--releve);
+        border-bottom-color: var(--releve);
       }
 
-      &:hover { color: var(--releve); text-decoration: underline; }
+      &:hover { color: var(--releve); border-bottom-color: var(--trait-appuye); }
     }
+  }
+}
+
+// ── Bandeau pleine largeur — accueil et CV (page.entete_pleine) ───────────
+// La règle de cadre partagée (`.entete, main, .pied`) borne l'en-tête à
+// `--largeur` et le centre. `.entete--pleine` lève CETTE borne, et elle seule :
+// la gouttière est conservée, donc le nom et les liens s'ancrent aux bords de
+// l'écran sans jamais toucher l'arête.
+//
+// Le geste : le bandeau court d'un bord à l'autre, et son unique filet inférieur
+// est la LIGNE DE TÊTE d'une feuille de relevé — la même arête cadastrale que
+// trace l'assolement. Le corps, lui, reste dans la colonne de 68 rem. Ce
+// contraste — bandeau pleine largeur, contenu centré — EST l'effet recherché,
+// pas un défaut d'alignement.
+//
+// Posé sur deux pages seulement : l'accueil, où le bandeau ouvre la thèse en
+// pleine page, et le CV, où il tient lieu de tête de feuille. Les pages /projets
+// et /activite gardent l'en-tête borné — voir la note à l'utilisateur.
+.entete--pleine {
+  // Source order : cette règle suit la règle de cadre, même spécificité →
+  // elle gagne. La borne saute, le centrage devient sans objet.
+  max-width: none;
+
+  // Le filet passe sur le bandeau lui-même : porté par la boîte pleine largeur,
+  // il court d'un bord à l'autre. Sur `.nav` (en retrait de la gouttière), il
+  // s'arrêtait aux marges — un cadre élargi, pas une pleine largeur.
+  border-bottom: 1px solid var(--trait);
+
+  .nav {
+    border-bottom: none;
+    padding-block: 1.4rem;
   }
 }
 

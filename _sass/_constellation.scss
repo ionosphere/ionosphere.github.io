@@ -1,0 +1,147 @@
+// Constellation du hero — « la tête dans les étoiles ». DESIGN.md §6 : ZÉRO JS.
+//
+// La donnée est dans _data/constellation.yml, le rendu dans
+// _includes/constellation.html. Ici : la mise en place dans le hero, les couleurs
+// (héritées du codage RPG via [data-nature]) et les animations CSS.
+//
+// ⚠️ Restrainte (DESIGN.md §1.2/§1.5) : le geste du site reste l'assolement. Cette
+//    constellation est une respiration — encre et teintes sur parchemin, mouvement
+//    lent, faible contraste. Elle ne doit jamais crier plus fort que le plan.
+
+// ── Hero en deux colonnes ──────────────────────────────────────────────────
+// À partir de 60 rem : texte à gauche, constellation à droite. En dessous, tout
+// s'empile — la constellation passe sous le pitch, réduite.
+.hero__texte { min-width: 0; }
+
+@media (min-width: 60rem) {
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 22rem);
+    gap: clamp(1.5rem, calc(0.5rem + 3vw), 4rem);
+    align-items: center;
+  }
+}
+
+// ── Le cadre ────────────────────────────────────────────────────────────────
+.constellation {
+  margin: 2.5rem auto 0;
+  max-width: 22rem;
+
+  &__svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible; // les libellés débordent un peu du cadre de dessin
+  }
+}
+
+@media (min-width: 60rem) {
+  .constellation {
+    margin: 0;
+    align-self: center;
+    max-width: none;
+  }
+}
+
+// ── Éléments ────────────────────────────────────────────────────────────────
+// Le balancement de toute la figure. transform-box: view-box → l'origine est en
+// unités du viewBox (posée inline). Amplitude faible : les noms restent droits.
+.constellation__ciel {
+  transform-box: view-box;
+  animation: constellation-balance var(--sway, 46s) ease-in-out infinite;
+}
+
+.constellation__etoile {
+  fill: var(--encre-pale);
+  opacity: 0.5;
+  animation: constellation-scintille var(--dur, 5s) ease-in-out infinite;
+}
+
+// Anneaux : hairline de relevé, très discrets. non-scaling-stroke → 1px net quelle
+// que soit la taille du SVG.
+.constellation__anneau {
+  fill: none;
+  stroke: var(--trait);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.7;
+}
+
+// Lunes en orbite : le seul mouvement de rotation vraie. Sans libellé ni lien,
+// donc rien à disloquer.
+.constellation__spin {
+  animation: constellation-orbite var(--dur, 120s) linear infinite;
+}
+
+.constellation__lune {
+  fill: var(--encre-pale);
+  opacity: 0.55;
+}
+
+// Les segments de la figure.
+.constellation__lien {
+  stroke: var(--trait-appuye);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.6;
+}
+
+// Les planètes. La couleur vient de [data-nature] (codage RPG, _tokens.scss).
+.constellation__halo {
+  fill: var(--parcelle);
+  opacity: 0.18;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: constellation-halo var(--dur, 6s) ease-in-out infinite;
+}
+
+.constellation__astre {
+  fill: var(--parcelle);
+  stroke: var(--sol);
+  stroke-width: 0.6;
+}
+
+// Le nom : mono, discret, il s'éclaire au survol/focus. C'est lui qui porte
+// l'information — la couleur n'est jamais seule (NFR-3).
+.constellation__nom {
+  font-family: var(--f-jeton);
+  font-size: 3.4px;
+  fill: var(--encre-pale);
+  dominant-baseline: middle;
+  transition: fill 120ms ease;
+}
+
+// Lien : la planète entière est cliquable. Focus visible (NFR-3).
+.constellation a {
+  cursor: pointer;
+
+  &:hover .constellation__nom,
+  &:focus-visible .constellation__nom { fill: var(--encre); }
+
+  &:hover .constellation__astre,
+  &:focus-visible .constellation__astre { stroke: var(--releve); stroke-width: 1; }
+
+  &:focus-visible { outline: none; }
+  &:focus-visible .constellation__halo { opacity: 0.34; }
+}
+
+// ── Animations ──────────────────────────────────────────────────────────────
+// (Toutes neutralisées par le bloc prefers-reduced-motion de _base.scss.)
+@keyframes constellation-balance {
+  0%, 100% { transform: rotate(calc(-1 * var(--amp, 3deg))); }
+  50%      { transform: rotate(var(--amp, 3deg)); }
+}
+
+@keyframes constellation-scintille {
+  0%, 100% { opacity: 0.25; }
+  50%      { opacity: 0.9; }
+}
+
+@keyframes constellation-orbite {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes constellation-halo {
+  0%, 100% { transform: scale(1);    opacity: 0.18; }
+  50%      { transform: scale(1.35); opacity: 0.07; }
+}

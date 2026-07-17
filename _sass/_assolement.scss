@@ -88,10 +88,18 @@
 
   // NFR-3 — code RPG : l'information n'est jamais portée par la couleur seule.
   // C'est aussi ainsi que fonctionne le RPG dont la palette est tirée.
+  //
+  // ⚠️ Le code est du TEXTE, et c'est lui qui porte l'information. Il était
+  //    rendu en `--parcelle` pleine intensité, où ENT tombait à 2,19:1 et SAL
+  //    à 3,44:1 — sous AA, et déjà sous l'ancien fond froid : le défaut est
+  //    antérieur au parchemin, il était en ligne. D'où `--parcelle-code`,
+  //    assombri à ≥ 4,5:1 à teinte constante (le codage se lit toujours).
+  //    Le filet, lui, est du décor doublé par le code : il garde la pleine
+  //    intensité, et c'est là que la couleur de la nature s'affirme.
   &__code {
     font-weight: 600;
     letter-spacing: 0.06em;
-    color: var(--parcelle);
+    color: var(--parcelle-code);
     border-bottom: 2px solid var(--parcelle);
     text-decoration: none;
     cursor: help;

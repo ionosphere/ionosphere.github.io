@@ -76,3 +76,32 @@
   fin:
   featured: true
 
+- id: la-vauzelle
+  visuel: /assets/img/projets/lavz.png
+  visuel_alt: Tiers-lieu La Vauzelle à Saint-Porchaire.
+  nom: La Vauzelle
+  tagline: Tiers-lieu agricole, insertion, environnement et numérique — recyclerie, fablab, coworking.
+  role: Fondateur & Associé
+  stack: [Python, Yolo, SQLite]
+  licence: AGPL-3.0
+  repo:
+  site: https://sci-chenes-verts.github.io
+  statut: actif
+  debut: "2022"
+  fin:
+  featured: true
+
+- id: seconde-nature
+  visuel: /assets/img/projets/sn.png
+  visuel_alt: Recyclerie Seconde Nature à Saint-Porchaire.
+  nom: Seconde Nature
+  tagline: Gestion automatisée de la recyclerie par IA.
+  role: Cofondateur & Trésorier
+  stack: [Python, Yolo, SQLite]
+  licence: AGPL-3.0
+  repo:
+  site: https://www.seconde-nature.net/ia/
+  statut: actif
+  debut: "2024"
+  fin:
+  featured: true

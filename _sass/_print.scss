@@ -14,9 +14,15 @@
   :root {
     --sol: #fff;
     --sol-creuse: #fff;
+    --surface: #fff;
     --encre: #000;
     --encre-pale: #444;
     --trait: #999;
+    --trait-appuye: #777;
+    // Le parchemin ne s'imprime pas : sur quatre pages A4, un aplat de couleur
+    // est une facture d'encre pour zéro information.
+    --ombre: none;
+    --ombre-levee: none;
   }
 
   body {
@@ -24,13 +30,22 @@
     line-height: 1.4;
   }
 
+  // Les deux halos d'atmosphère sont de l'écran. Sur papier ils ne seraient
+  // qu'un voile sale — quand l'imprimante daigne les rendre.
+  body::before { display: none !important; }
+
+  // Ceinture : aucune ombre portée nulle part, y compris sur ce qui serait
+  // ajouté après coup sans relire cette feuille.
+  * { box-shadow: none !important; }
+
   // Masquer ce qui n'a pas de sens sur papier.
   .entete,
   .pied,
   .evitement,
   .impression,
   .etude__retour,
-  .accueil-liens {
+  .accueil-liens,
+  .constellation {
     display: none !important;
   }
 
@@ -81,9 +96,23 @@
     break-inside: avoid;
   }
 
+  // ⚠️ Les paliers de _assolement.scss sont en `min-width` — donc évalués sur
+  //    la largeur de la BOÎTE DE PAGE à l'impression. A4 fait ~794 px à 96 dpi :
+  //    ça passe le palier de 600 px, mais PAS celui de 900 px. La feuille
+  //    retombait donc sur la disposition tablette, rôle sous la piste, une ligne
+  //    de trop par parcelle — et `--col-role`, défini juste au-dessus, ne servait
+  //    à RIEN : aucune règle ne le lisait. Le papier n'a pas de « largeur de
+  //    fenêtre » ; sa disposition se déclare, elle ne se déduit pas d'un palier.
+  .assolement__echelle,
+  .parcelle {
+    grid-template-columns: var(--col-identite) 1fr var(--col-role);
+  }
+
   .parcelle {
     padding-block: 1.2mm;
     border-bottom: none;
+
+    &__role { grid-column: 3; padding-top: 0; font-size: 7.5pt; }
 
     &__bande {
       opacity: 1;

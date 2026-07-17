@@ -2,17 +2,13 @@
 #
 # ⚠️ Liste probablement incomplète : huit hackathons GAIA ont eu lieu et une
 #    seule intervention est documentée publiquement. À compléter par l'utilisateur.
-#
-# ⚠️ ACT-4 — pas de « dernière mise à jour ». Une date d'intervention décrit
-#    l'intervention, elle ne date pas le site : c'est licite.
 
 - id: sia-2024
   titre: Hackathon IA & agriculture
   cadre: Salon international de l'agriculture
   annee: "2024"
   resume: >-
-    Premier hackathon IA agricole, organisé avec Comexposium et La Ferme
-    Digitale. Il a donné naissance à Piloterra.
+    Premier hackathon IA agricole, organisé avec Comexposium et La Ferme Digitale.
   url: https://www.gaia-ia.org/
 
 - id: sia-2026

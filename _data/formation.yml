@@ -16,12 +16,11 @@ diplomes:
 # Formations complémentaires. Le Bac S (1996–1999) est volontairement absent :
 # sans intérêt à vingt-sept ans de distance pour un profil de direction.
 complements:
+  - titre: Ecoute active, apprendre à apprendre & PNL
+    etablissement: CJD Bordeaux
+    debut: "2020"
+    fin: "2021"
   - titre: Nouveau modèle économique (NME)
-    etablissement: CJD
+    etablissement: CJD Bordeaux
     debut: "2021"
     fin: "2022"
-  - titre: Ruby on Rails
-    etablissement: Ekylibre
-    detail: Niveau avancé
-    debut: "2012"
-    fin:

@@ -10,41 +10,68 @@
 
 :root {
   // ── Neutres ────────────────────────────────────────────────────────────
-  // Blanc cassé FROID. Délibérément pas un crème (#F4F1EA) : c'est le défaut
-  // esthétique du moment, et il est partout.
-  --sol: #f7f8f5;
-  --sol-creuse: #eef0ea;
-  // Noir VERT, pas noir pur — l'encre des relevés.
-  --encre: #14201a;
-  --encre-pale: #5a6660;
-  --trait: #cbd1c6;
+  // Parchemin. Rév. 2026-07-17 : §1.3 tenait un blanc FROID (#F7F8F5) contre
+  // le crème « défaut esthétique du moment ». Arbitré par l'utilisateur en
+  // faveur du parchemin de Cultia — voir DESIGN.md §1.3, qui porte le pourquoi.
+  --sol: #f3f0e7;
+  --sol-creuse: #eae6d9;
+  // Les cartes se détachent du parchemin. Une carte parchemin sur parchemin
+  // ne se détache que par son filet : c'est le rendu maquette de la rév. 1.
+  --surface: #ffffff;
+
+  // Encre VERTE, pas noir pur — l'encre des relevés. §1.3 le demandait déjà ;
+  // #1D392C le tient plus franchement que l'ancien #14201A. 11:1 sur parchemin.
+  --encre: #1d392c;
+  // ⚠️ Cultia pose son gris secondaire à #837E72 : 3,55:1 sur son propre fond,
+  //    donc SOUS le seuil AA. NFR-3 n'est pas négociable ici → gris chaud
+  //    assombri jusqu'à 5,02:1. La parenté tient, la règle aussi.
+  --encre-pale: #6b6659;
+  --trait: #ddd8c9;
+  --trait-appuye: #c9c2ad;
 
   // ── Parcelles ──────────────────────────────────────────────────────────
   // La couleur ENCODE la nature de l'engagement. Palette dérivée du codage des
   // parcelles par usage du sol (RPG), pas du « vert agriculture » réflexe —
   // que les deux CV emploient justement.
-  // Chaque nature porte DEUX valeurs : la pleine intensité (arête, code) et la
-  // teinte (remplissage de bande). Teintes explicites plutôt qu'un `opacity` sur
-  // la bande : l'opacité s'appliquerait aussi à l'arête et l'écraserait, ce qui
-  // ruinerait le contraste voulu en DESIGN.md §1.3.
-  --p-entreprise:  #c8a64b; --p-entreprise-clair:  #eee2bd; // ENT
-  --p-salariat:    #6e8f55; --p-salariat-clair:    #d3e0c7; // SAL
-  --p-independant: #7a5570; --p-independant-clair: #ddccd9; // IND
-  --p-agricole:    #a8785a; --p-agricole-clair:    #e7d3c6; // AGR
-  --p-stage:       #8a8f6b; --p-stage-clair:       #dcdecf; // STG
-  --p-travail:     #2e5a8c; --p-travail-clair:     #c6d7e9; // TRA
-  --p-engagement:  #5a6660; --p-engagement-clair:  #d5dad7; // ENG
+  //
+  // TROIS valeurs par nature, et chacune a un emploi précis :
+  //   --p-X         pleine intensité — arête de bande. DÉCOR : doublé par le code.
+  //   --p-X-clair   teinte 30 % sur parchemin — remplissage de bande.
+  //   --p-X-code    assombri à ≥ 4,5:1 sur parchemin — LE CODE RPG, qui est du
+  //                 TEXTE et porte l'information (NFR-3). Voir ci-dessous.
+  //
+  // ⚠️ Pourquoi --p-X-code existe (ajouté le 2026-07-17). Le code RPG était
+  //    rendu en `--p-X` pleine intensité : ENT tombait à 2,19:1 et SAL à 3,44:1
+  //    SUR L'ANCIEN FOND FROID. Le défaut est donc antérieur au parchemin — il
+  //    était en ligne. NFR-3 dit que l'information n'est jamais portée par la
+  //    couleur seule ; encore faut-il que le code qui la porte soit lisible.
+  //    La teinte reste celle de la nature : c'est la clarté qui bouge, pas la
+  //    couleur — le codage se lit toujours.
+  //
+  // ENT prend le laiton de Cultia (#B1934E, ex-#C8A64B). Ce n'est pas un accent
+  // décoratif repeint : sur ce site, l'or DÉSIGNE l'entreprise fondée. Il porte
+  // une catégorie réelle, comme les six autres.
+  --p-entreprise:  #b1934e; --p-entreprise-clair:  #dfd4b9; --p-entreprise-code:  #7f6938; // ENT
+  --p-salariat:    #6e8f55; --p-salariat-clair:    #cbd3bb; --p-salariat-code:    #597345; // SAL
+  --p-independant: #7a5570; --p-independant-clair: #cfc2c3; --p-independant-code: #7a5570; // IND
+  --p-agricole:    #a8785a; --p-agricole-clair:    #dcccbd; --p-agricole-code:    #8c634a; // AGR
+  --p-stage:       #8a8f6b; --p-stage-clair:       #d4d3c2; --p-stage-code:       #6b6e53; // STG
+  --p-travail:     #2e5a8c; --p-travail-clair:     #b8c3cc; --p-travail-code:     #2e5a8c; // TRA
+  --p-engagement:  #5a6660; --p-engagement-clair:  #c5c7be; --p-engagement-code:  #5a6660; // ENG
 
   // ── Accent ─────────────────────────────────────────────────────────────
-  // Bleu de relevé — l'hydrographie des cartes IGN. Choisi contre le rouge
-  // cadastral, trop proche du terracotta ambiant, et distinct des quatre
-  // remplissages de parcelle. ~5,9:1 sur --sol.
+  // Bleu de relevé — l'hydrographie des cartes IGN. CONSERVÉ au passage au
+  // parchemin, et c'est un gain : bleu de relevé sur parchemin EST la carte
+  // IGN, ce que le fond froid ne disait qu'à moitié. Il reste distinct des
+  // sept remplissages et ne peut pas se confondre avec le laiton d'ENT —
+  // un lien qui ressemblerait à un code de parcelle serait un contresens.
+  // 6,23:1 sur parchemin.
   --releve: #2e5a8c;
   --releve-vif: #1d4270;
 
   // ── Typographie ────────────────────────────────────────────────────────
   // Trois fontes LIBRES et AUTO-HÉBERGÉES : Google Fonts est un tiers (§6).
-  --f-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --f-display: "Fraunces", Georgia, "Times New Roman", serif;
   --f-prose: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
   // Mono = ce qui ne se traduit pas (LANG-4). Sans = la voix française.
   --f-jeton: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -62,6 +89,17 @@
   --gouttiere: clamp(1rem, calc(0.5rem + 2vw), 2.5rem);
   --rythme: 1.6rem;
 
+  // Rayons. Cultia est franchement arrondi ; ici le rayon est gradué par
+  // NATURE d'objet, pas appliqué au kilo : une carte est un objet d'interface
+  // et s'arrondit ; une parcelle est un relevé cadastral et reste franche.
+  --r-s: 3px;
+  --r-m: 10px;
+
+  // Ombres — portées basses et très diffuses : elles décollent la carte du
+  // parchemin sans le vocabulaire « material ».
+  --ombre: 0 1px 2px rgba(29, 57, 44, 0.04), 0 8px 24px rgba(29, 57, 44, 0.05);
+  --ombre-levee: 0 2px 4px rgba(29, 57, 44, 0.06), 0 14px 32px rgba(29, 57, 44, 0.09);
+
   // Assolement
   --piste-h: 1.35rem;
   --bande-r: 1px;
@@ -69,10 +107,10 @@
 
 // Correspondance nature → couleur. Une seule source : ajouter une nature ici
 // et dans parcelle.html suffit.
-[data-nature="entreprise"]  { --parcelle: var(--p-entreprise);  --parcelle-clair: var(--p-entreprise-clair); }
-[data-nature="salariat"]    { --parcelle: var(--p-salariat);    --parcelle-clair: var(--p-salariat-clair); }
-[data-nature="independant"] { --parcelle: var(--p-independant); --parcelle-clair: var(--p-independant-clair); }
-[data-nature="agricole"]    { --parcelle: var(--p-agricole);    --parcelle-clair: var(--p-agricole-clair); }
-[data-nature="stage"]       { --parcelle: var(--p-stage);       --parcelle-clair: var(--p-stage-clair); }
-[data-nature="travail"]     { --parcelle: var(--p-travail);     --parcelle-clair: var(--p-travail-clair); }
-[data-nature="engagement"]  { --parcelle: var(--p-engagement);  --parcelle-clair: var(--p-engagement-clair); }
+[data-nature="entreprise"]  { --parcelle: var(--p-entreprise);  --parcelle-clair: var(--p-entreprise-clair);  --parcelle-code: var(--p-entreprise-code); }
+[data-nature="salariat"]    { --parcelle: var(--p-salariat);    --parcelle-clair: var(--p-salariat-clair);    --parcelle-code: var(--p-salariat-code); }
+[data-nature="independant"] { --parcelle: var(--p-independant); --parcelle-clair: var(--p-independant-clair); --parcelle-code: var(--p-independant-code); }
+[data-nature="agricole"]    { --parcelle: var(--p-agricole);    --parcelle-clair: var(--p-agricole-clair);    --parcelle-code: var(--p-agricole-code); }
+[data-nature="stage"]       { --parcelle: var(--p-stage);       --parcelle-clair: var(--p-stage-clair);       --parcelle-code: var(--p-stage-code); }
+[data-nature="travail"]     { --parcelle: var(--p-travail);     --parcelle-clair: var(--p-travail-clair);     --parcelle-code: var(--p-travail-code); }
+[data-nature="engagement"]  { --parcelle: var(--p-engagement);  --parcelle-clair: var(--p-engagement-clair);  --parcelle-code: var(--p-engagement-code); }

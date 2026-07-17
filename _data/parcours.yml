@@ -33,10 +33,13 @@
   debut: "2026-01"
   fin:
   nature: salariat
-  lieu: Bordeaux
+  lieu: Bordeaux / Saint-Porchaire
   faits:
-    - 'Direction technique : gestion des projets et des environnements de production numériques.'
+    - 'Direction technique : gestion des projets et des environnements de production.'
     - Veille technologique IA & Data ; audit, expertise et formation des organisations.
+    - 'Gouvernance SI : méthodes, procédures et indicateurs de qualité de service.'
+    - 'Sécurité du SI : environnements, sauvegardes, centralisation des logs, supervision, incidents, conformité RGPD.'
+    - 'Pilotage du portefeuille : roadmap produit, sprints, arbitrages budgétaires et mises en production.'
 
 - id: ekylibre
   logo: /assets/img/logos/ekylibre.svg
@@ -64,19 +67,19 @@
   organisation: Ionosphere Consulting
   role: Consultant AgroTIC — freelance
   debut: "2008-01"
-  fin: "2014-12"
+  fin: "2014-10"
   nature: independant
   lieu: Bordeaux
   faits:
     - Réorganisation informatique et migration vers des systèmes de gestion à base de briques libres, pour PMI-PME.
-    - Consultant AgroTIC « on-demand » ; gestion de projets transversaux.
+    - Consultant AgroTIC ; gestion de projets transversaux.
 
 - id: ergolis
   organisation: Ergolis
   role: Chef de projet MOA
   # ✅ rév. 7 — 2012, confirmé par l'utilisateur. Le CV DoYouBuzz avait raison.
   #    Chevauche donc Bordeaux Sciences Agro : le chevauchement est RÉEL.
-  debut: "2012-06"
+  debut: "2013-06"
   fin: "2014-10"
   nature: salariat
   lieu: Bordeaux
@@ -109,9 +112,6 @@
     - Gestion du parc, des appels d'offres et du support pour 150 collaborateurs ; documentation technique & applicatifs.
     - Pilotage et suivi de projets, animation de réunions, suivi budgétaire et reporting d'activité.
 
-# ⚠️ CV-6 OUVERT — coupée du CV DSI. Réintégrée : c'est la plus longue des bandes
-#    parallèles (dix-huit ans), et le lieu du tiers-lieu de La Vauzelle (ACT-7).
-#    Elle fait remonter l'origine de l'assolement à 2002.
 - id: gaec-joulin
   organisation: GAEC Joulin
   role: Agriculteur à temps partiel
@@ -124,20 +124,6 @@
     - 'Production végétale : travaux du sol, récolte, traitement.'
     - 'Conducteur d''engins : presse, moissonneuse-batteuse.'
 
-# ⚠️ CV-6 — RÉINTÉGRÉE (2026-07-16). Je l'avais écartée en écrivant qu'un stage
-#    de vingt ans n'apportait rien : arbitrage utilisateur contraire.
-#
-# ⚠️ NOM — l'expérience a eu lieu chez **Charentes Alliance**. « Ocealia » n'existe
-#    que depuis décembre 2015, née de la fusion Charentes Alliance + Coréa
-#    Poitou-Charentes. Écrire « Ocealia · 2002-2004 » serait un anachronisme : il
-#    n'a jamais travaillé chez Ocealia. D'où le nom d'époque + le successeur, qui
-#    porte la reconnaissance d'aujourd'hui (le logo fourni est celui d'Ocealia).
-#
-# ⚠️ DATES — CONFLIT NON RÉSOLU. L'utilisateur dit 2002-2004 ; le CV DoYouBuzz dit
-#    « juin 2004 à juin 2005 ». Deux ans d'écart, contenu identique (HACCP/sécurité
-#    alimentaire + audit ATEX) : c'est le même stage. 2002-2004 retenu (parole de
-#    l'intéressé, et cohérent avec l'IUP Génie des procédés 2002-2004, qu'il
-#    chevauche exactement). À confirmer.
 - id: charentes-alliance
   logo: /assets/img/logos/ocealia.webp
   organisation: Charentes Alliance

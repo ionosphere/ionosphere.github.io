@@ -1,0 +1,92 @@
+{%- comment -%}
+  Constellation du hero — « la tête dans les étoiles ». DESIGN.md §6 : ZÉRO JS.
+  Tout est en SVG + CSS. La donnée vient de _data/constellation.yml — rien n'est
+  écrit en dur ici (NFR-6).
+
+  Motion : les LUNES des anneaux tournent (vraie orbite, sans libellé) ; les
+  PLANÈTES nommées ne tournent pas — sinon la figure et les noms se disloquent.
+  Le tout respire d'un léger balancement. `prefers-reduced-motion` fige l'ensemble
+  (géré dans _base.scss, qui neutralise toute animation).
+
+  Accessibilité : la figure est décorative-informative → role="img" + un aria-label
+  qui NOMME les planètes. Le vrai accès (postes, projets, associations) reste
+  l'assolement et /activite.
+{%- endcomment -%}
+{%- assign k = site.data.constellation -%}
+{%- assign r = k.reglages -%}
+{%- assign o = r.orbites -%}
+{%- capture noms -%}{% for p in k.planetes %}{{ p.nom }}{% unless forloop.last %}, {% endunless %}{% endfor %}{%- endcapture -%}
+
+<figure class="constellation" aria-hidden="false">
+  <svg class="constellation__svg" viewBox="0 0 {{ r.largeur }} {{ r.hauteur }}"
+       role="img" aria-label="Une constellation de mes engagements et expériences : {{ noms }}."
+       preserveAspectRatio="xMidYMid meet">
+    <g class="constellation__ciel"
+       style="--amp: {{ r.balancement_deg }}deg; --sway: {{ r.balancement_duree }};
+              transform-origin: {{ r.largeur | divided_by: 2.0 }}px {{ r.hauteur | divided_by: 2.0 }}px;">
+
+      {%- comment -%} ── Étoiles de fond — décor, scatter déterministe ── {%- endcomment -%}
+      <g class="constellation__etoiles" aria-hidden="true">
+        {%- for i in (1..r.etoiles) -%}
+          {%- assign n = forloop.index0 -%}
+          {%- assign isq = n | times: n -%}
+          {%- assign sx = n | times: 53 | plus: isq | modulo: r.largeur -%}
+          {%- assign sy = n | times: 89 | plus: isq | modulo: r.hauteur -%}
+          {%- assign m = n | modulo: 3 -%}
+          {%- if m == 0 -%}{% assign rad = 0.5 %}{%- elsif m == 1 -%}{% assign rad = 0.7 %}{%- else -%}{% assign rad = 0.35 %}{%- endif -%}
+          {%- assign del = n | modulo: 7 -%}
+          <circle class="constellation__etoile" cx="{{ sx }}" cy="{{ sy }}" r="{{ rad }}"
+                  style="animation-delay: -{{ del }}00ms; --dur: {{ r.scintillement_duree }};"/>
+        {%- endfor -%}
+      </g>
+
+      {%- comment -%} ── Anneaux + lunes en orbite — décor céleste, sans libellé ── {%- endcomment -%}
+      <g class="constellation__orbites" aria-hidden="true"
+         style="--ox: {{ o.centre_x }}px; --oy: {{ o.centre_y }}px;">
+        {%- for an in o.anneaux -%}
+          <circle class="constellation__anneau" cx="{{ o.centre_x }}" cy="{{ o.centre_y }}" r="{{ an.rayon }}"/>
+          {%- for j in (1..an.lunes) -%}
+            {%- assign a0 = forloop.index0 | times: 360 | divided_by: an.lunes -%}
+            {%- assign lx = o.centre_x | plus: an.rayon -%}
+            <g style="transform: rotate({{ a0 }}deg); transform-origin: {{ o.centre_x }}px {{ o.centre_y }}px; transform-box: view-box;">
+              <g class="constellation__spin" style="--dur: {{ an.duree }}; transform-origin: {{ o.centre_x }}px {{ o.centre_y }}px; transform-box: view-box;">
+                <circle class="constellation__lune" cx="{{ lx }}" cy="{{ o.centre_y }}" r="0.8"/>
+              </g>
+            </g>
+          {%- endfor -%}
+        {%- endfor -%}
+      </g>
+
+      {%- comment -%} ── La figure : segments entre planètes ── {%- endcomment -%}
+      <g class="constellation__figure" aria-hidden="true">
+        {%- for seg in k.figure -%}
+          {%- assign a = k.planetes | where: "nom", seg[0] | first -%}
+          {%- assign b = k.planetes | where: "nom", seg[1] | first -%}
+          {%- if a and b -%}
+            <line class="constellation__lien" x1="{{ a.x }}" y1="{{ a.y }}" x2="{{ b.x }}" y2="{{ b.y }}"/>
+          {%- endif -%}
+        {%- endfor -%}
+      </g>
+
+      {%- comment -%} ── Les planètes ── {%- endcomment -%}
+      {%- assign mi = r.largeur | divided_by: 2.0 -%}
+      {%- for p in k.planetes -%}
+        {%- assign delp = forloop.index0 | modulo: 5 -%}
+        {%- if p.x > mi -%}
+          {%- assign anchor = "end" -%}{%- assign dx = 0 | minus: p.taille | minus: 1.6 -%}
+        {%- else -%}
+          {%- assign anchor = "start" -%}{%- assign dx = p.taille | plus: 1.6 -%}
+        {%- endif -%}
+        <g class="constellation__planete" data-nature="{{ p.nature }}">
+          {%- if p.lien -%}<a href="{{ p.lien | relative_url }}"><title>{{ p.nom }}</title>{%- endif -%}
+            <circle class="constellation__halo" cx="{{ p.x }}" cy="{{ p.y }}" r="{{ p.taille | times: 2.4 }}"
+                    style="animation-delay: -{{ delp }}s; --dur: {{ r.halo_duree }};"/>
+            <circle class="constellation__astre" cx="{{ p.x }}" cy="{{ p.y }}" r="{{ p.taille }}"/>
+            <text class="constellation__nom" x="{{ p.x }}" y="{{ p.y }}"
+                  text-anchor="{{ anchor }}" dx="{{ dx }}" dy="1.1">{{ p.nom }}</text>
+          {%- if p.lien -%}</a>{%- endif -%}
+        </g>
+      {%- endfor -%}
+    </g>
+  </svg>
+</figure>

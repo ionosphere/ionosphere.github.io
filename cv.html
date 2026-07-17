@@ -1,22 +1,35 @@
 ---
 layout: page
-titre: CV
-chapeau: Vingt ans de systèmes d'information pour l'agriculture. Plusieurs choses à la fois, le plus souvent.
+entete_pleine: true
+entete_custom: true
+titre: CTO
+chapeau:  Fils d'agriculteur devenu ingénieur, je conçois depuis vingt ans des systèmes d'informations, notamment pour les filières agricoles.
+  J'ai cofondé un éditeur de logiciels de gestion et je continue de construire des communs numériques pour simplifier les processus — données, outils,
+  et depuis 3 ans, en intégrant les apports de l'intelligence artificielle.
 permalink: /cv/
 ---
 
 {%- comment -%}
-  Portrait — page CV uniquement (arbitrage 2026-07-16). Le hero de la home porte
-  la thèse, pas un visage. Ici, le recruteur l'attend : convention du CV français.
-  Il s'imprime aussi (CV-4).
+  En-tête CV sur une seule ligne (entete_custom, voir _layouts/page.html) :
+    colonne 1 — titre + portrait empilés  (proportion 3)
+    colonne 2 — chapeau                    (proportion 12)
+  Le portrait est page CV uniquement (arbitrage 2026-07-16) : le hero de la home
+  porte la thèse, pas un visage ; ici le recruteur l'attend, convention du CV
+  français. Il s'imprime aussi (CV-4).
 {%- endcomment -%}
-{%- if site.data.identite.portrait -%}
-  <figure class="portrait">
-    <img src="{{ site.data.identite.portrait | relative_url }}"
-         alt="Portrait de {{ site.data.identite.nom }}"
-         width="320" height="320" loading="lazy" decoding="async">
-  </figure>
-{%- endif -%}
+<header class="cv-entete">
+  <div class="cv-entete__identite">
+    <h1 class="page__titre">{{ page.titre }}</h1>
+    {%- if site.data.identite.portrait -%}
+      <figure class="portrait">
+        <img src="{{ site.data.identite.portrait | relative_url }}"
+             alt="Portrait de {{ site.data.identite.nom }}"
+             width="320" height="320" loading="lazy" decoding="async">
+      </figure>
+    {%- endif -%}
+  </div>
+  {%- if page.chapeau -%}<p class="page__chapeau">{{ page.chapeau }}</p>{%- endif -%}
+</header>
 
 {%- comment -%}
   CV-5 — dire au visiteur quoi faire. Surtout PAS un faux bouton de

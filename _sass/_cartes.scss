@@ -16,12 +16,15 @@
     margin-bottom: 0.5rem;
   }
 
+  // Le one-liner est en display, en Light : c'est la thèse, et elle se dit à
+  // voix posée. Fraunces à ce corps prend un opsz intermédiaire — assez de
+  // contraste pour tenir sous le nom, pas assez pour lui disputer la place.
   &__one-liner {
     font-family: var(--f-display);
-    font-variation-settings: "wonk" 0;
-    font-weight: 400;
+    font-optical-sizing: auto;
+    font-weight: 300;
     font-size: var(--t-l);
-    line-height: 1.25;
+    line-height: 1.3;
     max-width: 34ch;
     margin-bottom: var(--rythme);
     text-wrap: balance;
@@ -38,6 +41,11 @@
 // ID-3 fait reposer l'identité sur la typo. Surtout, il évite le bandeau de
 // logos disparates de LinkedIn que NFR-2 proscrit — la moitié des marques du
 // site sont des lettres, pas des logos.
+// Logo et monogramme partagent désormais le MÊME jeton blanc. Le monogramme
+// était sur `--sol-creuse`, où le code de nature tombait à 4,2:1 (texte de
+// 11 px : il faut 4,5). Sur blanc il passe à 5,3 — et les deux familles de
+// marques deviennent un seul objet, ce qui était l'intention de §1.6 : des
+// repères de même rang, pas un mur de logos et des lettres en second choix.
 .marque {
   flex: 0 0 auto;
   width: 2.4rem;
@@ -45,7 +53,8 @@
   display: grid;
   place-items: center;
   border: 1px solid var(--trait);
-  border-radius: 3px;
+  border-radius: var(--r-s);
+  background: var(--surface);
 
   &--logo {
     // Les logos fournis sont un arc-en-ciel (vert, cyan, bordeaux, jaune…) sans
@@ -53,31 +62,32 @@
     // repères — pas des taches de couleur qui se disputeraient l'assolement.
     object-fit: contain;
     padding: 0.2rem;
-    background: #fff;
   }
 
   &--mono {
     font-family: var(--f-display);
-    font-variation-settings: "wonk" 0;
+    font-optical-sizing: auto;
     font-weight: 700;
     font-size: 0.7rem;
     letter-spacing: -0.02em;
-    color: var(--parcelle, var(--encre-pale));
-    background: var(--sol-creuse);
+    color: var(--parcelle-code, var(--encre-pale));
   }
 }
 
 // ── Grille de cartes ─────────────────────────────────────────────────────
 // PROJ-10 — conçue pour QUATRE cartes réelles, pas pour un book vide ni pour
 // vingt. À quatre, un 2×2 large tient mieux qu'un 4×1 étriqué.
+// Cartes DÉTACHÉES. La rév. 1 les cousait en un maillage de filets (`gap: 1px`
+// sur un fond `--trait`) : sur parchemin, une carte parchemin ne se distingue
+// plus de son fond, et la grille tourne au tableau. Chaque carte est désormais
+// une feuille blanche posée sur le parchemin — le vocabulaire de Cultia, ici
+// parce qu'il dit quelque chose de vrai : une étude de cas EST une fiche.
 .cartes {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 1px;
-  background: var(--trait);
-  border: 1px solid var(--trait);
+  gap: 1.25rem;
 }
 
 @media (min-width: 40rem) {
@@ -85,9 +95,21 @@
 }
 
 .carte {
-  background: var(--sol);
+  background: var(--surface);
+  border: 1px solid var(--trait);
+  border-radius: var(--r-m);
+  box-shadow: var(--ombre);
+  overflow: hidden;
   display: flex;
   flex-direction: column;
+  transition: box-shadow 120ms ease, transform 120ms ease;
+
+  // Le survol soulève la fiche de 2 px. C'est la seule animation du site avec
+  // les liens ; `prefers-reduced-motion` la neutralise déjà (_base).
+  &:hover {
+    box-shadow: var(--ombre-levee);
+    transform: translateY(-2px);
+  }
 
   // PROJ-5 `visuel` — une capture du projet réel. Du contenu encadré, pas une
   // marque : c'est ce qui la distingue d'un logo posé là.
@@ -169,11 +191,14 @@
   font-size: var(--t-xs);
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  border-radius: 2px;
+  border-radius: var(--r-s);
   padding: 0.05em 0.4em;
   border: 1px solid currentColor;
 
   // NFR-3 — le statut est un mot, pas seulement une couleur.
+  // ⚠️ Ces deux valeurs se lisent sur le blanc des cartes (6,3:1 et 4,9:1),
+  //    pas sur le parchemin, où « maintenu » tomberait à 4,3:1. Le jeton ne
+  //    sort pas de la carte : l'y déplacer demanderait de les réassombrir.
   &--actif { color: #3f6b2c; }
   &--maintenu { color: #8a6d1f; }
   &--archivé { color: var(--encre-pale); }
@@ -223,11 +248,13 @@
 
   &__role-label { font-weight: 600; color: var(--encre); }
 
+  // Le rôle d'un tiers est une ÉTIQUETTE POSÉE SUR l'ouvrage, pas une ligne de
+  // sa signature. Le jeton blanc le sort du flux du texte, franchement.
   &__role--tiers {
     display: inline-block;
-    background: var(--sol-creuse);
-    border: 1px solid var(--trait);
-    border-radius: 2px;
+    background: var(--surface);
+    border: 1px solid var(--trait-appuye);
+    border-radius: var(--r-s);
     padding: 0.25rem 0.5rem;
   }
 
@@ -239,6 +266,34 @@
   }
 
   &__poids { margin: 0; }
+}
+
+// ── En-tête CV — titre + photo | chapeau, sur une ligne ────────────────────
+// Deux colonnes, proportion 3:12. Colonne 1 : le titre du poste et le portrait
+// EMPILÉS — l'identité en un bloc. Colonne 2 : le chapeau. `align-items: start`
+// aligne les hauts : le titre et la première ligne du chapeau démarrent sur la
+// même ligne, ce que demande la mise en page.
+.cv-entete {
+  display: grid;
+  gap: 1rem 0;
+  margin-bottom: clamp(1.5rem, calc(1rem + 2vw), 2.5rem);
+
+  &__identite { min-width: 0; }
+
+  // Le portrait, ici, s'empile sous le titre : sa marge de bloc autonome ne vaut
+  // plus, seul un filet d'air le sépare du titre.
+  .portrait { margin: 0.85rem 0 0; }
+}
+
+// La deuxième colonne n'apparaît qu'à partir de 600 px. Sous ce seuil, tout
+// s'empile : titre, photo, puis chapeau, pleine largeur. Le seuil vaut aussi
+// pour la boîte de page A4 (~794 px) → l'impression rend bien les deux colonnes.
+@media (min-width: 37.5rem) {
+  .cv-entete {
+    grid-template-columns: 3fr 12fr;
+    gap: 0 clamp(1.5rem, calc(1rem + 2vw), 3rem);
+    align-items: start;
+  }
 }
 
 // ── Portrait — CV uniquement ─────────────────────────────────────────────
@@ -253,7 +308,7 @@
     width: 100%;
     aspect-ratio: 1;
     object-fit: cover;
-    border-radius: 3px;
+    border-radius: var(--r-s);
     border: 1px solid var(--trait);
     display: block;
   }
@@ -287,7 +342,7 @@
     color: var(--encre-pale);
     background: var(--sol-creuse);
     border: 1px solid var(--trait);
-    border-radius: 2px;
+    border-radius: var(--r-s);
     padding: 0.05em 0.4em;
   }
 
@@ -360,8 +415,9 @@
   margin-block: 1.5rem;
   padding: 1rem 1.25rem;
   border: 1px solid var(--trait);
-  border-radius: 3px;
-  background: var(--sol-creuse);
+  border-radius: var(--r-m);
+  background: var(--surface);
+  box-shadow: var(--ombre);
   font-size: var(--t-s);
 
   p { margin: 0; }

@@ -1,15 +1,25 @@
 # Site personnel — David Joulin — Spécification des besoins
 
-> Statut : **découverte close ; design fait — prêt pour `/sc:implement`**
-> (`/sc:brainstorm` rév. 7, puis `/sc:design`, 2026-07-16). Restent des **faits à vérifier
-> avant publication** (§7.2), qui n'empêchent ni de concevoir ni de monter.
+> Statut : **✅ SITE EN LIGNE** — `https://ionosphere.github.io` (2026-07-17).
+> Découverte close (rév. 7), design fait, implémentation faite et déployée. Restent des
+> **faits à vérifier** (§7.2) qui n'ont **pas** empêché la mise en ligne mais qu'il faut
+> fermer.
 >
 > Ce document décrit **le quoi et le pourquoi**. Le **comment** est dans
 > **`docs/DESIGN.md`** ; la matière factuelle dans **`docs/CONTENU.md`** ; les sources
-> dans **`docs/ressources/`**.
+> dans **`docs/ressources/`** ; les pièges de maintenance dans **`CLAUDE.md`**.
 >
 > **Le design a amendé deux points de cette spec** — §5 (Bootstrap abandonné : il
 > contredisait §6) et PROJ-7 (filtres : non implémentés). Voir `DESIGN.md` §7.
+>
+> **Ce que l'implémentation a appris** *(le détail est en `DESIGN.md` §8.1)* :
+> - **CV-7 tient partout** — écran, mobile 390 px **et** impression A4. Le design
+>   proposait d'y renoncer sous 600 px : c'était un repli inutile, la grille tient.
+> - **CV-4 est acquis** — le PDF sort en A4, bandes contourées lisibles en noir et blanc,
+>   URL en toutes lettres, aucun téléphone.
+> - **PROJ-3 / PROJ-4 sont prouvés** par test réel, pas supposés.
+> - ⚠️ **Un piège YAML a publié `{"Élevage"=>"…"}` sur le CV en production.** Dix faits
+>   touchés, aucun échec de build. Voir `CLAUDE.md`.
 >
 > **Révision 1 du 2026-07-16** — arbitrage utilisateur : **site en français uniquement**
 > pour l'instant. Le bilingue FR/EN et toute sa mécanique sortent du périmètre ; la
@@ -183,6 +193,16 @@ visiteur, ni dans le `<title>`, ni dans un logo, ni dans le pied de page.
   d'identité de marque à construire — mais **pour une autre raison** : ce n'est plus un
   écart assumé à contrecœur, c'est simplement qu'un **handle** et un **nom affiché**
   sont deux choses différentes, ce qui n'étonne aucun visiteur. Rien à rattraper.
+- **ID-6** — **Portrait — page `/cv` uniquement** (décidé le 2026-07-16, rév. 8). La
+  découverte n'avait jamais évoqué de photo.
+  - **Pas dans le hero** : celui-ci porte la **thèse** — one-liner + assolement, soit
+    « vingt ans, plusieurs choses à la fois ». Un visage y prendrait la place de
+    l'argument.
+  - **Sur `/cv`**, c'est la convention française et l'endroit où le recruteur l'attend.
+    Il s'imprime (CV-4).
+  - **Contenu à 7 rem** : le fichier fait 320 px ; au-delà il piquerait, et NFR-1 dit que
+    ce site est lui-même une pièce du portfolio.
+  - Un portrait **n'est pas un logo** : ID-3 n'est pas en cause.
 - **ID-5** — **Amendé (rév. 6) — il se contredisait.** La rév. 3 écrivait : *« le seul
   endroit où ionosphere a le droit d'apparaître est l'URL et `_config.yml` »*. Or le
   handle étant `ionosphere`, **tout lien vers GitHub affiche le mot** :
@@ -378,9 +398,21 @@ rendu des quatre premiers.
   rien d'autre* : pas de retouche de gabarit, pas de lien à câbler à la main.
 - **PROJ-4** — Ajouter une **page détail** doit coûter *un fichier Markdown* ; le lien
   depuis la carte doit apparaître automatiquement.
-- **PROJ-5** — Métadonnées à porter par carte (proposition à valider) :
-  nom, tagline, rôle, stack, lien repo, lien site, licence, statut
-  (actif / maintenu / archivé), période, visuel, `featured`.
+- **PROJ-5** — Métadonnées à porter par carte : nom, tagline, rôle, stack, lien repo,
+  lien site, licence, statut (actif / maintenu / archivé), période, visuel, `featured`.
+  ✅ **Renseignées et en ligne** — voir `DESIGN.md` §3.4.
+  - **`visuel` (2026-07-16)** : une **capture du site réel** du projet, 16∶9, WebP,
+    ~12 ko, auto-hébergée (§6). C'est du **contenu encadré**, pas une marque — d'où sa
+    légitimité là où un logo aurait fait décoration. Le site était jusque-là
+    **intégralement textuel**.
+  - **Pas de logo sur les cartes** : la capture porte **déjà** le logo, en grand.
+- **PROJ-14 — Le système de marques** (`_includes/marque.html`, 2026-07-16). Les logos
+  fournis forment un **arc-en-ciel** sans rapport avec la palette RPG (vert, cyan,
+  bordeaux, jaune, scène dessinée), et **trois postes sur huit** seulement en ont un.
+  Alignés tels quels → **bandeau LinkedIn, c'est-à-dire NFR-2**.
+  → **Logo réel s'il existe, monogramme typographique sinon.** Ce n'est pas un pis-aller :
+  **ID-3 fait reposer l'identité sur la typo**. La moitié des marques du site étant des
+  lettres, l'effet « mur de logos » ne prend jamais.
 - **PROJ-6** — La grille doit rester **digne** avec 1 à 3 projets comme avec 20.
   Un book vide ou quasi vide ne doit pas donner l'impression d'un site inachevé.
 - **PROJ-7** — Filtrage / regroupement par stack ou statut : *souhaitable, non requis*.
@@ -706,13 +738,14 @@ qui travaille sur la structure et non sur les valeurs.
    et une couverture presse jusqu'à BFM TV. **Leçon** : l'absence dans les CV n'est pas
    une absence de matière. Voir ACT-2 et ACT-6.
 
-6. **CV-6 — les trois entrées coupées** (Ionosphere Consulting, GAEC Joulin, Charentes
-   Alliance) : réintégrées ou non ? Décision éditoriale, entrée par entrée.
-   **Recadré par CV-7** : ces trois entrées sont précisément les **parallèles** que le CV
-   de recrutement a coupés. Les réintégrer n'est plus « alourdir le parcours » mais
-   **restituer sa forme réelle**. Deux d'entre elles ont pris du poids en rév. 6 :
-   *Ionosphere Consulting* **est le nom du handle GitHub et du site** (ID-4), et le
-   *GAEC Joulin* est **le lieu du tiers-lieu de La Vauzelle** (ACT-7).
+6. ✅ ~~**CV-6 — les trois entrées coupées**~~ — **toutes réintégrées** (rév. 8).
+   C'étaient précisément les **parallèles** que le CV de recrutement avait effacés : les
+   remettre ne « alourdit » pas le parcours, ça **restitue sa forme réelle** (CV-7).
+   - **Ionosphere Consulting** (2008–2014) — porte le nom du handle GitHub et du site (ID-4).
+   - **GAEC Joulin** (2002–2020) — la plus longue bande, et le lieu de La Vauzelle (ACT-7).
+   - **Charentes Alliance** (stage) — je l'avais écartée en jugeant qu'un stage de vingt
+     ans n'apportait rien ; **arbitrage utilisateur contraire**, elle est en ligne.
+     ⚠️ **Elle a imposé deux choses** — voir points 13 et 14.
 
 7. ✅ ~~**CONT-6 — profil GitHub personnel**~~ — **résolu (rév. 6)** :
    **`github.com/ionosphere`**, et il tient debout seul. Voir §3.5.
@@ -744,10 +777,27 @@ qui travaille sur la structure et non sur les valeurs.
     siège d'Ekylibre**. La question n'est plus « faut-il donner sa localisation ? » mais
     « le site peut-il raconter cet écosystème sans le situer ? ».
 
-12. ⚠️ **Ne pas publier d'âge.** Le CV DoYouBuzz affiche « 42 ans » ; le livre de Francis
-    Joulin date la naissance au **2 mars 1981** (cohérent avec le bac en 1999), soit
-    **45 ans** en 2026. Le CV est **périmé** — illustration littérale de ce que proscrit
-    ACT-4 : une donnée qui vieillit toute seule.
+12. ✅ **Ne pas publier d'âge** — appliqué, aucun âge sur le site. Le CV DoYouBuzz affiche
+    « 42 ans » ; le livre de Francis Joulin date la naissance au **2 mars 1981** (cohérent
+    avec le bac en 1999), soit **45 ans**. Le CV est **périmé** — illustration littérale
+    de ce que proscrit ACT-4 : une donnée qui vieillit toute seule.
+
+13. ⚠️ **Dates du stage Charentes Alliance — CONFLIT OUVERT.** L'utilisateur dit
+    **2002–2004** ; le CV DoYouBuzz dit **juin 2004 – juin 2005**. Deux ans d'écart, mais
+    contenu **identique** (HACCP / « certification Sécurité alimentaire » + audit ATEX) :
+    c'est le même stage. **2002–2004 est en ligne** — parole de l'intéressé, et cohérent
+    avec l'IUP Génie des procédés (2002–2004) qu'il chevauche exactement. **À confirmer.**
+
+14. ✅ **Anachronisme évité — « Ocealia » n'existait pas en 2002.** La coopérative naît en
+    **décembre 2015**, de la fusion de **Charentes Alliance** et de Coréa Poitou-Charentes.
+    David Joulin n'a **jamais** travaillé chez Ocealia : il a fait son stage chez Charentes
+    Alliance, absorbée depuis. Le site affiche donc le **nom d'époque** en titre et le nom
+    actuel en mention (`devenu:`) — vérité historique **et** reconnaissance d'aujourd'hui.
+    *Un lecteur du monde agricole charentais aurait vu l'erreur (NFR-1).*
+
+15. **CV-8 — nouvelle nature `stage` (code RPG `STG`).** Un stage **n'est pas** un emploi :
+    le coder `salariat` l'aurait surévalué. Cinquième catégorie de parcelle, ajoutée pour
+    une seule entrée — et c'est justifié, parce qu'elle **dit quelque chose de vrai**.
 
 ### 7.3 Résolues
 

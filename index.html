@@ -1,13 +1,22 @@
 ---
 layout: base
+entete_pleine: true
 ---
 {%- assign moi = site.data.identite -%}
 
 <section class="hero">
   {%- comment -%} HOME-1 — identité immédiate. {%- endcomment -%}
-  <h1 class="hero__nom">{{ moi.nom }}</h1>
-  <p class="hero__one-liner">{{ moi.one_liner }}</p>
-  <p class="hero__pitch">{{ moi.pitch }}</p>
+  <div class="hero__texte">
+    <h1 class="hero__nom">{{ moi.nom }}</h1>
+    <p class="hero__one-liner">{{ moi.one_liner }}</p>
+    <p class="hero__pitch">{{ moi.pitch }}</p>
+  </div>
+  {%- comment -%}
+    « La tête dans les étoiles » : une constellation de planètes = engagements et
+    expériences, dans la colonne de droite du hero. SVG + CSS, zéro JS (§6),
+    pilotée par _data/constellation.yml.
+  {%- endcomment -%}
+  {% include constellation.html %}
 </section>
 
 {%- comment -%}

@@ -41,6 +41,7 @@ sass:
 
 exclude:
   - docs/
+  - CLAUDE.md
   - Gemfile
   - Gemfile.lock
   - README.md
