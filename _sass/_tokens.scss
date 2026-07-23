@@ -10,24 +10,30 @@
 
 :root {
   // ── Neutres ────────────────────────────────────────────────────────────
-  // Parchemin. Rév. 2026-07-17 : §1.3 tenait un blanc FROID (#F7F8F5) contre
-  // le crème « défaut esthétique du moment ». Arbitré par l'utilisateur en
-  // faveur du parchemin de Cultia — voir DESIGN.md §1.3, qui porte le pourquoi.
-  --sol: #f3f0e7;
-  --sol-creuse: #eae6d9;
-  // Les cartes se détachent du parchemin. Une carte parchemin sur parchemin
-  // ne se détache que par son filet : c'est le rendu maquette de la rév. 1.
+  // Rév. 2026-07-23 — direction « au grand jour », parenté visuelle demandée
+  // par l'utilisateur avec 2050.do (fonds VC climat-agri). Le parchemin froid
+  // de Cultia passe à un BLUSH chaud, la valeur exacte du hero de 2050. La
+  // parenté se déplace de Cultia à 2050 ; ce qui NE bouge pas : le codage RPG,
+  // la structure (assolement + constellation), ACT-8, la typo Fraunces.
+  //
+  // ⚠️ Luminance tenue haute (L≈0.82) pour que les 7 codes RPG restent ≥ 4,5:1
+  //    (NFR-3) — un blush trop sombre les ferait tomber. Vérifié au calcul.
+  --sol: #f1e6da;          // blush chaud — le sol de 2050
+  --sol-creuse: #e8d9c8;   // blush creusé — renfoncements
+  // Off-white froid : la seconde bande de 2050 (sous le hero). Peu employé,
+  // réservé aux surfaces qui doivent se distinguer du blush sans être blanches.
+  --brume: #f5f4f0;
+  // Les cartes se détachent du blush : feuille blanche posée sur la terre.
   --surface: #ffffff;
 
-  // Encre VERTE, pas noir pur — l'encre des relevés. §1.3 le demandait déjà ;
-  // #1D392C le tient plus franchement que l'ancien #14201A. 11:1 sur parchemin.
-  --encre: #1d392c;
-  // ⚠️ Cultia pose son gris secondaire à #837E72 : 3,55:1 sur son propre fond,
-  //    donc SOUS le seuil AA. NFR-3 n'est pas négociable ici → gris chaud
-  //    assombri jusqu'à 5,02:1. La parenté tient, la règle aussi.
-  --encre-pale: #6b6659;
-  --trait: #ddd8c9;
-  --trait-appuye: #c9c2ad;
+  // Encre OLIVE-noire — l'olive profond du texte et de la nav de 2050, pas le
+  // noir pur. Reste dans la famille de l'ancien vert forêt, poussée vers l'olive
+  // chaud. ≈ 11:1 sur blush.
+  --encre: #2c331b;
+  // ⚠️ Gris chaud olive, tenu ≥ 4,5:1 sur blush (NFR-3 n'est pas négociable).
+  --encre-pale: #62604b;
+  --trait: #dccfbd;
+  --trait-appuye: #c6b7a0;
 
   // ── Parcelles ──────────────────────────────────────────────────────────
   // La couleur ENCODE la nature de l'engagement. Palette dérivée du codage des
@@ -51,23 +57,44 @@
   // ENT prend le laiton de Cultia (#B1934E, ex-#C8A64B). Ce n'est pas un accent
   // décoratif repeint : sur ce site, l'or DÉSIGNE l'entreprise fondée. Il porte
   // une catégorie réelle, comme les six autres.
-  --p-entreprise:  #b1934e; --p-entreprise-clair:  #dfd4b9; --p-entreprise-code:  #7f6938; // ENT
-  --p-salariat:    #6e8f55; --p-salariat-clair:    #cbd3bb; --p-salariat-code:    #597345; // SAL
+  // ⚠️ Rév. 2026-07-23 — les codes ENT/SAL/AGR/STG ont été RE-ASSOMBRIS : le
+  //    blush (L≈0.82) est plus sombre que l'ancien parchemin (L≈0.86), et les
+  //    quatre codes tombaient à ~4,3:1 sur le nouveau fond (mesuré, pas lu). Ils
+  //    sont ramenés à ≥ 4,7:1 à teinte constante — même leçon qu'en rév. 2 : une
+  //    couleur a un contraste POUR UN EMPLOI, et le fond a changé sous elle.
+  --p-entreprise:  #b1934e; --p-entreprise-clair:  #dfd4b9; --p-entreprise-code:  #776335; // ENT
+  --p-salariat:    #6e8f55; --p-salariat-clair:    #cbd3bb; --p-salariat-code:    #546c41; // SAL
   --p-independant: #7a5570; --p-independant-clair: #cfc2c3; --p-independant-code: #7a5570; // IND
-  --p-agricole:    #a8785a; --p-agricole-clair:    #dcccbd; --p-agricole-code:    #8c634a; // AGR
-  --p-stage:       #8a8f6b; --p-stage-clair:       #d4d3c2; --p-stage-code:       #6b6e53; // STG
+  --p-agricole:    #a8785a; --p-agricole-clair:    #dcccbd; --p-agricole-code:    #845d46; // AGR
+  --p-stage:       #8a8f6b; --p-stage-clair:       #d4d3c2; --p-stage-code:       #65674e; // STG
   --p-travail:     #2e5a8c; --p-travail-clair:     #b8c3cc; --p-travail-code:     #2e5a8c; // TRA
   --p-engagement:  #5a6660; --p-engagement-clair:  #c5c7be; --p-engagement-code:  #5a6660; // ENG
 
-  // ── Accent ─────────────────────────────────────────────────────────────
-  // Bleu de relevé — l'hydrographie des cartes IGN. CONSERVÉ au passage au
-  // parchemin, et c'est un gain : bleu de relevé sur parchemin EST la carte
-  // IGN, ce que le fond froid ne disait qu'à moitié. Il reste distinct des
-  // sept remplissages et ne peut pas se confondre avec le laiton d'ENT —
-  // un lien qui ressemblerait à un code de parcelle serait un contresens.
-  // 6,23:1 sur parchemin.
+  // ── Duo de marque — olive + marigold (2050) ──────────────────────────────
+  // Les deux couleurs de 2050. Elles ne portent PAS d'information de nature
+  // (c'est le rôle des sept parcelles) : elles sont la MARQUE — nav, hero,
+  // décor, appels à l'action. L'olive est aussi la couleur des surfaces
+  // sombres (nav flottante, pied, panneau du hero « ciel de nuit »).
+  --olive: #4c5024;          // olive foncé — 2050. Fond sombre ; texte crème par-dessus.
+  --olive-clair: #5e6330;    // survol / bordures sur olive
+  // Marigold — le grand titre du hero, le bouton d'appel, la légende chiffrée.
+  // ⚠️ Sur olive : 4,08:1 → AA « grand texte » (le hero est énorme). JAMAIS en
+  //    petit texte sur blush : 1,85:1 seulement. L'ambre se pose sur du sombre.
+  --ambre: #efa020;
+  --ambre-fonce: #c97f12;    // survol du bouton ambre
+
+  // ── Accent interactif — bleu de relevé, CONSERVÉ ─────────────────────────
+  // 2050 est olive+ambre, sans bleu ; la tentation était de passer les liens à
+  // l'ambre « pour faire 2050 ». Refusé, pour la raison même que le doc portait
+  // déjà : l'ambre plafonne à ~2:1 sur blush (illisible), et un lien ambre se
+  // lirait comme le code ENT. Le bleu de relevé reste le seul signal « cliquable »
+  // — accessible (5,5:1 sur blush), distinct de l'olive, de l'ambre et des sept
+  // remplissages. La couleur d'un lien n'est pas un choix esthétique libre.
   --releve: #2e5a8c;
   --releve-vif: #1d4270;
+  // Sur le fond olive du hero, le bleu foncé serait illisible : un bleu clair
+  // le remplace là (pied, panneaux sombres) — voir _base.scss.
+  --releve-clair: #cdd7c0;
 
   // ── Typographie ────────────────────────────────────────────────────────
   // Trois fontes LIBRES et AUTO-HÉBERGÉES : Google Fonts est un tiers (§6).
@@ -81,24 +108,28 @@
   --t-base: 1rem;
   --t-m: 1.125rem;
   --t-l: clamp(1.35rem, calc(1.15rem + 0.9vw), 1.9rem);
-  --t-xl: clamp(1.8rem, calc(1.4rem + 1.8vw), 2.75rem);
-  --t-hero: clamp(2.4rem, calc(1.6rem + 3.6vw), 4.5rem);
+  --t-xl: clamp(1.9rem, calc(1.4rem + 2.2vw), 3rem);
+  // Hero agrandi pour la frappe « 2050 » : le titre-thèse porte la page.
+  --t-hero: clamp(2.6rem, calc(1.4rem + 5vw), 5.5rem);
 
   // ── Mesures ────────────────────────────────────────────────────────────
   --largeur: 68rem;
   --gouttiere: clamp(1rem, calc(0.5rem + 2vw), 2.5rem);
   --rythme: 1.6rem;
 
-  // Rayons. Cultia est franchement arrondi ; ici le rayon est gradué par
-  // NATURE d'objet, pas appliqué au kilo : une carte est un objet d'interface
-  // et s'arrondit ; une parcelle est un relevé cadastral et reste franche.
-  --r-s: 3px;
-  --r-m: 10px;
+  // Rayons — gradués par NATURE d'objet. 2050 arrondit franchement (nav, cartes,
+  // boutons en pilule) ; on suit, SAUF la parcelle, qui est un relevé cadastral
+  // et reste franche. --r-l pour les grands panneaux (hero, pied), --r-pill pour
+  // la nav flottante et les boutons.
+  --r-s: 4px;
+  --r-m: 14px;
+  --r-l: 26px;
+  --r-pill: 999px;
 
-  // Ombres — portées basses et très diffuses : elles décollent la carte du
-  // parchemin sans le vocabulaire « material ».
-  --ombre: 0 1px 2px rgba(29, 57, 44, 0.04), 0 8px 24px rgba(29, 57, 44, 0.05);
-  --ombre-levee: 0 2px 4px rgba(29, 57, 44, 0.06), 0 14px 32px rgba(29, 57, 44, 0.09);
+  // Ombres — portées basses et très diffuses : elles décollent la surface du
+  // blush sans le vocabulaire « material ».
+  --ombre: 0 1px 2px rgba(44, 51, 27, 0.04), 0 8px 24px rgba(44, 51, 27, 0.06);
+  --ombre-levee: 0 2px 4px rgba(44, 51, 27, 0.07), 0 16px 36px rgba(44, 51, 27, 0.11);
 
   // Assolement
   --piste-h: 1.35rem;

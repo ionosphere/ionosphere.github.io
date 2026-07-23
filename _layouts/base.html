@@ -26,6 +26,7 @@
     `entete_pleine` (front matter de la page) → bandeau pleine largeur. Posé sur
     l'accueil et le CV. Voir _base.scss, .entete--pleine.
   {%- endcomment -%}
+  {%- assign courriel = site.data.identite.contacts | where: "id", "email" | first -%}
   <div class="nav">
     <a class="nav__nom" href="{{ '/' | relative_url }}">{{ site.data.identite.nom }}</a>
     <nav class="nav__liens" aria-label="Navigation principale">
@@ -33,6 +34,7 @@
       <a href="{{ '/projets/' | relative_url }}" {% if page.url contains '/projets' %}aria-current="page"{% endif %}>Travaux</a>
       <a href="{{ '/activite/' | relative_url }}" {% if page.url contains '/activite' %}aria-current="page"{% endif %}>Activité</a>
     </nav>
+    {%- if courriel %}<a class="nav__cta" href="{{ courriel.url }}">Contact</a>{% endif -%}
   </div>
 </header>
 

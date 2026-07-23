@@ -4,35 +4,77 @@
 //    `.poste` dupliqués s'annuleraient entre eux selon l'ordre — piège classique
 //    et silencieux.
 
-// ── Hero ─────────────────────────────────────────────────────────────────
-// Le hero est une thèse : one-liner puis assolement. Pas de gros chiffre avec
-// petit label, pas de dégradé — c'est la réponse template.
-// Pas de portrait ici : le hero porte l'argument, pas un visage (voir /cv).
+// ── Hero — le panneau « ciel de nuit » ────────────────────────────────────
+// Rév. 2026-07-23. Le hero devient un grand panneau olive arrondi (le geste de
+// 2050 : un champ de couleur franc), et la thèse — « les pieds sur terre et la
+// tête dans les étoiles » — passe en marigold, énorme. Ce n'est pas un décor
+// plaqué : la constellation (« la tête dans les étoiles ») était posée sur un
+// jour de parchemin ; sur l'olive sombre elle devient enfin un VRAI ciel de
+// nuit. Le sens de l'accroche et la couleur du fond disent la même chose.
+//
+// ⚠️ Contraste : l'ambre sur olive tient 3,9:1 → AA « grand texte » seulement.
+//    C'est pour ça que la thèse est le SEUL ambre de texte, et qu'elle est
+//    énorme (--t-hero). Le pitch et le nom, eux, sont en crème (≥ 6:1).
 .hero {
-  padding-block: clamp(1rem, calc(0.5rem + 2vw), 2.5rem) 0;
+  position: relative;
+  overflow: hidden;
+  background: var(--olive);
+  color: var(--sol);
+  border-radius: var(--r-l);
+  padding: clamp(1.75rem, calc(1rem + 4vw), 3.5rem);
+  margin-top: 0.5rem;
 
-  &__nom {
-    font-size: var(--t-hero);
-    margin-bottom: 0.5rem;
+  // L'éventail 2050 — un seul, discret, en bas à gauche (la constellation tient
+  // la droite). Blades ambre rayonnant du coin. C'est le risque assumé : un
+  // troisième signe décoratif, tenu bas (opacité, un seul coin, masqué en
+  // dégradé). Si un ornement doit un jour sauter (règle de Chanel), c'est
+  // celui-ci — le plus récent.
+  // ⚠️ Éventail en SVG data-URI, PAS en conic-gradient : libsass 1.5.2 (le build
+  //    distant, §5) peut avaler `repeating-conic-gradient(from … at …)` en
+  //    silence. Une url() de data-URI est du pass-through pur — elle ne peut pas
+  //    casser. Le SVG est auto-hébergé dans la feuille (§6 : aucun tiers).
+  &::before {
+    content: "";
+    position: absolute;
+    left: -2.5rem;
+    bottom: -4rem;
+    width: 17rem;
+    height: 17rem;
+    background: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20200%20200'%3E%3Cg%20fill='%23efa020'%3E%3Cpath%20d='M0%20200%20L16.7%200.7%20L38.8%203.8%20Z'/%3E%3Cpath%20d='M0%20200%20L57.8%208.5%20L78.8%2016.2%20Z'/%3E%3Cpath%20d='M0%20200%20L96.4%2024.7%20L115.3%2036.6%20Z'/%3E%3Cpath%20d='M0%20200%20L130.7%2048.6%20L146.7%2064.1%20Z'/%3E%3Cpath%20d='M0%20200%20L159.3%2079.1%20L171.8%2097.6%20Z'/%3E%3Cpath%20d='M0%20200%20L181%20114.8%20L189.3%20135.5%20Z'/%3E%3Cpath%20d='M0%20200%20L194.7%20154.3%20L198.6%20176.3%20Z'/%3E%3C/g%3E%3C/svg%3E") no-repeat left bottom / contain;
+    opacity: 0.38;
+    pointer-events: none;
   }
 
-  // Le one-liner est en display, en Light : c'est la thèse, et elle se dit à
-  // voix posée. Fraunces à ce corps prend un opsz intermédiaire — assez de
-  // contraste pour tenir sous le nom, pas assez pour lui disputer la place.
+  // Le contenu passe au-dessus de l'éventail.
+  &__texte, .constellation { position: relative; z-index: 1; }
+
+  // Le nom, en crème, en tête : HOME-1, identité immédiate. Il reste le h1.
+  &__nom {
+    font-size: var(--t-l);
+    font-weight: 700;
+    color: var(--sol);
+    margin-bottom: 0.75rem;
+  }
+
+  // La thèse — marigold, énorme, serrée. C'est elle qui porte la page.
   &__one-liner {
     font-family: var(--f-display);
     font-optical-sizing: auto;
-    font-weight: 300;
-    font-size: var(--t-l);
-    line-height: 1.3;
-    max-width: 34ch;
+    font-weight: 600;
+    font-size: var(--t-hero);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    color: var(--ambre);
+    max-width: 15ch;
     margin-bottom: var(--rythme);
     text-wrap: balance;
   }
 
   &__pitch {
-    max-width: 58ch;
-    color: var(--encre-pale);
+    max-width: 48ch;
+    color: var(--sol);
+    opacity: 0.9;
+    margin-bottom: 0;
   }
 }
 

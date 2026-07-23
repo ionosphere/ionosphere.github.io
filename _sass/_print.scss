@@ -19,7 +19,14 @@
     --encre-pale: #444;
     --trait: #999;
     --trait-appuye: #777;
-    // Le parchemin ne s'imprime pas : sur quatre pages A4, un aplat de couleur
+    // Le duo de marque (olive + ambre) est de l'écran : sur papier, l'olive
+    // devient noir et l'ambre un gris — aucun aplat de couleur (CV-4).
+    --olive: #000;
+    --olive-clair: #333;
+    --ambre: #666;
+    --ambre-fonce: #444;
+    --releve-clair: #555;
+    // Le blush ne s'imprime pas : sur plusieurs pages A4, un aplat de couleur
     // est une facture d'encre pour zéro information.
     --ombre: none;
     --ombre-levee: none;

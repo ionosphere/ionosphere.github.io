@@ -13,6 +13,9 @@ body {
   -webkit-font-smoothing: antialiased;
   position: relative;
   min-height: 100vh;
+  // Ceinture : le décor organique du hero (l'éventail 2050) est borné, mais on
+  // évite tout débordement horizontal accidentel sur mobile.
+  overflow-x: hidden;
 }
 
 // ── Atmosphère ───────────────────────────────────────────────────────────
@@ -34,8 +37,8 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(at 50% 0%, rgba(29, 57, 44, 0.06), rgba(29, 57, 44, 0) 55%),
-    radial-gradient(at 100% 100%, rgba(177, 147, 78, 0.10), rgba(177, 147, 78, 0) 50%);
+    radial-gradient(at 15% 0%, rgba(76, 80, 36, 0.07), rgba(76, 80, 36, 0) 45%),
+    radial-gradient(at 100% 90%, rgba(239, 160, 32, 0.12), rgba(239, 160, 32, 0) 48%);
 }
 
 img { max-width: 100%; height: auto; }
@@ -83,94 +86,106 @@ a {
   padding-inline: var(--gouttiere);
 }
 
-main { padding-block: clamp(2rem, calc(1rem + 4vw), 4.5rem); }
+main { padding-block: clamp(1.5rem, calc(1rem + 3vw), 3rem) clamp(2rem, calc(1rem + 4vw), 4.5rem); }
 
-// ── Navigation — quatre liens, toujours visibles, zéro JS ────────────────
+// ── Navigation flottante — la pilule olive de 2050 ────────────────────────
+// L'en-tête colle en haut ; la nav est une PILULE olive qui flotte au-dessus du
+// contenu (le geste de 2050). Quatre repères, toujours visibles, zéro JS —
+// aucun hamburger : ils tiennent en pilule même à 320 px (ils passent à la ligne).
+.entete {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  padding-block: clamp(0.6rem, calc(0.4rem + 0.6vw), 1rem);
+  // Le blush affleure sous la pilule pendant le défilement : la pilule reste
+  // nette, le fond ne « saute » pas.
+  background: linear-gradient(var(--sol) 55%, rgba(241, 230, 218, 0));
+}
+
 .nav {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
-  gap: 0.5rem 1.5rem;
-  padding-block: 1.25rem;
-  border-bottom: 1px solid var(--trait);
+  gap: 0.4rem 1.25rem;
+  padding: 0.55rem 0.7rem 0.55rem 1.4rem;
+  background: var(--olive);
+  border-radius: var(--r-pill);
+  box-shadow: var(--ombre);
 
-  // ID-3 — l'identité repose sur la typo, et c'est tout ce qu'il y a ici :
-  // pas de logo, pas de monogramme, pas de sigle. Le nom, dans la fonte du
-  // site. Cultia écrit « CULT-IA » en bicolore parce que l'or y découpe un
-  // mot qui veut dire quelque chose ; « Joulin » ne veut rien dire de tel, et
-  // le même geste n'y serait plus qu'un effet. Il n'est pas repris.
+  // ID-3 — l'identité repose sur la typo : le nom, dans la fonte du site, en
+  // crème sur l'olive. Pas de logo, pas de sigle « Ionosphere » (ID-5).
   &__nom {
     font-family: var(--f-display);
     font-optical-sizing: auto;
     font-weight: 700;
     font-size: var(--t-m);
     letter-spacing: -0.02em;
-    color: var(--encre);
+    color: var(--sol);
     text-decoration: none;
+
+    &:hover { color: var(--ambre); }
   }
 
   &__liens {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem 1.5rem;
+    align-items: center;
+    gap: 0.4rem 1.35rem;
 
     a {
       font-family: var(--f-jeton);
       font-size: var(--t-s);
       text-decoration: none;
-      color: var(--encre-pale);
-      padding-bottom: 0.15rem;
+      color: var(--releve-clair);
+      padding-bottom: 0.12rem;
       border-bottom: 2px solid transparent;
 
       // NFR-3 — la page courante n'est pas signalée par la seule couleur :
-      // aria-current la porte, et le trait la double visuellement.
+      // aria-current la porte, et le trait ambre la double visuellement.
       &[aria-current="page"] {
-        color: var(--encre);
+        color: var(--sol);
         font-weight: 600;
-        border-bottom-color: var(--releve);
+        border-bottom-color: var(--ambre);
       }
 
-      &:hover { color: var(--releve); border-bottom-color: var(--trait-appuye); }
+      &:hover { color: var(--sol); border-bottom-color: var(--olive-clair); }
     }
   }
-}
 
-// ── Bandeau pleine largeur — accueil et CV (page.entete_pleine) ───────────
-// La règle de cadre partagée (`.entete, main, .pied`) borne l'en-tête à
-// `--largeur` et le centre. `.entete--pleine` lève CETTE borne, et elle seule :
-// la gouttière est conservée, donc le nom et les liens s'ancrent aux bords de
-// l'écran sans jamais toucher l'arête.
-//
-// Le geste : le bandeau court d'un bord à l'autre, et son unique filet inférieur
-// est la LIGNE DE TÊTE d'une feuille de relevé — la même arête cadastrale que
-// trace l'assolement. Le corps, lui, reste dans la colonne de 68 rem. Ce
-// contraste — bandeau pleine largeur, contenu centré — EST l'effet recherché,
-// pas un défaut d'alignement.
-//
-// Posé sur deux pages seulement : l'accueil, où le bandeau ouvre la thèse en
-// pleine page, et le CV, où il tient lieu de tête de feuille. Les pages /projets
-// et /activite gardent l'en-tête borné — voir la note à l'utilisateur.
-.entete--pleine {
-  // Source order : cette règle suit la règle de cadre, même spécificité →
-  // elle gagne. La borne saute, le centrage devient sans objet.
-  max-width: none;
+  // L'appel à l'action — la pilule ambre « Nous contacter » de 2050. Ici :
+  // écrire un courriel. Texte olive foncé sur ambre (6:1). Fonctionnel : un
+  // contact était jusque-là relégué au pied.
+  &__cta {
+    font-family: var(--f-jeton);
+    font-size: var(--t-s);
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--encre);
+    background: var(--ambre);
+    padding: 0.4rem 1rem;
+    border-radius: var(--r-pill);
+    white-space: nowrap;
+    transition: background 120ms ease;
 
-  // Le filet passe sur le bandeau lui-même : porté par la boîte pleine largeur,
-  // il court d'un bord à l'autre. Sur `.nav` (en retrait de la gouttière), il
-  // s'arrêtait aux marges — un cadre élargi, pas une pleine largeur.
-  border-bottom: 1px solid var(--trait);
-
-  .nav {
-    border-bottom: none;
-    padding-block: 1.4rem;
+    &:hover { background: var(--ambre-fonce); color: var(--encre); }
   }
 }
 
-// ── Pied ─────────────────────────────────────────────────────────────────
+// `entete_pleine` (front matter accueil + CV) — la pilule flotte de la même
+// manière partout ; le bandeau pleine largeur de la rév. précédente n'a plus
+// lieu d'être (le hero porte désormais son propre panneau). La classe reste
+// posée dans le gabarit, sans effet particulier.
+
+// ── Pied — panneau olive posé sur le blush ────────────────────────────────
+// Le pied reprend l'olive de la nav : la page s'ouvre et se referme sur la même
+// couleur de marque. Panneau arrondi flottant, contacts en crème.
 .pied {
-  border-top: 1px solid var(--trait);
-  padding-block: 2rem;
+  margin-block: clamp(2rem, calc(1rem + 3vw), 4rem) clamp(1rem, calc(0.5rem + 1vw), 1.75rem);
+  padding: clamp(1.5rem, calc(1rem + 2vw), 2.5rem);
+  background: var(--olive);
+  border-radius: var(--r-l);
+  color: var(--sol);
 
   &__contacts {
     display: flex;
@@ -181,5 +196,10 @@ main { padding-block: clamp(2rem, calc(1rem + 4vw), 4.5rem); }
     list-style: none;
     font-family: var(--f-jeton);
     font-size: var(--t-s);
+
+    a {
+      color: var(--releve-clair);
+      &:hover { color: var(--ambre); }
+    }
   }
 }

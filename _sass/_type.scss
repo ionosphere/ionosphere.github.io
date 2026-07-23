@@ -102,7 +102,19 @@ p { margin: 0 0 var(--rythme); }
     margin-bottom: 1.25rem;
     display: flex;
     align-items: center;
-    gap: 0.9rem;
+    gap: 0.7rem;
+
+    // Marqueur ambre en tête : la couleur de marque étiquette la section, comme
+    // la légende chiffrée de 2050 — mais sans fausse numérotation (ces sections
+    // ne sont pas une séquence ; les numéroter mentirait).
+    &::before {
+      content: "";
+      flex: 0 0 auto;
+      width: 0.7rem;
+      height: 0.7rem;
+      border-radius: 2px;
+      background: var(--ambre);
+    }
 
     &::after {
       content: "";
@@ -111,6 +123,51 @@ p { margin: 0 0 var(--rythme); }
       background: var(--trait);
     }
   }
+}
+
+// ── Bouton en pilule — l'appel à l'action « En savoir plus » de 2050 ───────
+// Réservé aux VRAIS appels à l'action (pas aux liens de prose, qui restent des
+// liens bleus soulignés). Deux variantes : plein olive, et contour.
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--f-jeton);
+  font-size: var(--t-s);
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.5rem 1.15rem;
+  border-radius: var(--r-pill);
+  border: 1.5px solid var(--olive);
+  color: var(--encre);
+  background: transparent;
+  transition: background 120ms ease, color 120ms ease, transform 120ms ease;
+
+  &:hover {
+    background: var(--olive);
+    color: var(--sol);
+    transform: translateY(-1px);
+  }
+
+  &--plein {
+    background: var(--olive);
+    color: var(--sol);
+    &:hover { background: var(--olive-clair); color: var(--sol); }
+  }
+
+  &--ambre {
+    border-color: var(--ambre);
+    background: var(--ambre);
+    color: var(--encre);
+    &:hover { background: var(--ambre-fonce); color: var(--encre); }
+  }
+}
+
+// Rangée d'appels à l'action (accueil) — des pilules, pas des liens de prose.
+.accueil-liens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
 }
 
 .page__titre { margin-bottom: 0.75rem; }

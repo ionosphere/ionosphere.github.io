@@ -145,3 +145,24 @@
   0%, 100% { transform: scale(1);    opacity: 0.18; }
   50%      { transform: scale(1.35); opacity: 0.07; }
 }
+
+// ── Sur le panneau olive du hero : le VRAI ciel de nuit ──────────────────────
+// Rév. 2026-07-23. La constellation était réglée pour le parchemin clair (étoiles
+// et noms en encre pâle). Sur l'olive sombre du nouveau hero, il faut inverser :
+// tout ce qui portait de l'encre passe au crème. Les halos et astres colorés
+// (codage RPG) restent — ils GLOWENT enfin, ce que le jour ne permettait pas.
+//
+// ⚠️ NFR-3 : le nom d'une planète PORTE l'information (jamais la couleur seule).
+//    Crème sur olive = 6,9:1 — largement lisible. Ce n'est pas cosmétique.
+.hero .constellation__etoile { fill: var(--sol); }
+.hero .constellation__anneau { stroke: var(--releve-clair); opacity: 0.35; }
+.hero .constellation__lien   { stroke: var(--releve-clair); opacity: 0.4; }
+.hero .constellation__lune   { fill: var(--sol); opacity: 0.55; }
+.hero .constellation__nom    { fill: var(--sol); }
+// Le cerclage crème détache l'astre coloré sur l'olive.
+.hero .constellation__astre  { stroke: var(--olive); stroke-width: 0.8; }
+
+.hero .constellation a:hover .constellation__nom,
+.hero .constellation a:focus-visible .constellation__nom { fill: var(--ambre); }
+.hero .constellation a:hover .constellation__astre,
+.hero .constellation a:focus-visible .constellation__astre { stroke: var(--ambre); stroke-width: 1.2; }

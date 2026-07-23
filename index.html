@@ -37,8 +37,8 @@ entete_pleine: true
   <h2 class="section__titre">Vingt ans, plusieurs choses à la fois</h2>
   {% include assolement.html postes=true travaux=true featured_only=true %}
   <p class="accueil-liens">
-    <a href="{{ '/cv/' | relative_url }}">Le parcours en détail</a> ·
-    <a href="{{ '/projets/' | relative_url }}">Les travaux en détail</a>
+    <a class="bouton" href="{{ '/cv/' | relative_url }}">Le parcours en détail</a>
+    <a class="bouton" href="{{ '/projets/' | relative_url }}">Les travaux en détail</a>
   </p>
 </section>
 
@@ -83,6 +83,6 @@ entete_pleine: true
     </div>
   </div>
   <p class="accueil-liens" style="margin-top:1.25rem">
-    <a href="{{ '/activite/' | relative_url }}">Contributions, publications et engagements</a>
+    <a class="bouton bouton--plein" href="{{ '/activite/' | relative_url }}">Contributions, publications et engagements</a>
   </p>
 </section>
