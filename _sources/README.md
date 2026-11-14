@@ -29,3 +29,4 @@ Captures d'écran des sites publics, prises dans Chrome. Les originaux sont dans
 | `captures/fourmy.png` (fourmy.org, plan 3D) | `assets/img/projets/fourmy.webp` | 960×540, WebP |
 | `captures/aiffel.jpg` (aiffel.org, accueil) | `assets/img/projets/aiffel.webp` | recadré 16:9, 712×400, WebP |
 | `captures/ekylibre-demo.jpg` (démo, tableau de bord production) | `assets/img/projets/ekylibre-demo.webp` | menu latéral retiré, 960×540, WebP. « GAEC JOULIN » visible, publication validée par l'utilisateur. |
+| `captures/gaia.jpg` (gaia-ia.org refondu, accueil) | `assets/img/projets/gaia.webp` | recadré 16:9, 960×540, WebP. Remplace la capture de l'ancien site. |

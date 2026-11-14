@@ -79,7 +79,7 @@
 
 - id: gaia
   visuel: /assets/img/projets/gaia.webp
-  visuel_alt: Page d'accueil du projet GAIA.
+  visuel_alt: "Accueil de GAIA : « Vos problèmes de terrain, résolus avec l'IA », les défis proposés par les agriculteurs et les hackathons."
   nom: GAIA
   tagline: Démocratiser l'intelligence artificielle dans le monde agricole.
   # ✅ GORT-7 (2026-11-14) — rôle porté par une source publique : osfarm.org/collective
