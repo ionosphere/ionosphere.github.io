@@ -1,0 +1,38 @@
+{%- comment -%}
+  Vidéo de projet — GORT-14 à GORT-18. Pilotée par le champ `video:` de
+  projects.yml : ajouter une vidéo à une étude de cas = une entrée de données.
+
+  §6 : fichier auto-hébergé, lecteur NATIF, aucun script, aucun tiers.
+  GORT-16 : pas de lecture automatique, `preload="none"` (rien ne se charge
+  avant le clic), une affiche, et le texte de la vidéo en clair dessous : elle
+  doit se comprendre sans le son, et sans la vidéo.
+  GORT-17 : à l'impression, la vidéo cède la place à son affiche et à son URL.
+{%- endcomment -%}
+
+{%- assign v = include.video -%}
+<figure class="video">
+  <video class="video__lecteur" controls preload="none" playsinline
+         width="1280" height="720"
+         poster="{{ v.affiche | relative_url }}">
+    <source src="{{ v.src | relative_url }}" type="video/mp4">
+    <a href="{{ v.src | relative_url }}">Télécharger la vidéo</a>
+  </video>
+  <img class="video__affiche-imprimee" src="{{ v.affiche | relative_url }}" alt="" width="1280" height="720" loading="lazy">
+
+  <figcaption class="video__legende">
+    {{ v.legende }}
+    {%- if v.duree %} {% include jeton.html valeur=v.duree %}{% endif -%}
+    {%- if v.poids %} {% include jeton.html valeur=v.poids %}{% endif -%}
+    <span class="video__url">{{ site.url }}{{ v.src | relative_url }}</span>
+  </figcaption>
+
+  {%- if v.texte -%}
+    <details class="video__texte">
+      <summary>Le texte de la vidéo</summary>
+      <ol>
+        {%- for ligne in v.texte -%}<li>{{ ligne }}</li>{%- endfor -%}
+      </ol>
+      {%- if v.mention -%}<p class="video__mention">{{ v.mention }}</p>{%- endif -%}
+    </details>
+  {%- endif -%}
+</figure>

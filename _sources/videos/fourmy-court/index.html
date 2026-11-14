@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #F6F4EE; }
+      #root { position: relative; width: 100%; height: 100%; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="55" data-width="1920" data-height="1080">
+      <div id="matin" data-composition-id="matin" data-composition-src="compositions/matin.html" data-start="0" data-duration="4.5" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="champ" data-composition-id="champ" data-composition-src="compositions/champ.html" data-start="4.5" data-duration="11" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="retour" data-composition-id="retour" data-composition-src="compositions/retour.html" data-start="15.5" data-duration="3.5" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="bureau" data-composition-id="bureau" data-composition-src="compositions/bureau.html" data-start="19" data-duration="16" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="fiche" data-composition-id="fiche" data-composition-src="compositions/fiche.html" data-start="35" data-duration="10" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="papiers" data-composition-id="papiers" data-composition-src="compositions/papiers.html" data-start="45" data-duration="4.5" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="fin" data-composition-id="fin" data-composition-src="compositions/fin.html" data-start="49.5" data-duration="5.5" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <audio id="sfx-clic2" class="clip" src="assets/sfx/click-soft.mp3" data-start="22.93" data-duration="0.37" data-track-index="7" data-volume="0.6"></audio>
+      <audio id="sfx-clic3" class="clip" src="assets/sfx/click-soft.mp3" data-start="26.43" data-duration="0.37" data-track-index="8" data-volume="0.6"></audio>
+      <audio id="sfx-clic4" class="clip" src="assets/sfx/click-soft.mp3" data-start="33.63" data-duration="0.37" data-track-index="9" data-volume="0.6"></audio>
+      <audio id="sfx-pop1" class="clip" src="assets/sfx/pop.mp3" data-start="40.53" data-duration="0.72" data-track-index="10" data-volume="0.5"></audio>
+      <audio id="sfx-pop2" class="clip" src="assets/sfx/pop.mp3" data-start="41.33" data-duration="0.72" data-track-index="11" data-volume="0.5"></audio>
+      <audio id="sfx-moteur" class="clip" src="assets/sfx/moteur.mp3" data-start="4.5" data-duration="7.7" data-track-index="2" data-volume="0.22" data-fade-in="0.6" data-fade-out="1.5"></audio>
+      <audio id="sfx-moteur2" class="clip" src="assets/sfx/moteur.mp3" data-start="12.1" data-duration="3.4" data-track-index="5" data-volume="0.22" data-media-start="2" data-fade-in="0.4" data-fade-out="1.2"></audio>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.set({}, {}, 55);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

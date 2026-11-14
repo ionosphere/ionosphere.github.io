@@ -165,3 +165,54 @@
   display: grid;
   gap: 2rem;
 }
+
+// ── Vidéo de projet — GORT-14 à 18 ───────────────────────────────────────
+.video {
+  margin: 0 0 2.5rem;
+  max-width: 56rem;
+
+  &__lecteur {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    background: var(--olive);
+    border-radius: var(--r-m);
+  }
+
+  // L'affiche n'existe que sur papier (GORT-17).
+  &__affiche-imprimee { display: none; }
+
+  &__legende {
+    margin-top: 0.6rem;
+    font-size: var(--t-s);
+    color: var(--encre-pale);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    align-items: baseline;
+  }
+
+  &__url { display: none; }
+
+  &__texte {
+    margin-top: 0.75rem;
+    font-size: var(--t-s);
+
+    summary { cursor: pointer; color: var(--releve); }
+    ol { margin: 0.6rem 0 0; padding-left: 1.4rem; }
+    li { margin-bottom: 0.2rem; }
+  }
+
+  &__mention {
+    margin: 0.6rem 0 0;
+    color: var(--encre-pale);
+    font-size: var(--t-xs);
+  }
+}
+
+@media print {
+  .video__lecteur { display: none; }
+  .video__affiche-imprimee { display: block; width: 100%; height: auto; }
+  .video__url { display: inline; font-family: var(--f-jeton); }
+}

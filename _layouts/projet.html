@@ -28,6 +28,9 @@ layout: base
     </dl>
   </header>
 
+  {%- comment -%} GORT-14 — la vidéo, si le projet en a une, avant la prose. {%- endcomment -%}
+  {%- if p.video -%}{% include video.html video=p.video %}{%- endif -%}
+
   <div class="etude__prose">
     {{ content }}
   </div>

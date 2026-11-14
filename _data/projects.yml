@@ -44,6 +44,28 @@
   debut: "2026-09"
   fin:
   featured: true
+  # GORT-14 à 18 — version courte (55 s) du film du dépôt Fourmy
+  # (videos/journee-semis-mais), accord de Pierre Haurigot acquis (2026-11-14).
+  # Source du montage : _sources/videos/README.md.
+  # ⚠️ PIÈGE YAML : les lignes contenant « : » sont entre guillemets.
+  video:
+    src: /assets/video/fourmy.mp4
+    affiche: /assets/video/fourmy.webp
+    legende: Une journée de semis dans Fourmy, du tracteur à la fiche réalisée. Le texte est à l'écran, le son n'est pas nécessaire.
+    duree: 55 s
+    poids: MP4 · 2,4 Mo
+    texte:
+      - 7 h 10. Aujourd'hui, je sème mon maïs.
+      - 7,84 ha, deux heures et demie de semoir. (Rejeu GPS dans le plan 3D de Fourmy, vue drone.)
+      - 18 h 30. Au bureau, la trace m'attend.
+      - "La trace est là : Lespourcy, 8,45 ha semés."
+      - Je l'ajoute au semis prévu ce matin.
+      - "Les heures viennent du GPS : 9 h 15 – 11 h 47."
+      - Je passe le semis en réalisé.
+      - "Réalisé : la trace, la zone semée, les contrôles."
+      - "Nitrates conformes, IFT de 1,435 : c'est calculé."
+      - Je sème. Fourmy fait les papiers.
+    mention: Avec Pierre Haurigot, Monassut-Audiracq (64). Vrais écrans de Fourmy, journée de semis reconstituée.
 
 # GORT-9 — Aiffel. Même preuve que Fourmy : seul contributeur du dépôt public.
 # ACT-4 : « en construction » est dit par la tagline, sans date.
