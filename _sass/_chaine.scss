@@ -1,0 +1,167 @@
+// La chaîne (GORT-5) et le consortium (GORT-1/2).
+//
+// ⚠️ PIÈGE LIBSASS (CLAUDE.md) : toute addition dans clamp() passe par calc().
+
+// ── La chaîne : un rang de semis ─────────────────────────────────────────
+// Un sillon continu (la ligne) et cinq maillons posés dessus. Vertical sous
+// 48rem, horizontal au-dessus. La ligne est un trait de la liste elle-même :
+// pas d'élément décoratif en plus.
+.chaine__chapeau {
+  max-width: 62ch;
+  color: var(--encre-pale);
+  margin-bottom: 1.75rem;
+}
+
+.chaine {
+  --sillon: var(--olive);
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 1.4rem;
+  border-left: 2px solid var(--sillon);
+  display: grid;
+  gap: 1.5rem;
+}
+
+.chaine__maillon {
+  position: relative;
+
+  // La graine posée sur le sillon.
+  &::before {
+    content: "";
+    position: absolute;
+    left: calc(-1.4rem - 7px);
+    top: 0.3rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--sillon);
+    border: 2px solid var(--sol);
+  }
+
+  p { margin: 0; }
+}
+
+.chaine__etape {
+  font-family: var(--f-display);
+  font-size: var(--t-m);
+  line-height: 1.25;
+  color: var(--encre);
+  margin-bottom: 0.25rem !important;
+}
+
+.chaine__projets {
+  font-weight: 600;
+  font-size: var(--t-s);
+  margin-bottom: 0.35rem !important;
+
+  a { color: var(--releve); }
+  a:hover { color: var(--releve-vif); }
+}
+
+.chaine__texte {
+  font-size: var(--t-s);
+  color: var(--encre-pale);
+  max-width: 34ch;
+}
+
+// GORT-2 — le maillon qui n'est pas à moi : graine creuse, pointillés, porteur
+// nommé. Il se lit comme une destination de la chaîne, pas comme un projet.
+.chaine__maillon--tiers {
+  &::before {
+    background: var(--sol);
+    border: 2px dashed var(--sillon);
+  }
+
+  .chaine__porteur {
+    font-weight: 400;
+    color: var(--encre-pale);
+    margin-left: 0.3rem;
+  }
+}
+
+@media (min-width: 48rem) {
+  .chaine {
+    padding: 1.4rem 0 0;
+    border-left: 0;
+    border-top: 2px solid var(--sillon);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .chaine__maillon::before {
+    left: 0;
+    top: calc(-1.4rem - 7px);
+  }
+
+  // Le dernier maillon se détache du rang : cadre en pointillés.
+  .chaine__maillon--tiers {
+    padding: 0.75rem;
+    margin-top: -0.75rem;
+    border: 1px dashed var(--trait-appuye);
+    border-radius: var(--r-s);
+
+    &::before { left: 0.75rem; top: calc(-0.65rem - 7px); }
+  }
+}
+
+// ── Consortium — GORT-1/2 ────────────────────────────────────────────────
+// Pas une carte du book : pas de visuel, pas d'ombre de carte, un filet à
+// gauche comme les publications. C'est le même registre qu'ACT-8 : un objet
+// d'un tiers, sur lequel est posée une étiquette de contribution.
+.consortium {
+  padding: 1.25rem 0 0.25rem 1.25rem;
+  border-left: 3px dashed var(--trait-appuye);
+  max-width: 46rem;
+
+  &__titre {
+    font-size: var(--t-l);
+    margin-bottom: 0.3rem;
+  }
+
+  // Le porteur fait partie du titre (GORT-2) : même taille, graisse plus légère.
+  &__porteur { font-weight: 400; }
+
+  &__objet {
+    color: var(--encre-pale);
+    margin-bottom: 1rem;
+  }
+
+  &__faits {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.4rem 0.85rem;
+    margin: 0 0 1rem;
+    font-size: var(--t-s);
+
+    dt {
+      font-family: var(--f-jeton);
+      font-size: var(--t-xs);
+      color: var(--encre-pale);
+      padding-top: 0.15rem;
+    }
+
+    dd { margin: 0; }
+  }
+
+  &__membres {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.15rem;
+
+    strong { font-weight: 600; }
+  }
+
+  &__role { margin-bottom: 0.75rem; }
+
+  &__source {
+    font-size: var(--t-s);
+    margin: 0;
+  }
+}
+
+.consortiums {
+  display: grid;
+  gap: 2rem;
+}

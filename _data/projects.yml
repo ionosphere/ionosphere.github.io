@@ -8,8 +8,10 @@
 # `stack` et `licence` sont des jetons LANG-4 → rendus en mono, jamais traduits.
 
 - id: ekylibre
-  visuel: /assets/img/projets/ekylibre.webp
-  visuel_alt: Page d'accueil du projet Ekylibre.
+  # GORT-19 — capture de la démo réelle (tableau de bord de production), publiée
+  #    telle quelle avec accord de l'utilisateur. Original : _sources/img/captures/.
+  visuel: /assets/img/projets/ekylibre-demo.webp
+  visuel_alt: "Tableau de bord de production d'Ekylibre : carte des activités, temps passé par activité et assolement 2019 sur 119 ha."
   nom: Ekylibre
   tagline: ERP agricole open source — gestion, traçabilité, comptabilité.
   role: Co-fondateur & CEO
@@ -23,14 +25,48 @@
   featured: true
   # PROJ-11 — la seule preuve de traction vérifiable du dossier. Elle s'affiche
   # sur la carte, pas seulement dans l'étude de cas.
-  etoiles: 486
-  forks: 170
+  etoiles: 496
+  forks: 175
+
+# GORT-8 — Fourmy. Rôle « Créateur » : `ionosphere` est le seul contributeur du
+# dépôt (public depuis le 2026-11-14). C'est la preuve en un clic (NFR-1, GORT-10).
+- id: fourmy
+  visuel: /assets/img/projets/fourmy.webp
+  visuel_alt: Plan 3D de Fourmy, rejeu d'un tracteur et de sa herse dans une ferme du Béarn.
+  nom: Fourmy
+  tagline: Le jumeau numérique de la ferme — réécriture complète d'Ekylibre.
+  role: Créateur
+  stack: [TypeScript, React, PostgreSQL]
+  licence: AGPL-3.0
+  repo: https://github.com/ekylibre/fourmy
+  site: https://fourmy.org
+  statut: actif
+  debut: "2026-09"
+  fin:
+  featured: true
+
+# GORT-9 — Aiffel. Même preuve que Fourmy : seul contributeur du dépôt public.
+# ACT-4 : « en construction » est dit par la tagline, sans date.
+- id: aiffel
+  visuel: /assets/img/projets/aiffel.webp
+  visuel_alt: "Accueil d'Aiffel : un message vocal devient une intervention à valider, puis enregistrée dans Ekylibre."
+  nom: Aiffel
+  tagline: L'assistant de la ferme, à la voix — il prépare, fait valider, puis écrit dans Ekylibre et Lexicon.
+  role: Créateur
+  stack: [Python, FastAPI, MCP]
+  licence: AGPL-3.0-or-later
+  repo: https://github.com/ekylibre/aiffel
+  site: https://aiffel.org
+  statut: actif
+  debut: "2026-09"
+  fin:
+  featured: true
 
 - id: lexicon
   visuel: /assets/img/projets/lexicon.webp
   visuel_alt: Interface d'exploration des jeux de données Lexicon.
   nom: Lexicon
-  tagline: Open data agricole normalisé — explorer, filtrer, exporter.
+  tagline: L'open data agricole français relié — 624 M de données, 55 jeux de données.
   role: Créateur
   stack: [Ruby, TypeScript]
   licence: MIT
@@ -46,18 +82,19 @@
   visuel_alt: Page d'accueil du projet GAIA.
   nom: GAIA
   tagline: Démocratiser l'intelligence artificielle dans le monde agricole.
-  # ⚠️ §7.2 point 10 — « créateur » est confirmé par l'utilisateur, mais
-  #    gaia-ia.org attribue le projet à La Ferme Digitale + OSFarm et ne cite
-  #    David Joulin que comme intervenant. La formulation ci-dessous est celle
-  #    qui reste VÉRIFIABLE. Ne pas écrire « créateur » tout court tant que la
-  #    source publique ne le porte pas (NFR-1).
-  role: Créateur — via La Ferme Digitale et OSFarm
+  # ✅ GORT-7 (2026-11-14) — rôle porté par une source publique : osfarm.org/collective
+  #    dit « Co-createur / animateur ». Ferme le point §7.2-10 pour GAIA.
+  role: Co-créateur & animateur
+  # PROJ-8 — chiffre de la SOURCE (770 / 111), pas celui du CV (750, introuvable).
+  distinction: Lauréat parmi 770 projets de 111 pays — AI Action Summit, Paris 2025
+  distinction_url: https://www.osfarm.org/collective/
   licence: MIT
   repo: https://github.com/osfarm/GAIA-AGRI-IA-QUALIFICATION
   site: https://www.gaia-ia.org/
-  statut: maintenu
+  # Hackathons toujours en cours en novembre 2026 (gaia-ia.org) : actif, sans fin.
+  statut: actif
   debut: "2024"
-  fin: "2026"
+  fin:
   featured: true
 
 - id: piloterra

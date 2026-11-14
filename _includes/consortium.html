@@ -1,0 +1,46 @@
+{%- comment -%}
+  Consortium — GORT-1 à GORT-4. CONTRAT DE RENDU, comme ACT-8a.
+
+  1. Le PORTEUR est le titre. Il se lit avant tout le reste : « Gort, porté par
+     XLIM », jamais « Gort » seul.
+  2. Le financement et les membres suivent, avec les rôles de la source.
+  3. Le rôle de David Joulin est une ÉTIQUETTE POSÉE SUR l'objet, le même
+     traitement que « Éditeur : David Joulin » (publication__role--tiers). Un
+     lecteur pressé voit un projet de recherche ET une contribution, pas un
+     projet personnel.
+
+  Ne jamais rendre un consortium avec projet-carte.html (GORT-2).
+{%- endcomment -%}
+
+{%- assign c = include.consortium -%}
+{%- assign moi = site.data.identite.nom -%}
+
+<article class="consortium" id="{{ c.id }}">
+  <h3 class="consortium__titre">
+    {{ c.nom }}<span class="consortium__porteur">, porté par {{ c.porteur }}</span>
+  </h3>
+  <p class="consortium__objet">{{ c.objet }}</p>
+
+  <dl class="consortium__faits">
+    <dt>Financement</dt>
+    <dd>{{ c.financement }} {% include jeton.html valeur=c.montant %}</dd>
+    <dt>Période</dt>
+    <dd><time datetime="{{ c.debut }}">{{ c.debut }}{% if c.fin %}–{{ c.fin }}{% else %} — en cours{% endif %}</time></dd>
+    <dt>Consortium</dt>
+    <dd>
+      <ul class="consortium__membres">
+        {%- for m in c.membres -%}
+          <li><strong>{{ m.nom }}</strong> {{ m.role }}</li>
+        {%- endfor -%}
+      </ul>
+    </dd>
+  </dl>
+
+  <p class="publication__role publication__role--tiers consortium__role">
+    <span class="publication__role-label">{{ c.role }} : {{ moi }}</span>, au titre d'{{ c.au_titre_de }}
+  </p>
+
+  {%- if c.source -%}
+    <p class="consortium__source"><a href="{{ c.source }}">Voir la source</a></p>
+  {%- endif -%}
+</article>

@@ -19,9 +19,11 @@
   debut: "2024"
   fin:
   role: Fondateur & Président
+  # GORT-12 — projets nommés, tels qu'osfarm.org/collective les présente.
   resume: >-
-    Création de l'association, Projet de fablab de 350 m² ; hackathons autour des
-    communs numériques agricoles ; Projet France 2030 / Horizon Europe sur l'IA et la robotique agricole.
+    Association des communs agricoles libres — logiciels, machines, données. Porte
+    Lexicon et GAIA, les projets REBUS et AOG+, un projet de fablab de 350 m² et des
+    hackathons autour des communs numériques agricoles.
   url: https://www.osfarm.org/
 
 - id: seconde-nature

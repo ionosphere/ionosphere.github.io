@@ -12,6 +12,7 @@ classique** sur `https://ionosphere.github.io` (pas de domaine personnalisé).
 | --- | --- | --- |
 | **`docs/SPEC.md`** | **Le quoi et le pourquoi.** Exigences numérotées (`CV-7`, `PROJ-3`, `ACT-8`…), décisions et leurs raisons, questions ouvertes. | toucher au **comportement** ou au contenu |
 | **`docs/DESIGN.md`** | **Le comment.** Direction visuelle, tokens, architecture, contrats de gabarit. | toucher à la **structure** ou au CSS |
+| **`docs/BRIEF-GORT.md`** | La mise à jour pour l'appel d'offres Gort (nov. 2026) : exigences `GORT-n`, sources, questions ouvertes. | toucher à Gort, Fourmy, Aiffel ou à la chaîne |
 | **`docs/CONTENU.md`** | **La matière factuelle** dépouillée des CV et de neuf sources en ligne, avec ses ⚠️ conflits. | écrire quoi que ce soit dans `_data/` |
 | `docs/ressources/` | Les deux CV PDF d'origine. |  |
 | `_sources/` | Images originales, **non déployées**. |  |
@@ -103,6 +104,13 @@ où c'est une **donnée technique vraie** : l'URL, `_config.yml`, le lien de pro
 les liens de dépôts. **Jamais** en logo, filigrane, `og:site_name` ou favicon siglée —
 le handle est une adresse, pas une identité.
 
+### GORT-2 — un consortium n'est pas un projet
+
+**Gort** (porté par **XLIM**, ANR France 2030) vit dans `_data/consortiums.yml`, **jamais**
+dans `projects.yml`, et se rend par `_includes/consortium.html` : le porteur dans le
+titre, le rôle de David Joulin comme une étiquette posée sur l'objet. C'est la faute
+d'ACT-8 appliquée à un projet de recherche. Le détail est dans `docs/BRIEF-GORT.md`.
+
 ### CONT-3 — jamais le numéro de téléphone
 
 Il figure dans les CV sources. Il n'est dans **aucune** donnée et ne doit apparaître
@@ -115,11 +123,13 @@ délibérément absents du site (NFR-1 : un pair vérifie en un clic) :
 
 - GAIA « **80 projets** » — `gaia-ia.org` dit *30 sujets, 8 hackathons, 17 coachs* ;
 - Lexicon « **80 sources** » — le site affiche *7 catégories* ;
-- « sélectionné parmi **750 projets** internationaux à l'IA Summit 2025 » — **introuvable**.
+- « sélectionné parmi **750 projets** internationaux à l'IA Summit 2025 » — **faux**. La
+  source (`osfarm.org/collective`) dit **770 projets, 111 pays** : c'est ce chiffre-là
+  qui est publié sur la carte GAIA, avec son lien (PROJ-8, GORT-7).
 
-De même, les **rôles** ne sont pas portés par les sources : `gaia-ia.org` attribue GAIA à
-La Ferme Digitale + OSFarm et ne cite David Joulin que comme intervenant. D'où la
-formulation retenue, vérifiable : *« Créateur — via La Ferme Digitale et OSFarm »*.
+Un **rôle** ne s'écrit que si une source publique le porte. GAIA : *« Co-créateur &
+animateur »*, mot pour mot d'`osfarm.org/collective`. Fourmy et Aiffel : « Créateur »,
+prouvé par les dépôts publics, dont `ionosphere` est le seul contributeur.
 
 ## Architecture
 
@@ -128,6 +138,7 @@ _data/         la source de vérité — TOUT le contenu (NFR-6)
 _projects/     études de cas ; le front matter ne porte que `ref:`
 _includes/     assolement.html (signature) · parcelle.html · marque.html
                publication.html (ACT-8) · projet-carte.html · jeton.html
+               chaine.html (GORT-5, piloté par chaine.yml) · consortium.html (GORT-2)
 _sass/         _tokens (palette RPG) · _assolement (le geste) · _print (CV-4)
 ```
 

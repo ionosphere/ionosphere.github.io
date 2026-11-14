@@ -19,3 +19,13 @@ NFR-4 (performance) ne tolérait pas de déployer les deux.
 Le détourage est un remplissage par diffusion **depuis les bords** : il n'efface que
 le fond connecté au cadre, et préserve les blancs *intérieurs* au logo (le creux du
 « b » de bziiit, la vague d'Ocealia). Un simple blanc→transparent les aurait troués.
+
+## Captures de projets (2026-11-14)
+
+Captures d'écran des sites publics, prises dans Chrome. Les originaux sont dans `img/captures/`.
+
+| Original | Dérivé servi | Traitement |
+| --- | --- | --- |
+| `captures/fourmy.png` (fourmy.org, plan 3D) | `assets/img/projets/fourmy.webp` | 960×540, WebP |
+| `captures/aiffel.jpg` (aiffel.org, accueil) | `assets/img/projets/aiffel.webp` | recadré 16:9, 712×400, WebP |
+| `captures/ekylibre-demo.jpg` (démo, tableau de bord production) | `assets/img/projets/ekylibre-demo.webp` | menu latéral retiré, 960×540, WebP. « GAEC JOULIN » visible, publication validée par l'utilisateur. |

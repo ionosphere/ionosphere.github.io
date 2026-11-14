@@ -64,6 +64,13 @@
       PROJ-11 — la traction d'Ekylibre est la seule preuve vérifiable du dossier.
       Elle s'affiche sur la carte, pas seulement dans l'étude de cas.
     {%- endcomment -%}
+    {%- comment -%}
+      PROJ-8 — une distinction ne s'affiche qu'avec sa source (NFR-1).
+    {%- endcomment -%}
+    {%- if p.distinction -%}
+      <dt>Distinction</dt>
+      <dd>{% if p.distinction_url %}<a href="{{ p.distinction_url }}">{{ p.distinction }}</a>{% else %}{{ p.distinction }}{% endif %}</dd>
+    {%- endif -%}
     {%- if p.etoiles -%}
       <dt>Traction</dt>
       <dd>{% include jeton.html valeur=p.etoiles %} étoiles ·

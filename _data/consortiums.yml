@@ -1,0 +1,34 @@
+# Consortiums — GORT-1 à GORT-4.
+#
+# ⚠️⚠️ GORT-2 — MÊME FAUTE QU'ACT-8, AUTRE OBJET.
+#    Un consortium n'est PAS un projet de David Joulin. Il n'entre donc pas dans
+#    projects.yml : une carte du book le rendrait à l'identique d'Ekylibre ou de
+#    Fourmy et l'attribuerait par simple placement. _includes/consortium.html
+#    affiche TOUJOURS le porteur en titre, et le rôle comme une étiquette posée
+#    sur l'objet, jamais comme une signature.
+#
+# Source unique de tout ce bloc : osfarm.org/collective (relevé du 2026-11-14).
+# Les rôles des membres sont ceux de la source, traduits sans les enrichir.
+#
+# ⚠️ PIÈGE YAML (CLAUDE.md) : tout texte contenant « mot : mot » se met entre
+#    guillemets simples.
+
+- id: gort
+  nom: Gort
+  objet: Des robots agricoles génériques, agnostiques et interopérables.
+  porteur: XLIM
+  financement: ANR, plan France 2030
+  montant: 4,5 M€
+  debut: "2024"
+  fin:
+  membres:
+    - { nom: XLIM, role: porteur du projet }
+    - { nom: Natuition, role: constructeur de robots }
+    - { nom: ELATEC, role: constructeur de robots }
+    - { nom: LaBRI, role: conseil projet }
+    - { nom: Ekylibre, role: données et évaluation }
+  # Le rôle de David Joulin, tel que la source le donne : « Data consulting and
+  # evaluator », au titre d'Ekylibre.
+  role: Conseil data et évaluation
+  au_titre_de: Ekylibre
+  source: https://www.osfarm.org/collective/

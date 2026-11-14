@@ -1,7 +1,7 @@
 ---
 layout: page
 titre: Travaux
-chapeau: 6 projets. Tous communautaires, tous innovants — c'est le même fil que le parcours, pas une annexe.
+chapeau: Tous libres, tous agricoles — c'est le même fil que le parcours, pas une annexe.
 permalink: /projets/
 ---
 
@@ -20,26 +20,31 @@ permalink: /projets/
 </ul>
 
 {%- comment -%}
-  PROJ-12 — les quatre projets forment une chaîne, pas une liste. C'est la
+  PROJ-12 / GORT-5 — les projets forment une chaîne, pas une liste. C'est la
   démonstration de POS-1 : le book n'illustre pas le CV, il l'est.
 {%- endcomment -%}
+{% include chaine.html %}
+
+{%- comment -%}
+  GORT-1 / GORT-2 — les consortiums de recherche, APRÈS le book et hors de la
+  grille de cartes : ce ne sont pas des projets de David Joulin.
+{%- endcomment -%}
+<section class="section" aria-labelledby="consortiums-titre">
+  <h2 class="section__titre" id="consortiums-titre">Recherche en consortium</h2>
+  <div class="consortiums">
+    {%- for c in site.data.consortiums -%}
+      {% include consortium.html consortium=c %}
+    {%- endfor -%}
+  </div>
+</section>
+
 <section class="section">
-  <h2 class="section__titre">Comment ils s'enchaînent</h2>
-  <div class="grille-deux">
-    <div class="bloc">
-      <h3 class="bloc__titre">Lexicon alimente Ekylibre</h3>
-      <p class="bloc__prose">
-        Ekylibre normalise ses données agricoles via les nomenclatures Onoma et
-        Lexicon — plus de vingt millions de références. Le second n'est pas à côté
-        du premier : il est dedans.
-      </p>
-    </div>
-    <div class="bloc">
-      <h3 class="bloc__titre">GAIA a engendré Piloterra</h3>
-      <p class="bloc__prose">
-        Piloterra est né du premier hackathon IA &amp; agriculture, organisé au
-        Salon de l'agriculture 2024 avec Comexposium et La Ferme Digitale.
-      </p>
-    </div>
+  <h2 class="section__titre">Une autre filiation</h2>
+  <div class="bloc">
+    <h3 class="bloc__titre">GAIA a engendré Piloterra</h3>
+    <p class="bloc__prose">
+      Piloterra est né du premier hackathon IA &amp; agriculture, organisé au
+      Salon de l'agriculture 2024 avec Comexposium et La Ferme Digitale.
+    </p>
   </div>
 </section>

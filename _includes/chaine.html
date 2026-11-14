@@ -1,0 +1,51 @@
+{%- comment -%}
+  La chaîne — GORT-5 / GORT-6. Pilotée par _data/chaine.yml, zéro JS (§6).
+
+  Un rang de semis : un sillon continu (la bordure de la liste) et des maillons
+  posés dessus. La liste est ORDONNÉE parce que c'est un flux réel : la donnée
+  passe d'un maillon au suivant.
+
+  Un maillon qui pointe vers un consortium est rendu en pointillés, avec son
+  porteur : ce n'est pas un projet de David Joulin (GORT-2).
+
+  LANG-5 — aucun libellé en dur : tout vient des données.
+{%- endcomment -%}
+
+{%- assign ch = site.data.chaine -%}
+<section class="section chaine-section" aria-labelledby="chaine-titre">
+  <h2 class="section__titre" id="chaine-titre">{{ ch.titre }}</h2>
+  <p class="chaine__chapeau">{{ ch.chapeau }}</p>
+
+  <ol class="chaine">
+    {%- for m in ch.maillons -%}
+      {%- if m.consortium -%}
+        {%- assign c = site.data.consortiums | where: "id", m.consortium | first -%}
+        <li class="chaine__maillon chaine__maillon--tiers">
+          <p class="chaine__etape">{{ m.etape }}</p>
+          <p class="chaine__projets">
+            <a href="{{ '/projets/' | relative_url }}#{{ c.id }}">{{ c.nom }}</a>
+            <span class="chaine__porteur">porté par {{ c.porteur }}</span>
+          </p>
+          <p class="chaine__texte">{{ m.texte }}</p>
+        </li>
+      {%- else -%}
+        <li class="chaine__maillon">
+          <p class="chaine__etape">{{ m.etape }}</p>
+          <p class="chaine__projets">
+            {%- for id in m.projets -%}
+              {%- assign p = site.data.projects | where: "id", id | first -%}
+              {%- assign detail = site.projects | where: "ref", id | first -%}
+              {%- if detail -%}
+                <a href="{{ detail.url | relative_url }}">{{ p.nom }}</a>
+              {%- else -%}
+                <a href="{{ '/projets/' | relative_url }}#{{ p.id }}">{{ p.nom }}</a>
+              {%- endif -%}
+              {%- unless forloop.last %}, puis {% endunless -%}
+            {%- endfor -%}
+          </p>
+          <p class="chaine__texte">{{ m.texte }}</p>
+        </li>
+      {%- endif -%}
+    {%- endfor -%}
+  </ol>
+</section>

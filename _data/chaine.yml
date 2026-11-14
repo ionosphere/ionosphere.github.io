@@ -1,0 +1,48 @@
+# La chaîne — GORT-5 / GORT-6, et PROJ-12 rendu explicite.
+#
+# Ce n'est pas du contenu nouveau : c'est POS-1 dessiné. Le book n'illustre pas
+# le CV, il EST une chaîne de données, du registre public jusqu'au robot. C'est
+# exactement ce que l'évaluateur de Gort doit voir en moins de 10 s.
+#
+# Chaque maillon renvoie à un projet (`projets`: ids de projects.yml) ou à un
+# consortium (`consortium`: id de consortiums.yml). Un maillon `consortium` est
+# rendu en pointillés : ce n'est pas un projet de David Joulin (GORT-2).
+#
+# L'ordre de la liste EST l'ordre du flux. Le réordonner change le sens.
+
+titre: De la donnée publique au robot
+chapeau: >-
+  Mes projets ne sont pas posés côte à côte : chacun nourrit le suivant. La donnée
+  publique devient la mémoire d'une ferme, cette mémoire se remplit à la voix,
+  l'IA s'en sert, et des robots la lisent au champ.
+
+maillons:
+  - etape: Relier la donnée publique
+    projets: [lexicon]
+    texte: >-
+      Cadastre, parcelles PAC, phytosanitaires, météo — 624 M de données
+      agricoles françaises, reliées par des clés communes.
+
+  - etape: Tenir la mémoire de la ferme
+    projets: [ekylibre, fourmy]
+    texte: >-
+      Parcelles, interventions, stocks, matériels : la ferme à jour, et
+      consultable à n'importe quelle date.
+
+  - etape: La remplir à la voix
+    projets: [aiffel]
+    texte: >-
+      Une phrase dite au champ devient une intervention vérifiée, validée par
+      l'agriculteur, puis enregistrée.
+
+  - etape: En tirer des outils d'IA
+    projets: [gaia]
+    texte: >-
+      Des défis venus du terrain, résolus en hackathon par des outils ouverts et
+      frugaux.
+
+  - etape: La faire lire aux robots
+    consortium: gort
+    texte: >-
+      Des robots génériques et interopérables, essayés au champ avec les données
+      d'un jumeau numérique de ferme.

@@ -43,6 +43,12 @@ entete_pleine: true
 </section>
 
 {%- comment -%}
+  GORT-6 — la chaîne, au même rang que l'assolement, sans le remplacer. Son
+  dernier maillon mène à Gort et à son porteur (GORT-2).
+{%- endcomment -%}
+{% include chaine.html %}
+
+{%- comment -%}
   HOME-3 — piloté par `featured: true`, jamais par une liste écrite à la main.
 
   ⚠️ DESIGN.md §4.1 — les quatre projets du lancement sont TOUS featured, donc
