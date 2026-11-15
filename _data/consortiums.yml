@@ -26,9 +26,9 @@
     - { nom: Natuition, role: constructeur de robots }
     - { nom: ELATEC, role: constructeur de robots }
     - { nom: LaBRI, role: conseil projet }
-    - { nom: Ekylibre, role: données et évaluation }
+    - { nom: OSFarm, role: données et évaluation }
   # Le rôle de David Joulin, tel que la source le donne : « Data consulting and
   # evaluator », au titre d'Ekylibre.
   role: Conseil data et évaluation
-  au_titre_de: Ekylibre
+  au_titre_de: OSFarm
   source: https://www.osfarm.org/collective/
